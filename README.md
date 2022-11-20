@@ -10,6 +10,16 @@ El anteproyecto está definido en este [documento](https://docs.google.com/docum
 
 En la carpeta [`mockups`](/mockups/) se encuentran los mockups de la app.
 
+
+# API
+
+En la carpeta [`stacker-api`](/stacker-api/) se encuentra el codigo fuente del backend de la aplicación.
+
+
+# Frontend
+
+En la carpeta [`stacker-front`](/stacker-front/) se encuentra el codigo fuente del frontend de la aplicación.
+
 # Historias de Usuario
 
 En el proyecto de Github [PP3 User Stories](https://github.com/users/AoMartin/projects/1/views/1)
