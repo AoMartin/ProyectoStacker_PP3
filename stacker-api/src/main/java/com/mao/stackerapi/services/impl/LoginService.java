@@ -36,7 +36,7 @@ public class LoginService implements ILoginService {
 
 		LoginBO login = loginRepository.findByUser(userDto.getUsername());
 
-		// TODO manejar caso relogin
+		// TODO manejar caso relogin, guardar user con password, responder ante usuario ya creado
 
 		login = new LoginBO();
 		login.setUltimoLogin(new Timestamp(System.currentTimeMillis()));

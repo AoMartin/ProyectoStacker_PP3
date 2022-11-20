@@ -1,4 +1,5 @@
 package com.mao.stackerapi.models.security;
+
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -10,7 +11,7 @@ import javax.persistence.Table;
 
 /**
  * <p>
- * Entidad que refiere a la tabla LOGIN 
+ * Entidad que refiere a la tabla LOGIN
  * </p>
  *
  * @author molsson
@@ -21,69 +22,80 @@ import javax.persistence.Table;
 @Table(name = "LOGIN")
 public class LoginBO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_LOGIN")
-    private Long idLogin;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_LOGIN")
+	private Long idLogin;
 
-    @Column(name = "USER")
-    private String user;
+	@Column(name = "USER")
+	private String user;
 
-    @Column(name = "IMAGEN_URL")
-    private String imagenUrl;
+	@Column(name = "IMAGEN_URL")
+	private String imagenUrl;
 
-    @Column(name = "ULTIMO_LOGIN")
-    private Timestamp ultimoLogin;
+	@Column(name = "ULTIMO_LOGIN")
+	private Timestamp ultimoLogin;
 
-    public LoginBO() {
+	@Column(name = "PUNTAJE")
+	private Integer puntaje;
 
-    }
+	public LoginBO() {
 
-    public LoginBO(Long idLogin, String user, String imagenUrl, Timestamp ultimoLogin) {
-        super();
-        this.idLogin = idLogin;
-        this.user = user;
-        this.imagenUrl = imagenUrl;
-        this.ultimoLogin = ultimoLogin;
-    }
+	}
 
-    public Long getIdLogin() {
-        return idLogin;
-    }
+	public LoginBO(Long idLogin, String user, String imagenUrl, Timestamp ultimoLogin, Integer puntaje) {
+		super();
+		this.idLogin = idLogin;
+		this.user = user;
+		this.imagenUrl = imagenUrl;
+		this.ultimoLogin = ultimoLogin;
+		this.puntaje = puntaje;
+	}
 
-    public void setIdLogin(Long idLogin) {
-        this.idLogin = idLogin;
-    }
+	public Long getIdLogin() {
+		return idLogin;
+	}
 
-    public String getUser() {
-        return user;
-    }
+	public void setIdLogin(Long idLogin) {
+		this.idLogin = idLogin;
+	}
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+	public String getUser() {
+		return user;
+	}
 
-    public String getImagenUrl() {
-        return imagenUrl;
-    }
+	public void setUser(String user) {
+		this.user = user;
+	}
 
-    public void setImagenUrl(String imagenUrl) {
-        this.imagenUrl = imagenUrl;
-    }
+	public String getImagenUrl() {
+		return imagenUrl;
+	}
 
-    public Timestamp getUltimoLogin() {
-        return ultimoLogin;
-    }
+	public void setImagenUrl(String imagenUrl) {
+		this.imagenUrl = imagenUrl;
+	}
 
-    public void setUltimoLogin(Timestamp ultimoLogin) {
-        this.ultimoLogin = ultimoLogin;
-    }
+	public Timestamp getUltimoLogin() {
+		return ultimoLogin;
+	}
 
-    @Override
-    public String toString() {
-        return "LoginBO [idLogin=" + idLogin + ", user=" + user + ", imagenUrl=" + imagenUrl + ", ultimoLogin="
-                + ultimoLogin + "]";
-    }
+	public void setUltimoLogin(Timestamp ultimoLogin) {
+		this.ultimoLogin = ultimoLogin;
+	}
 
-    
+	public Integer getPuntaje() {
+		return puntaje;
+	}
+
+	public void setPuntaje(Integer puntaje) {
+		this.puntaje = puntaje;
+	}
+
+	@Override
+	public String toString() {
+		return "LoginBO [idLogin=" + idLogin + ", user=" + user + ", imagenUrl=" + imagenUrl + ", ultimoLogin="
+				+ ultimoLogin + ", puntaje=" + puntaje + "]";
+	}
+
 }
