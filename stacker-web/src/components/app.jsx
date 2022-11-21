@@ -7,13 +7,6 @@ import MainBanner from './MainBanner/MainBanner';
 const mdTheme = createTheme({
   palette: {
     error: { main: '#E20613' },
-
-    background: {
-      default: "#222222"
-    },
-    text: {
-      primary: "#ffffff"
-    }
   }
 });
 
