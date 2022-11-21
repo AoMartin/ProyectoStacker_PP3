@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from "@mui/system";
 import { Avatar, Button, Card, CardActionArea, Grid, IconButton, Typography } from '@mui/material';
-import ValoracionFechaHora from '../ValoracionFechaHora/ValoracionFechaHora';
+import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
 import PlusOneIcon from '@mui/icons-material/PlusOne';
 import MessageIcon from '@mui/icons-material/Message';
 import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
@@ -10,7 +10,7 @@ import { grey } from '@mui/material/colors';
 const Comentario = (props) => {
 
     const handleReplyClick = () => {
-        alert("dasdasd");
+        alert("reply test!");
     }
 
     return (
