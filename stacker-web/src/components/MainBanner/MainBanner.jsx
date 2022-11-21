@@ -1,5 +1,6 @@
+import LayersIcon from '@mui/icons-material/Layers';
 import {
-  Box, Container, CssBaseline, Grid, Typography
+  Box, Container, Grid, Typography
 } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { grey } from '@mui/material/colors';
@@ -12,9 +13,8 @@ export default function MainBanner(props) {
   const { vista } = props;
 
   return (
-    <Box sx={{ display: 'flex'}}>
-      <CssBaseline />
-
+    <Box sx={{ display: 'flex' }}>
+      
       <AppBar position="absolute"
         elevation={0}
         sx={{
@@ -28,26 +28,29 @@ export default function MainBanner(props) {
         }}
       >
         <Box m={2}>
-          <Typography component="h4" variant="h4" style={{ color: '#000000' }} >
-            Stacker
-          </Typography>
+          <Grid container>
+            <Grid item mt={1}>
+              <LayersIcon sx={{ fontSize: 60 }} style={{ color: '#000000' }} />
+            </Grid>
+            <Grid item ml={1}>
+              <Typography component="h2" variant="h2" style={{ color: '#000000' }} >
+                Stacker
+              </Typography>
+            </Grid>
+          </Grid>
         </Box>
-        <Box m={2}>
+        <Box m={1.5}>
           <Usuario />
         </Box>
       </AppBar>
 
-      <Box sx={{ backgroundColor: (theme) => theme.palette.error.main }}>
+      <Box sx={{ backgroundColor: (theme) => theme.palette.info.light }}>
         <Grid container spacing={0}>
           <Grid
             item
             xs={12}
             sx={{
-              minHeight: 175,
-              backgroundImage: `url()`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: '65%',
-              backgroundPosition: 'center',
+              minHeight: 100,
             }}
           />
           <Grid item xs={12}>

@@ -4,7 +4,7 @@ import React from 'react';
 export default function Home(props) {
   
   return (
-    <Grid container component="main" sx={{ height: '100vh' }}>
+    <Grid container component="main">
      
     </Grid>
   );
