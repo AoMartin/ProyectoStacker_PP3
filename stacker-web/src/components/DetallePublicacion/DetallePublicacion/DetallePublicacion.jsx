@@ -1,9 +1,9 @@
 import PlusOneIcon from '@mui/icons-material/PlusOne';
-import { Avatar, Box, Button, IconButton, Typography } from '@mui/material';
+import { Avatar, Box, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
 
-const PublicacionDetallada = (props) => {
+const DetallePublicacion = (props) => {
 
 
 
@@ -45,4 +45,4 @@ const PublicacionDetallada = (props) => {
     );
 };
 
-export default PublicacionDetallada;
+export default DetallePublicacion;

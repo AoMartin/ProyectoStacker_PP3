@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { trackPromise } from 'react-promise-tracker';
+import { Store } from '../redux/store/Store';
 import { API_URL } from '../utils/Constantes';
 
 let headers = {
@@ -85,7 +86,7 @@ const call = async(url, options = {}) => {
 };
 
 const checkToken = async(options) => {
-    
+    let token = await Store.getState().usuario.login.token;
     let AUTH = { 'Authorization': token };
     if (null != token && token != '')
         return {...options, headers: AUTH }

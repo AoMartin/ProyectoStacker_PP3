@@ -3,26 +3,26 @@ import { Stack } from '@mui/system';
 import * as React from 'react';
 import CajaComentario from '../../components/DetallePublicacion/CajaComentario/CajaComentario';
 import Comentario from '../../components/DetallePublicacion/Comentario/Comentario';
-import PublicacionDetallada from '../../components/DetallePublicacion/PublicacionDetallada/PublicacionDetallada';
+import DetallePublicacion from '../../components/DetallePublicacion/DetallePublicacion/DetallePublicacion';
 
-export default function DetallePublicacion(props) {
+export default function Publicacion(props) {
 
   return (
     <Grid container component="main">
 
       <Grid item sx={12}>
-        <PublicacionDetallada></PublicacionDetallada>
+        <DetallePublicacion/>
       </Grid>
 
       <Grid item sx={12}>
-        <CajaComentario></CajaComentario>
+        <CajaComentario/>
       </Grid>
 
       <Grid item sx={12}>
         <Stack spacing={2}>
-          <Comentario></Comentario>
-          <Comentario></Comentario>
-          <Comentario></Comentario>
+          <Comentario/>
+          <Comentario/>
+          <Comentario/>
         </Stack>
       </Grid>
 

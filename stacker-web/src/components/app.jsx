@@ -1,8 +1,8 @@
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import DetallePublicacion from '../containers/DetallePublicacion/DetallePublicacion';
 import Home from '../containers/Home/Home';
+import Publicacion from '../containers/Publicacion/Publicacion';
 import MainBanner from './MainBanner/MainBanner';
 
 const mdTheme = createTheme({
@@ -22,7 +22,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<MainBanner vista={<Home />} />} />
             <Route path="/home" element={<MainBanner vista={<Home />} />} />
-            <Route path="/detalle" element={<MainBanner vista={<DetallePublicacion />} />} />
+            <Route path="/publicacion" element={<MainBanner vista={<Publicacion />} />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

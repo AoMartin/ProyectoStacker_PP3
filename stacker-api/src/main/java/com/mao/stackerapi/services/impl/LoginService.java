@@ -44,7 +44,7 @@ public class LoginService implements ILoginService {
 		loginRepository.save(login);
 
 		token = jwtTokenProvider.generateToken(userDto.getUsername(), id);
-		ret = new TokenResponseDTO(token,userDto.getUsername());
+		ret = new TokenResponseDTO(token,userDto.getUsername(),login.getImagenUrl(),login.getUltimoLogin().toString());
 
 		logger.debug(String.format("Saliendo de %s", new Throwable().getStackTrace()[0].getMethodName()));
 		return ret;

@@ -13,21 +13,18 @@ public class TokenResponseDTO {
 
 	private String token;
 	private String userName;
+	private String img;
+	private String lastLoginDate;
 
 	public TokenResponseDTO() {
 	}
 
-	public TokenResponseDTO(String token, String userName) {
+	public TokenResponseDTO(String token, String userName, String img, String lastLoginDate) {
+		super();
 		this.token = token;
 		this.userName = userName;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+		this.img = img;
+		this.lastLoginDate = lastLoginDate;
 	}
 
 	public String getToken() {
@@ -38,5 +35,36 @@ public class TokenResponseDTO {
 		this.token = token;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public String getLastLoginDate() {
+		return lastLoginDate;
+	}
+
+	public void setLastLoginDate(String lastLoginDate) {
+		this.lastLoginDate = lastLoginDate;
+	}
+
+	@Override
+	public String toString() {
+		return "TokenResponseDTO [token=" + token + ", userName=" + userName + ", img=" + img + ", lastLoginDate="
+				+ lastLoginDate + "]";
+	}
+
+	
 	
 }
