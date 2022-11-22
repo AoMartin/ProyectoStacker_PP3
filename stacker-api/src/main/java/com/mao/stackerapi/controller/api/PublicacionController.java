@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping(value = "/api/v1/publicacion")
+@RequestMapping(value = "/publicacion")
 public class PublicacionController  {
 
 	private static final Logger logger = LogManager.getLogger(PublicacionController.class);

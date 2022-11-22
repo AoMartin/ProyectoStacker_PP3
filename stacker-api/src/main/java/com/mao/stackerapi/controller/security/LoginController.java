@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
-@RequestMapping(value = "/api/login")
+@RequestMapping(value = "/login")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class LoginController {
 	

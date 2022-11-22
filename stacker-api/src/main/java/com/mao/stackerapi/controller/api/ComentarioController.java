@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping(value = "/api/v1/comentario")
+@RequestMapping(value = "/comentario")
 public class ComentarioController  {
 
 	private static final Logger logger = LogManager.getLogger(ComentarioController.class);
