@@ -5,9 +5,9 @@ import {
 import AppBar from '@mui/material/AppBar';
 import { grey } from '@mui/material/colors';
 import React from 'react';
+import Usuario from '../../components/Sistema//Usuario/Usuario';
 import MenuPrincipal from '../../components/Sistema/MenuPrincipal/MenuPrincipal';
-import Spinner from '../../components/Spinner/Spinner';
-import Usuario from '../../components/Usuario/Usuario';
+import Spinner from '../../components/Sistema/Spinner/Spinner';
 
 export default function MainBanner(props) {
   const { vista } = props;

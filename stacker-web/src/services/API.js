@@ -86,7 +86,9 @@ const call = async(url, options = {}) => {
 };
 
 const checkToken = async(options) => {
-    let token = await Store.getState().usuario.login.token;
+    //TODO token
+    //let token = await Store.getState().usuario.login.token;
+    let token = null;
     let AUTH = { 'Authorization': token };
     if (null != token && token != '')
         return {...options, headers: AUTH }

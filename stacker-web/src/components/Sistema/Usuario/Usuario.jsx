@@ -1,9 +1,8 @@
 import { Avatar, Box, Grid, Menu, MenuItem, Typography } from '@mui/material';
+import { grey } from '@mui/material/colors';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { grey } from '@mui/material/colors';
 import { userLogout } from '../../../redux/slices/usuarioSlice';
-import { userLogin } from '../../../../../../stock web/src/redux/actions/UsuarioActions';
 
 const Usuario = (props) => {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const Usuario = (props) => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    dispatch(userLogin());
+    //dispatch(userLogin());
   };
 
   const handleClose = () => {

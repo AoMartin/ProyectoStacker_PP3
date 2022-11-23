@@ -2,8 +2,8 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../containers/Home/Home';
+import MainBanner from '../containers/MainBanner/MainBanner';
 import Publicacion from '../containers/Publicacion/Publicacion';
-import MainBanner from './MainBanner/MainBanner';
 
 const mdTheme = createTheme({
   palette: {

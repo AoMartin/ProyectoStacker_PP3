@@ -1,4 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import {  createSlice } from '@reduxjs/toolkit'
+import LoginService from '../../services/LoginService'
 
 const loginInicial = {
   userName: '',
@@ -26,31 +27,9 @@ const usuarioSlice = createSlice({
       })
     },
 
-  },
-  extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(userLogin.fulfilled, (state, action) => {
-      state.usuario.push(action.payload)
-    })
-  },
+  }
 })
 
-const userLogin = createAsyncThunk(
-  'usuario/login',
-  async (loginData, thunkAPI) => {
-    let response = null;
-
-    try {
-      response = await LoginService.autenticarUsuario(loginData);
-    } catch (error) {
-      //TODO dispatch(abrirModalAvisoUsuario('Fallo al registrar intentar loguearse.', false, error));
-    }
-    if (null == response) return;
-
-    sessionStorage.setItem('session', JSON.stringify(response));
-    return response
-  }
-)
 
 export const { userLogout, userImgUpdate } = usuarioSlice.actions
-export default usuarioSlice.reducer
+export default usuarioSlice
