@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import usuarioSlice from '../slices/usuarioSlice'
+import usuarioReducer from '../slices/usuarioSlice'
 
 export const Store = configureStore({
   reducer: {
     //publicaciones: publicacionReducer,
-    usuario: usuarioSlice.reducer
+    usuario: usuarioReducer
   }
 })
 

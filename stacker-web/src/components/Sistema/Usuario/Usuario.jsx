@@ -1,24 +1,25 @@
-import { Avatar, Box, Grid, Menu, MenuItem, Typography } from '@mui/material';
+import { Avatar, Box, Button, Grid, Menu, MenuItem, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userLogout } from '../../../redux/slices/usuarioSlice';
+import { openLoginModal, userLogout } from '../../../redux/slices/usuarioSlice';
+import ModalLogin from '../../Modals/ModalLogin/ModalLogin';
 
 const Usuario = (props) => {
   const dispatch = useDispatch();
 
-  const userName = useSelector((state) => state.usuario.userName);
-  const img = useSelector((state) => state.usuario.img);
-  const lastLoginDate = useSelector((state) => state.usuario.lastLoginDate);
+  const userName = useSelector((state) => state.usuario.login.userName);
+  const img = useSelector((state) => state.usuario.login.img);
+  const lastLoginDate = useSelector((state) => state.usuario.login.lastLoginDate);
 
   //TODO formatear fechas
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const open = Boolean(anchorEl && userName != '');
 
   const handleClick = (event) => {
+    if (userName == '') return;
     setAnchorEl(event.currentTarget);
-    //dispatch(userLogin());
   };
 
   const handleClose = () => {
@@ -31,6 +32,12 @@ const Usuario = (props) => {
 
   const logout = () => {
     dispatch(userLogout());
+    sessionStorage.removeItem('session');
+  }
+
+  const handleLoginModalOpen = () => {
+    dispatch(openLoginModal());
+    setAnchorEl(null);
   }
 
   return (
@@ -44,23 +51,31 @@ const Usuario = (props) => {
           <Typography id="user" component="h4" variant="h5" sx={{ color: 'black' }}>
             {userName}
           </Typography>
-          <Typography id="login-date" sx={{ fontSize: 12, color: (theme) => theme.palette.info.light }}>
-            <strong>Inicio sesion: {lastLoginDate}</strong>
-          </Typography>
+          {userName == ''
+            ?
+            <Button onClick={handleLoginModalOpen} variant="outlined" color="info">No se ha iniciado sesión</Button>
+            :
+            <Typography id="login-date" sx={{ fontSize: 12, color: (theme) => theme.palette.info.light }}>
+              <strong>Inicio sesion: {lastLoginDate}</strong>
+            </Typography>
+          }
         </Grid>
       </Grid>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={() => handleImgChange()}>Asociar Imagen</MenuItem>
-        <MenuItem onClick={() => logout()}>Salir</MenuItem>
-      </Menu>
+      {userName != '' &&
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          <MenuItem onClick={() => handleImgChange()}>Asociar Imagen</MenuItem>
+          <MenuItem onClick={() => logout()}>Salir</MenuItem>
+        </Menu>
+      }
+      <ModalLogin></ModalLogin>
     </Box>
   );
 };

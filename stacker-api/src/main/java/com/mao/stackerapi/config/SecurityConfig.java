@@ -18,7 +18,7 @@ public class SecurityConfig {
 		.disable()
 		.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 		.authorizeRequests()
-		.antMatchers("/api/login/autenticar-usuario",
+		.antMatchers("/login/autenticar-usuario",
 				     "/v3/api-docs/",
 				     "/v3/api-docs",
 				     "/api-docs/",
