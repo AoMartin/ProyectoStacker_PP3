@@ -5,12 +5,18 @@ import {
 import AppBar from '@mui/material/AppBar';
 import { grey } from '@mui/material/colors';
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Usuario from '../../components/Sistema//Usuario/Usuario';
 import MenuPrincipal from '../../components/Sistema/MenuPrincipal/MenuPrincipal';
 import Spinner from '../../components/Sistema/Spinner/Spinner';
 
 export default function MainBanner(props) {
   const { vista } = props;
+
+  let navigate = useNavigate();
+  const routeChange = () =>{ 
+    navigate('/home');
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -28,7 +34,7 @@ export default function MainBanner(props) {
         }}
       >
         <Box m={2}>
-          <Grid container>
+          <Grid container onClick={routeChange}>
             <Grid item mt={1}>
               <LayersIcon sx={{ fontSize: 60 }} style={{ color: '#000000' }} />
             </Grid>
