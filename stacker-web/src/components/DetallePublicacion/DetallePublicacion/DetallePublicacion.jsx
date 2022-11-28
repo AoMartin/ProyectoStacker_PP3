@@ -1,28 +1,40 @@
 import PlusOneIcon from '@mui/icons-material/PlusOne';
 import { Avatar, Box, IconButton, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
 
 const DetallePublicacion = (props) => {
+    const data = props.location.state;
 
+    useEffect(() => {
+        cargarListaComentarios();
+    }, []);
 
+    const cargarListaComentarios = async () => {
+        try {
+            //const response = await PublicacionService.obtenerTodo();
+            //dispatch(cargarPublicaciones(response));
+        } catch (err) {
+            //TODO manejar casos de error
+        }
+    }
 
     return (
         <Box item sx={{ display: 'flex' }}>
             <Box m={2}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Avatar></Avatar>
-                    <Typography ml={2}>Usuario</Typography>
-                    <ValoracionFechaHora />
+                    <Avatar src={data.usuario.imagenUrl}></Avatar>
+                    <Typography ml={2}>{data.usuario.user}</Typography>
+                    <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                 </Box>
                 <Typography variant="h4" component="div" color='#000000' >
-                    Live From Space
+                    {data.titulo}
                     <IconButton color="info">
                         <PlusOneIcon sx={{ fontSize: 40 }} />
                     </IconButton>
                 </Typography>
                 <Typography variant="h5" component="div" color='#000000' mt={1}>
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit blandit cubilia sociis netus, porta tempor curabitur himenaeos cum neque hendrerit sagittis pulvinar placerat. Nulla erat viverra iaculis magnis et at urna, magna congue maecenas accumsan integer sem.
+                    {data.descripcion}
                 </Typography>
 
                 <Box xs={12} sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -38,7 +50,7 @@ const DetallePublicacion = (props) => {
                         width: 'auto',
                         height: 'auto'
                     }}
-                    src="https://i.ytimg.com/vi/ZuzrrZkgC8Q/maxresdefault.jpg"
+                    src={data.imagen}
                 />
             </Box>
         </Box>

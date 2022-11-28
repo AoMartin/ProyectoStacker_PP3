@@ -34,11 +34,11 @@ public class PublicacionMapper implements IGenericMapper<PublicacionDTO,Publicac
 		dto.setDescripcion(bo.getDescripcion());
 		dto.setPuntaje(bo.getPuntaje());
 		
-		Timestamp fechaHoraCreacion = null;
+		String fechaHoraCreacion = null;
 		if (null != bo.getFechaHoraCreacion()) {
-			fechaHoraCreacion = dto.getFechaHoraCreacion();
+			fechaHoraCreacion = dto.getFechaHoraCreacion().toString();
 		}else {
-			fechaHoraCreacion = new Timestamp(System.currentTimeMillis());
+			fechaHoraCreacion = new Timestamp(System.currentTimeMillis()).toString();
 		}
 		dto.setFechaHoraCreacion(fechaHoraCreacion);
 		
@@ -61,7 +61,7 @@ public class PublicacionMapper implements IGenericMapper<PublicacionDTO,Publicac
 		
 		Timestamp fechaHoraCreacion = null;
 		if (null != dto.getFechaHoraCreacion()) {
-			fechaHoraCreacion = dto.getFechaHoraCreacion();
+			fechaHoraCreacion = Timestamp.valueOf(dto.getFechaHoraCreacion());
 		}else {
 			fechaHoraCreacion = new Timestamp(System.currentTimeMillis());
 		}

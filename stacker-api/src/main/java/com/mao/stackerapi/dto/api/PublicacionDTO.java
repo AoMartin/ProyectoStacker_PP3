@@ -1,7 +1,5 @@
 package com.mao.stackerapi.dto.api;
 
-import java.sql.Timestamp;
-
 import com.mao.stackerapi.models.security.LoginBO;
 
 
@@ -12,7 +10,7 @@ public class PublicacionDTO {
 	private String imagen;
 	private String descripcion;
 	private Integer puntaje;
-	private Timestamp fechaHoraCreacion;
+	private String fechaHoraCreacion;
 	private LoginBO usuario;
 	
 	public PublicacionDTO() {
@@ -20,7 +18,7 @@ public class PublicacionDTO {
 	}
 
 	public PublicacionDTO(Long idPublicacion, String titulo, String imagen, String descripcion, Integer puntaje,
-			Timestamp fechaHoraCreacion, LoginBO usuario) {
+			String fechaHoraCreacion, LoginBO usuario) {
 		super();
 		this.idPublicacion = idPublicacion;
 		this.titulo = titulo;
@@ -71,11 +69,11 @@ public class PublicacionDTO {
 		this.puntaje = puntaje;
 	}
 
-	public Timestamp getFechaHoraCreacion() {
+	public String getFechaHoraCreacion() {
 		return fechaHoraCreacion;
 	}
 
-	public void setFechaHoraCreacion(Timestamp fechaHoraCreacion) {
+	public void setFechaHoraCreacion(String fechaHoraCreacion) {
 		this.fechaHoraCreacion = fechaHoraCreacion;
 	}
 

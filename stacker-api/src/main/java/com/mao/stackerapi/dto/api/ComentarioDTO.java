@@ -11,7 +11,7 @@ public class ComentarioDTO {
 	private Long idRespuesta;
 	private String mensaje;
 	private Integer puntaje;
-	private Timestamp fechaHoraCreacion;
+	private String fechaHoraCreacion;
 	private LoginBO usuario;
 	
 
@@ -21,7 +21,7 @@ public class ComentarioDTO {
 
 
 	public ComentarioDTO(Long idComentario, Long idPublicacion, Long idRespuesta, String mensaje, Integer puntaje,
-			Timestamp fechaHoraCreacion, LoginBO usuario) {
+			String fechaHoraCreacion, LoginBO usuario) {
 		super();
 		this.idComentario = idComentario;
 		this.idPublicacion = idPublicacion;
@@ -83,12 +83,12 @@ public class ComentarioDTO {
 	}
 
 
-	public Timestamp getFechaHoraCreacion() {
+	public String getFechaHoraCreacion() {
 		return fechaHoraCreacion;
 	}
 
 
-	public void setFechaHoraCreacion(Timestamp fechaHoraCreacion) {
+	public void setFechaHoraCreacion(String fechaHoraCreacion) {
 		this.fechaHoraCreacion = fechaHoraCreacion;
 	}
 
