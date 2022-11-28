@@ -1,6 +1,7 @@
 package com.mao.stackerapi.services.impl;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.apache.logging.log4j.LogManager;
@@ -44,10 +45,30 @@ public class LoginService implements ILoginService {
 		loginRepository.save(login);
 
 		token = jwtTokenProvider.generateToken(userDto.getUsername(), id);
-		ret = new TokenResponseDTO(token,userDto.getUsername(),login.getImagenUrl(),login.getUltimoLogin().toString());
+		ret = new TokenResponseDTO(login.getIdLogin(),token,userDto.getUsername(),login.getImagenUrl(),login.getUltimoLogin().toString());
 
 		logger.debug(String.format("Saliendo de %s", new Throwable().getStackTrace()[0].getMethodName()));
 		return ret;
+	}
+
+	@Override
+	public String cambiarImagen(Long idLogin, String nuevaImagen) {
+		logger.debug(String.format("Entrando en %s", new Throwable().getStackTrace()[0].getMethodName()));
+		String res = nuevaImagen;
+		
+		Optional<LoginBO> loginEncontrado = loginRepository.findById(idLogin);
+		
+		try {
+			LoginBO login = loginEncontrado.get();
+			login.setImagenUrl(nuevaImagen);
+			loginRepository.save(login);
+		}catch(Exception e) {
+			logger.error(e);
+			res = null;
+		}
+		
+		logger.debug(String.format("Saliendo de %s", new Throwable().getStackTrace()[0].getMethodName()));
+		return res;
 	}
 
 }

@@ -1,16 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const INITIAL_STATE = {
   login: sessionStorage.getItem('session') ? JSON.parse(sessionStorage.getItem('session')) : {
+    id: -1,
     userName: '',
     img: '',
     token: '',
     lastLoginDate: '',
   },
   loginModalOpen: false,
+  imagenModalOpen: false,
 }
-
-
 
 const usuarioSlice = createSlice({
   name: 'usuario',
@@ -24,8 +24,17 @@ const usuarioSlice = createSlice({
       state.loginModalOpen = false;
     },
 
+    openImagenModal: (state) => {
+      state.imagenModalOpen = true;
+    },
+
+    closeImagenModal: (state) => {
+      state.imagenModalOpen = false;
+    },
+
     userLogin: (state, action) => {
-      state.login = action.payload
+      state.login = action.payload;
+      console.log(current(state))
     },
 
     userLogout: () => INITIAL_STATE,
@@ -38,7 +47,7 @@ const usuarioSlice = createSlice({
 })
 
 
-export const { openLoginModal, closeLoginModal, userLogin, userLogout, userImgUpdate } = usuarioSlice.actions
+export const { openLoginModal, closeLoginModal, openImagenModal, closeImagenModal, userLogin, userLogout, userImgUpdate } = usuarioSlice.actions
 export default usuarioSlice.reducer
 
 

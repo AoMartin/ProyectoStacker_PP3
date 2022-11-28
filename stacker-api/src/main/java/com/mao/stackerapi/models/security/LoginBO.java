@@ -30,7 +30,7 @@ public class LoginBO {
 	@Column(name = "USER")
 	private String user;
 
-	@Column(name = "IMAGEN_URL")
+	@Column(name = "IMAGEN_URL", length = 2048)
 	private String imagenUrl;
 
 	@Column(name = "ULTIMO_LOGIN")

@@ -2,8 +2,9 @@ import { Avatar, Box, Button, Grid, Menu, MenuItem, Typography } from '@mui/mate
 import { grey } from '@mui/material/colors';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { openLoginModal, userLogout } from '../../../redux/slices/usuarioSlice';
+import { openImagenModal, openLoginModal, userLogout } from '../../../redux/slices/usuarioSlice';
 import ModalLogin from '../../Modals/ModalLogin/ModalLogin';
+import ModalUsuarioCambiarImagen from '../../Modals/ModalUsuarioCambiarImagen/ModalUsuarioCambiarImagen';
 
 const Usuario = (props) => {
   const dispatch = useDispatch();
@@ -27,7 +28,8 @@ const Usuario = (props) => {
   };
 
   const handleImgChange = () => {
-    //TODO user img change 
+    dispatch(openImagenModal());
+    setAnchorEl(null);
   }
 
   const logout = () => {
@@ -75,7 +77,8 @@ const Usuario = (props) => {
           <MenuItem onClick={() => logout()}>Salir</MenuItem>
         </Menu>
       }
-      <ModalLogin></ModalLogin>
+      <ModalLogin/>
+      <ModalUsuarioCambiarImagen/>
     </Box>
   );
 };

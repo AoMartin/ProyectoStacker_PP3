@@ -11,6 +11,7 @@ package com.mao.stackerapi.dto.security;
 
 public class TokenResponseDTO {
 
+	private Long id;
 	private String token;
 	private String userName;
 	private String img;
@@ -19,12 +20,21 @@ public class TokenResponseDTO {
 	public TokenResponseDTO() {
 	}
 
-	public TokenResponseDTO(String token, String userName, String img, String lastLoginDate) {
+	public TokenResponseDTO(Long id, String token, String userName, String img, String lastLoginDate) {
 		super();
+		this.id = id;
 		this.token = token;
 		this.userName = userName;
 		this.img = img;
 		this.lastLoginDate = lastLoginDate;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getToken() {
@@ -61,10 +71,11 @@ public class TokenResponseDTO {
 
 	@Override
 	public String toString() {
-		return "TokenResponseDTO [token=" + token + ", userName=" + userName + ", img=" + img + ", lastLoginDate="
-				+ lastLoginDate + "]";
+		return "TokenResponseDTO [id=" + id + ", token=" + token + ", userName=" + userName + ", img=" + img
+				+ ", lastLoginDate=" + lastLoginDate + "]";
 	}
 
+	
 	
 	
 }

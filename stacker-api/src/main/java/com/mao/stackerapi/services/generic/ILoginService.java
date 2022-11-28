@@ -31,4 +31,5 @@ public interface ILoginService {
 	 */
 	public TokenResponseDTO autenticarUser(UserDTO userDto) ;
 
+	public String cambiarImagen(Long idLogin, String nuevaImagen);
 }
