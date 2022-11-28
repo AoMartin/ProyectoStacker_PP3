@@ -13,6 +13,7 @@ export default function Home(props) {
   useEffect(() => {
     cargarListaPubs();
     console.log("llamandoPugs")
+    console.log(JSON.stringify(listaPublicaciones))
   }, []);
 
   const cargarListaPubs = async() =>{
@@ -26,9 +27,9 @@ export default function Home(props) {
 
   return (
     <Grid container component="main">
-      {listaPublicaciones.map(pub => {
-        <PublicacionCard data={pub}></PublicacionCard>
-      })}
+      {listaPublicaciones.map( (pub, index) => 
+        <PublicacionCard key={index} data={pub}/>
+      )}
     </Grid>
   );
 }

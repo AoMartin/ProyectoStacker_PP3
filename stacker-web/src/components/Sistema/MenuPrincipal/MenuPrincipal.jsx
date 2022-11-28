@@ -20,7 +20,7 @@ const MenuPrincipal = () => {
 
   return (
     <List
-      sx={{ width: '30%', minWidth: 230,maxWidth: 230, bgcolor: (theme) => theme.palette.info.light }}
+      sx={{ bgcolor: (theme) => theme.palette.info.light }}
       component="nav"
     >
       <ListItemButton component={Link} to="/home">

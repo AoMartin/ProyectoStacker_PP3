@@ -5,24 +5,21 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import ValoracionFechaHora from '../ValoracionFechaHora/ValoracionFechaHora';
 
 const PublicacionCard = (props) => {
-    const data = props.data;
+    const { data } = props;
+    let navigate = useNavigate();
+
+    const handleCardClick = () => {
+        navigate('/publicacion',{state: data})
+    }
 
     return (
-        <Box m={.5} width={700}>
+        <Box m={.5} width={'49%'}>
             <Card sx={{ display: 'flex' }}>
-                <CardActionArea component={
-                    <Link
-                        to={{
-                            pathname: "/publicacion",
-                            state: data
-                        }}
-                    />
-                }>
+                <CardActionArea onClick={handleCardClick}>
                     <CardContent >
                         <Box sx={{ display: 'flex', alignItems: 'center', pb: 1 }}>
                             <Avatar src={data.usuario.imagenUrl}></Avatar>
@@ -42,7 +39,7 @@ const PublicacionCard = (props) => {
                                 />
                             </Box>
                         </Box>
-                        <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion}/>
+                        <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                     </CardContent>
                 </CardActionArea>
             </Card>

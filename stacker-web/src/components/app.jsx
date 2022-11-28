@@ -23,8 +23,8 @@ const App = () => {
             <Route path="/" element={<MainBanner vista={<Home />} />} />
             <Route path="/home" element={<MainBanner vista={<Home />} />} />
             <Route path="/publicacion" element={<MainBanner vista={<Publicacion />} />} />
-            <Route path="/nuevos" element={<MainBanner vista />} />
-            <Route path="/tendencia" element={<MainBanner vista />} />
+            <Route path="/nuevos" element={<MainBanner vista={<Publicacion />} />} />
+            <Route path="/tendencia" element={<MainBanner vista={<Publicacion />} />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

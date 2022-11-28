@@ -1,13 +1,16 @@
 import PlusOneIcon from '@mui/icons-material/PlusOne';
 import { Avatar, Box, IconButton, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
 
 const DetallePublicacion = (props) => {
-    const data = props.location.state;
+    const location = useLocation();
+    const data = location.state;
 
     useEffect(() => {
         cargarListaComentarios();
+        console.log(data.usuario.imagenUrl)
     }, []);
 
     const cargarListaComentarios = async () => {

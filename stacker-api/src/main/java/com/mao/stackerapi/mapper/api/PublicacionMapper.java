@@ -42,6 +42,8 @@ public class PublicacionMapper implements IGenericMapper<PublicacionDTO,Publicac
 		}
 		dto.setFechaHoraCreacion(fechaHoraCreacion);
 		
+		dto.setUsuario(bo.getUsuario());
+		
 		return dto;
 	}
 

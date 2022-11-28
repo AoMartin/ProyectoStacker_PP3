@@ -43,6 +43,8 @@ public class ComentarioMapper implements IGenericMapper<ComentarioDTO,Comentario
 		}
 		dto.setFechaHoraCreacion(fechaHoraCreacion);
 		
+		dto.setUsuario(bo.getUsuario());
+		
 		return dto;
 	}
 

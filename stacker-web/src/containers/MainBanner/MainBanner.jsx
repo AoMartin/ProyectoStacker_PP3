@@ -31,7 +31,7 @@ export default function MainBanner(props) {
   }
 
   return (
-    <Box sx={{ display: 'flex', maxWidth: 230 }}>
+    <Box sx={{ display: 'flex'  }}>
 
       <AppBar position="absolute"
         elevation={0}
@@ -62,7 +62,7 @@ export default function MainBanner(props) {
         </Box>
       </AppBar>
 
-      <Box sx={{ backgroundColor: (theme) => theme.palette.info.light }}>
+      <Box sx={{ maxWidth: '15%', backgroundColor: (theme) => theme.palette.info.light }}>
         <Grid container spacing={0} >
           <Grid
             item
@@ -74,12 +74,12 @@ export default function MainBanner(props) {
           {
             userName != '' &&
             <>
-              <Grid item mt={2} ml={2}>
+              <Grid item mt={2} ml={2} xs={12}>
                 <Button color="info" variant="contained" startIcon={<PostAddIcon />} size="large" onClick={handleOpenModalCrearPublicacion}>
                   Publicar!
                 </Button>
               </Grid>
-              <Grid item mt={1} ml={2}>
+              <Grid item mt={1} ml={2} xs={12}>
                 <Button color="info" variant="contained" startIcon={<AutoAwesomeMotionIcon />} size="large" >
                   Editar
                 </Button>
