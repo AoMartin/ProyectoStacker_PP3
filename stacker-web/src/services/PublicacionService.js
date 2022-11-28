@@ -12,7 +12,7 @@ const obtenerTodo = async () => {
 };
 
 const guardar = async (bodyData) => {
-  return await API.post(`${CONTROLLER}/guardar`, { data: {...bodyData,fechaModificacion:'2022-01-01 00:00:00.00', fechaCreacion:'2022-01-01 00:00:00.00'}});
+  return await API.post(`${CONTROLLER}/guardar`, { data: {...bodyData}});
 };
 
 const actualizar = async (bodyData) => {

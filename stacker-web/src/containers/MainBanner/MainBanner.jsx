@@ -1,29 +1,37 @@
+import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import LayersIcon from '@mui/icons-material/Layers';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 import {
   Box, Button, Container, Grid, Typography
 } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { grey } from '@mui/material/colors';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import ModalCrearPublicacion from '../../components/Modals/ModalCrearPublicacion/ModalCrearPublicacion';
 import Usuario from '../../components/Sistema//Usuario/Usuario';
 import MenuPrincipal from '../../components/Sistema/MenuPrincipal/MenuPrincipal';
 import Spinner from '../../components/Sistema/Spinner/Spinner';
-import PostAddIcon from '@mui/icons-material/PostAdd';
-import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
+import { mostrarModalCrearPub } from '../../redux/slices/publicacionSlice';
 
 export default function MainBanner(props) {
   const { vista } = props;
+  const dispatch = useDispatch();
   const userName = useSelector((state) => state.usuario.login.userName);
 
   let navigate = useNavigate();
+
   const routeChange = () => {
     navigate('/home');
   }
 
+  const handleOpenModalCrearPublicacion = () =>{
+    dispatch(mostrarModalCrearPub());
+  }
+
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', maxWidth: 230 }}>
 
       <AppBar position="absolute"
         elevation={0}
@@ -67,7 +75,7 @@ export default function MainBanner(props) {
             userName != '' &&
             <>
               <Grid item mt={2} ml={2}>
-                <Button color="info" variant="contained" startIcon={<PostAddIcon />} size="large" >
+                <Button color="info" variant="contained" startIcon={<PostAddIcon />} size="large" onClick={handleOpenModalCrearPublicacion}>
                   Publicar!
                 </Button>
               </Grid>
@@ -98,6 +106,7 @@ export default function MainBanner(props) {
         </Container>
       </Box>
 
+      <ModalCrearPublicacion/>
       <Spinner />
       {/* TODO: MODALES ETC */}
     </Box>

@@ -12,6 +12,7 @@ export default function Home(props) {
 
   useEffect(() => {
     cargarListaPubs();
+    console.log("llamandoPugs")
   }, []);
 
   const cargarListaPubs = async() =>{
@@ -25,7 +26,7 @@ export default function Home(props) {
 
   return (
     <Grid container component="main">
-      {listaPublicaciones.sort().map(pub => {
+      {listaPublicaciones.map(pub => {
         <PublicacionCard data={pub}></PublicacionCard>
       })}
     </Grid>

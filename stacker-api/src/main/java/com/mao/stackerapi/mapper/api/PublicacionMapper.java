@@ -36,7 +36,7 @@ public class PublicacionMapper implements IGenericMapper<PublicacionDTO,Publicac
 		
 		String fechaHoraCreacion = null;
 		if (null != bo.getFechaHoraCreacion()) {
-			fechaHoraCreacion = dto.getFechaHoraCreacion().toString();
+			fechaHoraCreacion = bo.getFechaHoraCreacion().toString();
 		}else {
 			fechaHoraCreacion = new Timestamp(System.currentTimeMillis()).toString();
 		}

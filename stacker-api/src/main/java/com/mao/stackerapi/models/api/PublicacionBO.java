@@ -26,7 +26,7 @@ public class PublicacionBO {
 	@Column(name = "TITULO")
 	private String titulo;
 	
-	@Column(name = "IMAGEN")
+	@Column(name = "IMAGEN", length = 2048)
 	private String imagen;
 	
 	@Column(name = "DESCRIPCION")
