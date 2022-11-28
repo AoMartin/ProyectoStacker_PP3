@@ -49,9 +49,9 @@ const ModalUsuarioCambiarImagen = (props) => {
 
     const handleSubmit = async () => {
         try {
-            const response = await UsuarioService.cambiarImagen(idLogin,values.imagenUrl);
-            handleClose();
+            const response = await UsuarioService.cambiarImagen({id:idLogin,url:values.imagenUrl});
             dispatch(userImgUpdate(response));
+            handleClose();
         } catch (err) {
             //TODO manejar casos de error
         }

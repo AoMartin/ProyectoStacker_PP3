@@ -64,8 +64,8 @@ const ModalLogin = (props) => {
         try {
             const response = await LoginService.autenticarUsuario({ username: values.user, password: values.password });
             sessionStorage.setItem('session', JSON.stringify(response));
-            handleClose();
             dispatch(userLogin(response));
+            handleClose();
         } catch (err) {
             //TODO manejar casos de error
         }

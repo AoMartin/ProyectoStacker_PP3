@@ -27,14 +27,14 @@ public class UsuarioController {
 	@Autowired
 	ILoginService loginService;
 
-	@PutMapping(path = "/cambiar-imagen/{idLogin}")
+	@PutMapping(path = "/cambiar-imagen")
 	@Operation(summary = "Cambiar la imagen asociada al usuario actual")
 	@ApiResponse(responseCode = "200", description = "Cambiar la imagen asociada al usuario actual", content = {
 			@Content(mediaType = "application/json") })
-	public ResponseEntity<?> cambiarImagen(@PathVariable Long idLogin, @RequestBody String nuevaImagenUrl) throws Exception {
+	public ResponseEntity<?> cambiarImagen(@RequestBody CambiarImagenReqDTO dto) throws Exception {
 		logger.debug(String.format("Entrando en %s", new Throwable().getStackTrace()[0].getMethodName()));
 		
-		String urlGuardada  = loginService.cambiarImagen(idLogin, nuevaImagenUrl);
+		String urlGuardada  = loginService.cambiarImagen(dto.getId(), dto.getUrl());
 
 		logger.debug(String.format("Saliendo de %s", new Throwable().getStackTrace()[0].getMethodName()));
 		return ResponseEntity.ok().body(urlGuardada);

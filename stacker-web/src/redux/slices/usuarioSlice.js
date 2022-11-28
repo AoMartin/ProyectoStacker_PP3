@@ -41,6 +41,7 @@ const usuarioSlice = createSlice({
 
     userImgUpdate: (state, action) => {
       state.login.img = action.payload
+      sessionStorage.setItem('session', JSON.stringify(state.login));
     },
 
   }

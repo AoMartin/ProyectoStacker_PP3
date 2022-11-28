@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { cargarPublicaciones, ocultarModalCrearPub } from '../../../redux/slices/publicacionSlice';
 import PublicacionService from '../../../services/PublicacionService';
 
@@ -13,12 +14,13 @@ const pubData = {
     descripcion: '',
     puntaje: 0,
     fechaHoraCreacion: null,
-    usuario: null,
+    usuario: {idLogin:-1},
 }
 
 const ModalCrearPublicacion = (props) => {
+    let navigate = useNavigate();
     const showModalCrearPub = useSelector((state) => state.pubs.showModalCrearPub);
-    const usuario = useSelector((state) => state.usuario.login);
+    const idLogin = useSelector((state) => state.usuario.login.id);
     const listaPublicaciones = useSelector((state) => state.pubs.listaPubs);
     const dispatch = useDispatch();
 
@@ -60,11 +62,10 @@ const ModalCrearPublicacion = (props) => {
             data.titulo = values.titulo;
             data.descripcion = values.descripcion;
             data.imagen = values.imagenUrl;
-            data.usuario = usuario;
+            data.usuario.idLogin = idLogin;
 
             const response = await PublicacionService.guardar(data);
-            const listaActualizada = [listaPublicaciones, response];
-            dispatch(cargarPublicaciones(listaActualizada));
+            navigate('/');
             handleClose();
         } catch (err) {
             //TODO manejar casos de error

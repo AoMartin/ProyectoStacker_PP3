@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,7 +39,7 @@ public class PublicacionBO {
 	@Column(name = "FECHA_HORA_CREACION")
 	private Timestamp fechaHoraCreacion;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_USUARIO")
 	private LoginBO usuario;
 	

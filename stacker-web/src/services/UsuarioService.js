@@ -4,8 +4,8 @@ import API from './API';
 const CONTROLLER = CONTROLLER_USUARIO;
 
 
-const cambiarImagen = async (idLogin, bodyData) => {
-  return await API.put(`${CONTROLLER}/cambiar-imagen/${idLogin}`, { data: bodyData });
+const cambiarImagen = async ( bodyData) => {
+  return await API.put(`${CONTROLLER}/cambiar-imagen`, { data: bodyData });
 };
 
 
