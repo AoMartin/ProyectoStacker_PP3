@@ -21,7 +21,6 @@ const ModalCrearPublicacion = (props) => {
     let navigate = useNavigate();
     const showModalCrearPub = useSelector((state) => state.pubs.showModalCrearPub);
     const idLogin = useSelector((state) => state.usuario.login.id);
-    const listaPublicaciones = useSelector((state) => state.pubs.listaPubs);
     const dispatch = useDispatch();
 
     const [values, setValues] = useState({
@@ -107,7 +106,6 @@ const ModalCrearPublicacion = (props) => {
                                             label="Descripcion"
                                             multiline
                                             rows={4}
-                                            maxRows={4}
                                             fullWidth
                                             value={values.descripcion}
                                             onChange={handleChange('descripcion')}

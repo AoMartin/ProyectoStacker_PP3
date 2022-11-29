@@ -1,13 +1,17 @@
-import React from 'react';
-import { Box } from "@mui/system";
-import { Avatar, Button, Card, CardActionArea, Grid, IconButton, Typography } from '@mui/material';
-import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
-import PlusOneIcon from '@mui/icons-material/PlusOne';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import MessageIcon from '@mui/icons-material/Message';
+import PlusOneIcon from '@mui/icons-material/PlusOne';
 import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
+import { Avatar, Card, CardActionArea, Grid, IconButton, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
+import { Box } from "@mui/system";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
 
 const Comentario = (props) => {
+    const { data, respondiendo } = props;
+    const idLogin = useSelector((state) => state.usuario.login.id);
 
     const handleReplyClick = () => {
         alert("reply test!");
@@ -19,13 +23,10 @@ const Comentario = (props) => {
 
             <Grid container component="main" p={.5}>
                 <Grid item>
-                    <Avatar></Avatar>
+                    <Avatar src={data.usuario.imagenUrl}></Avatar>
                 </Grid>
                 <Grid item p={1}>
-                    <Typography>Usuario</Typography>
-                </Grid>
-                <Grid item p={1}>
-                    <ValoracionFechaHora />
+                    <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                 </Grid>
                 <Grid item pl={1}>
                     <IconButton color="info">
@@ -37,25 +38,35 @@ const Comentario = (props) => {
                         <MessageIcon />
                     </IconButton>
                 </Grid>
+                { idLogin == data.usuario.idLogin &&
+                    <Grid item pl={1}>
+                        <IconButton color="info">
+                            <DeleteForeverIcon />
+                        </IconButton>
+                    </Grid>
+                }
 
-                <Grid item pl={1}>
-                    <Box sx={{ backgroundColor: grey[200], borderRadius: '10px' }}
-                        onClick={handleReplyClick}>
-                        <Card variant="outlined">
-                            <CardActionArea>
-                                <Box p={.5}>
-
-                                    <SubdirectoryArrowRightIcon sx={{ fontSize: 12 }} />
-                                    <Typography variant="caption">Lorem ipsum dolor sit amet consectetur adipiscing elit blandit cubilia sociis netus, porta tempor curabitur himenaeos cum neque hendrerit sagittis pulvinar placerat. Nulla erat viverra iaculis magnis et at urna, magna congue maecenas accumsan integer sem.
-                                    </Typography>
-                                </Box>
-                            </CardActionArea>
-                        </Card>
-                    </Box>
-                </Grid>
+                {respondiendo &&                
+                    <Grid item pl={1}>
+                        <Box sx={{ backgroundColor: grey[200], borderRadius: '10px' }}
+                            onClick={handleReplyClick}>
+                            <Card variant="outlined">
+                                <CardActionArea>
+                                    <Box p={.5}>
+                                        <SubdirectoryArrowRightIcon sx={{ fontSize: 12 }} />
+                                        <Typography variant="caption">
+                                            {respondiendo}
+                                        </Typography>
+                                    </Box>
+                                </CardActionArea>
+                            </Card>
+                        </Box>
+                    </Grid>
+                }
 
                 <Grid item pt={1}>
-                    <Typography>Lorem ipsum dolor sit amet consectetur adipiscing elit blandit cubilia sociis netus, porta tempor curabitur himenaeos cum neque hendrerit sagittis pulvinar placerat. Nulla erat viverra iaculis magnis et at urna, magna congue maecenas accumsan integer sem.
+                    <Typography>
+                        {data.mensaje}
                     </Typography>
                 </Grid>
             </Grid>

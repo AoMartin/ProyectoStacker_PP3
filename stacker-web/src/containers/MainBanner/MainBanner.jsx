@@ -76,7 +76,7 @@ export default function MainBanner(props) {
             <>
               <Grid item mt={2} ml={2} xs={12}>
                 <Button color="info" variant="contained" startIcon={<PostAddIcon />} size="large" onClick={handleOpenModalCrearPublicacion}>
-                  Publicar!
+                  Publicar
                 </Button>
               </Grid>
               <Grid item mt={1} ml={2} xs={12}>

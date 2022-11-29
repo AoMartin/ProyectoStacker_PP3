@@ -12,8 +12,6 @@ export default function Home(props) {
 
   useEffect(() => {
     cargarListaPubs();
-    console.log("llamandoPugs")
-    console.log(JSON.stringify(listaPublicaciones))
   }, []);
 
   const cargarListaPubs = async() =>{

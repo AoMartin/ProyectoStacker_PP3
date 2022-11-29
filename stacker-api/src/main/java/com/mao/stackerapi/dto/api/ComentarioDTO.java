@@ -1,7 +1,5 @@
 package com.mao.stackerapi.dto.api;
 
-import java.sql.Timestamp;
-
 import com.mao.stackerapi.models.security.LoginBO;
 
 public class ComentarioDTO {

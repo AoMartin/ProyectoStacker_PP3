@@ -33,8 +33,8 @@ const Usuario = (props) => {
   }
 
   const logout = () => {
-    dispatch(userLogout());
     sessionStorage.removeItem('session');
+    dispatch(userLogout());
   }
 
   const handleLoginModalOpen = () => {

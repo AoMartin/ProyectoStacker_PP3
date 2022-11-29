@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeImagenModal, userImgUpdate, userLogin } from '../../../redux/slices/usuarioSlice';
-import LoginService from '../../../services/LoginService';
+import { closeImagenModal, userImgUpdate } from '../../../redux/slices/usuarioSlice';
 import UsuarioService from '../../../services/UsuarioService';
 
 const ModalUsuarioCambiarImagen = (props) => {
@@ -39,7 +38,7 @@ const ModalUsuarioCambiarImagen = (props) => {
     }
 
     const handleChange = (prop) => (event) => {
-        console.log(event.target.value.length)
+        
         if (event.target.value.length > 2048) {
             setValues({ ...values, sendDisabled: true });
             return;

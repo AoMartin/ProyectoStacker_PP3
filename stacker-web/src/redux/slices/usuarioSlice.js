@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const INITIAL_STATE = {
   login: sessionStorage.getItem('session') ? JSON.parse(sessionStorage.getItem('session')) : {
@@ -34,7 +34,6 @@ const usuarioSlice = createSlice({
 
     userLogin: (state, action) => {
       state.login = action.payload;
-      console.log(current(state))
     },
 
     userLogout: () => INITIAL_STATE,

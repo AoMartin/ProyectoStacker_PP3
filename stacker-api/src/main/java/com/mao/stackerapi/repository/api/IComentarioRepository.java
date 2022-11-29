@@ -1,5 +1,7 @@
 package com.mao.stackerapi.repository.api;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +18,5 @@ import com.mao.stackerapi.models.api.ComentarioBO;
 @Repository
 public interface IComentarioRepository extends JpaRepository<ComentarioBO, Long> {
 
+	public List<ComentarioBO> findByPublicacionIdPublicacionOrderByFechaHoraCreacion(Long idPub);
 }

@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState ={
+const INITIAL_STATE ={
   listaPubs: [],
   showModalCrearPub: false,
 }
 
 const publicacionSlice = createSlice({
   name: 'publicacion',
-  initialState: initialState,
+  initialState: INITIAL_STATE,
   reducers: {
   
     cargarPublicaciones: (state, action) => {

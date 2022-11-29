@@ -130,5 +130,26 @@ public class ComentarioServiceImpl implements IComentarioService {
         return id;
     }
 
+	@Override
+	public List<ComentarioDTO> obtenerTodoPorPublicacion(Long idPublicacion) throws ComentarioServiceException {
+        logger.debug("ComentarioServiceImpl: Ingresando a obtenerTodoPorPublicacion...");
+        List<ComentarioDTO> listaDto = new ArrayList<>();
+
+        try {
+            List<ComentarioBO> boLista = comentarioRepository.findByPublicacionIdPublicacionOrderByFechaHoraCreacion(idPublicacion);
+
+            for (ComentarioBO bo : boLista) {
+                ComentarioDTO dto = comentarioMapper.toDTO(bo);
+                listaDto.add(dto);
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            throw new ComentarioServiceException(ComentarioServiceException.DEFAULT_MESSAGE + e.getMessage());
+        }
+
+        logger.debug("ComentarioServiceImpl: Saliendo de obtenerTodoPorPublicacion...");
+        return listaDto;
+	}
+
 
 }

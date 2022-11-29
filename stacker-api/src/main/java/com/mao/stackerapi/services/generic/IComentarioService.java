@@ -77,5 +77,5 @@ public interface IComentarioService {
      */
     public Long borrarComentario(Long id) throws ComentarioServiceException;
 
-  
+    public List<ComentarioDTO> obtenerTodoPorPublicacion(Long idPublicacion) throws ComentarioServiceException;
 }

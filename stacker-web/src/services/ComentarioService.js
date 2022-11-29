@@ -1,7 +1,7 @@
 import { CONTROLLER_COMENTARIO } from '../utils/Constantes';
 import API from './API';
 
-const CONTROLLER = CONTROLLER_PUBLICACION;
+const CONTROLLER = CONTROLLER_COMENTARIO;
 
 const obtener = async (id) => {
   return await API.get(`${CONTROLLER}/obtener/${id}`);
@@ -23,10 +23,15 @@ const borrar = async (id) => {
   return await API.delete(`${CONTROLLER}/borrar/${id}`);
 };
 
+const obtenerTodoPorIdPub = async (id) => {
+  return await API.get(`${CONTROLLER}/obtener-todos/${id}`);
+};
+
 export default {
   obtener,
   obtenerTodo,
   guardar,
   actualizar,
   borrar,
+  obtenerTodoPorIdPub,
 };

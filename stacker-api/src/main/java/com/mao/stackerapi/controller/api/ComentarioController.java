@@ -111,4 +111,17 @@ public class ComentarioController  {
 	}
 
 
+	@GetMapping(value = "/obtener-todos-pub/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Metodo obtenerTodosComentario", notes = "Solicita todos los datos de comentario cargados en la base de datos de una publicacion dada", httpMethod = "GET")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ComentarioDTO.class),
+			@ApiResponse(code = 400, message = ""), @ApiResponse(code = 500, message = "") })
+	public ResponseEntity<List<ComentarioDTO>> obtenerTodosComentarioPorIdPublicacion(@PathVariable Long id) throws Exception {
+		logger.debug("ComentarioController: Ingresando a obtenerTodosComentarioPorIdPublicacion...");
+		List<ComentarioDTO> lista = null;
+
+		lista = comentarioService.obtenerTodoPorPublicacion(id);
+
+		logger.debug("ComentarioController: Saliendo de obtenerTodosComentarioPorIdPublicacion...");
+		return ResponseEntity.ok().body(lista);
+	}
 }

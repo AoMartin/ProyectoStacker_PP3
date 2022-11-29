@@ -1,26 +1,10 @@
 import PlusOneIcon from '@mui/icons-material/PlusOne';
 import { Avatar, Box, IconButton, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
 
 const DetallePublicacion = (props) => {
-    const location = useLocation();
-    const data = location.state;
-
-    useEffect(() => {
-        cargarListaComentarios();
-        console.log(data.usuario.imagenUrl)
-    }, []);
-
-    const cargarListaComentarios = async () => {
-        try {
-            //const response = await PublicacionService.obtenerTodo();
-            //dispatch(cargarPublicaciones(response));
-        } catch (err) {
-            //TODO manejar casos de error
-        }
-    }
+    const { data } = props;
 
     return (
         <Box item sx={{ display: 'flex' }}>
