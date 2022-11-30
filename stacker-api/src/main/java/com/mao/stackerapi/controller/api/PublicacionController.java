@@ -34,7 +34,49 @@ public class PublicacionController  {
 	@Autowired
 	private IPublicacionService publicacionService;
 
+	@GetMapping(value = "/obtener-todos-puntaje", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Metodo obtenerTodosPublicacionPuntaje", notes = "Solicita todos los datos de publicacion cargados en la base de datos", httpMethod = "GET")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = PublicacionDTO.class),
+			@ApiResponse(code = 400, message = ""), @ApiResponse(code = 500, message = "") })
+	public ResponseEntity<List<PublicacionDTO>> obtenerTodosPublicacionPuntaje() throws Exception {
+		logger.debug("PublicacionController: Ingresando a obtenerTodosPublicacionPuntaje...");
+		List<PublicacionDTO> lista = null;
+		
+		lista = publicacionService.obtenerTodoPublicacionPuntaje();
+		
+		logger.debug("PublicacionController: Saliendo de obtenerTodosPublicacionPuntaje...");
+		return ResponseEntity.ok().body(lista);
+	}
+	
+	@GetMapping(value = "/obtener-todos-hora-creacion", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Metodo obtenerTodosPublicacionHoraCreacion", notes = "Solicita todos los datos de publicacion cargados en la base de datos", httpMethod = "GET")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = PublicacionDTO.class),
+			@ApiResponse(code = 400, message = ""), @ApiResponse(code = 500, message = "") })
+	public ResponseEntity<List<PublicacionDTO>> obtenerTodosPublicacionHoraCreacion() throws Exception {
+		logger.debug("PublicacionController: Ingresando a obtenerTodosPublicacionHoraCreacion...");
+		List<PublicacionDTO> lista = null;
+		
+		lista = publicacionService.obtenerTodoPublicacionHoraCreacion();
+		
+		logger.debug("PublicacionController: Saliendo de obtenerTodosPublicacionHoraCreacion...");
+		return ResponseEntity.ok().body(lista);
+	}
+	
+	@GetMapping(value = "/obtener-todos-actualizacion", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Metodo obtenerTodosPublicacionUltimaActualizacion", notes = "Solicita todos los datos de publicacion cargados en la base de datos", httpMethod = "GET")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = PublicacionDTO.class),
+			@ApiResponse(code = 400, message = ""), @ApiResponse(code = 500, message = "") })
+	public ResponseEntity<List<PublicacionDTO>> obtenerTodosPublicacionUltimaActualizacion() throws Exception {
+		logger.debug("PublicacionController: Ingresando a obtenerTodosPublicacionUltimaActualizacion...");
+		List<PublicacionDTO> lista = null;
+		
+		lista = publicacionService.obtenerTodoPublicacionUltimaActualizacion();
+		
+		logger.debug("PublicacionController: Saliendo de obtenerTodosPublicacionUltimaActualizacion...");
+		return ResponseEntity.ok().body(lista);
+	}
 
+	
 	@GetMapping(value = "/obtener/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Metodo obtenerPublicacion", notes = "Solicita todos los datos de una publicacion para el ID indicado", httpMethod = "GET")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = PublicacionDTO.class),
@@ -48,22 +90,6 @@ public class PublicacionController  {
 		logger.debug("PublicacionController: Saliendo de obtenerPublicacion...");
 		return ResponseEntity.ok().body(dto);
 	}
-
-
-	@GetMapping(value = "/obtener-todos", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiOperation(value = "Metodo obtenerTodosPublicacion", notes = "Solicita todos los datos de publicacion cargados en la base de datos", httpMethod = "GET")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = PublicacionDTO.class),
-			@ApiResponse(code = 400, message = ""), @ApiResponse(code = 500, message = "") })
-	public ResponseEntity<List<PublicacionDTO>> obtenerTodosPublicacion() throws Exception {
-		logger.debug("PublicacionController: Ingresando a obtenerTodosPublicacion...");
-		List<PublicacionDTO> lista = null;
-
-		lista = publicacionService.obtenerTodoPublicacion();
-
-		logger.debug("PublicacionController: Saliendo de obtenerTodosPublicacion...");
-		return ResponseEntity.ok().body(lista);
-	}
-
 
 	@PostMapping(value = "/guardar", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Metodo guardarPublicacion", notes = "Guarda los datos de publicacion cargados en la base de datos", httpMethod = "POST")

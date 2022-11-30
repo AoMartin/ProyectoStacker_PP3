@@ -24,7 +24,7 @@ const borrar = async (id) => {
 };
 
 const obtenerTodoPorIdPub = async (id) => {
-  return await API.get(`${CONTROLLER}/obtener-todos/${id}`);
+  return await API.get(`${CONTROLLER}/obtener-todos-pub/${id}`);
 };
 
 export default {

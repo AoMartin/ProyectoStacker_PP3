@@ -19,4 +19,6 @@ import com.mao.stackerapi.models.api.ComentarioBO;
 public interface IComentarioRepository extends JpaRepository<ComentarioBO, Long> {
 
 	public List<ComentarioBO> findByPublicacionIdPublicacionOrderByFechaHoraCreacion(Long idPub);
+	
+	public List<ComentarioBO> findByPublicacionIdPublicacionOrderByPuntaje(Long idPub);
 }

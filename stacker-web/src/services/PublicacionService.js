@@ -7,10 +7,6 @@ const obtener = async (id) => {
   return await API.get(`${CONTROLLER}/obtener/${id}`);
 };
 
-const obtenerTodo = async () => {
-  return await API.get(`${CONTROLLER}/obtener-todos`);
-};
-
 const guardar = async (bodyData) => {
   return await API.post(`${CONTROLLER}/guardar`, { data: {...bodyData}});
 };
@@ -23,9 +19,21 @@ const borrar = async (id) => {
   return await API.delete(`${CONTROLLER}/borrar/${id}`);
 };
 
+const obtenerTodoPuntaje = async () => {
+  return await API.get(`${CONTROLLER}/obtener-todos-puntaje`);
+};
+const obtenerTodoHoraCreacion = async () => {
+  return await API.get(`${CONTROLLER}/obtener-todos-hora-creacion`);
+};
+const obtenerTodoUltimaActualizacion = async () => {
+  return await API.get(`${CONTROLLER}/obtener-todos-actualizacion`);
+};
+
 export default {
   obtener,
-  obtenerTodo,
+  obtenerTodoPuntaje,
+  obtenerTodoHoraCreacion,
+  obtenerTodoUltimaActualizacion,
   guardar,
   actualizar,
   borrar,

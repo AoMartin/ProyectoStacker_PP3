@@ -10,20 +10,23 @@ import { useSelector } from 'react-redux';
 import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
 
 const Comentario = (props) => {
-    const { data, respondiendo } = props;
+    const { data, respondiendo, handleSelect, handleReplyClick,refSetter } = props;
     const idLogin = useSelector((state) => state.usuario.login.id);
 
-    const handleReplyClick = () => {
-        alert("reply test!");
+    const handleDelete = () => {
+        //TODO
     }
 
+    let myRef = React.createRef();
+
     return (
-        <Box m={.5}>
-
-
-            <Grid container component="main" p={.5}>
+        <Box m={.5} ref={refSetter}>
+            <Grid container component="main" p={.5} ref={myRef}>
                 <Grid item>
                     <Avatar src={data.usuario.imagenUrl}></Avatar>
+                </Grid>
+                <Grid item p={1}>
+                    <Typography>{data.usuario.user}</Typography>
                 </Grid>
                 <Grid item p={1}>
                     <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
@@ -35,27 +38,27 @@ const Comentario = (props) => {
                 </Grid>
                 <Grid item pl={1}>
                     <IconButton color="info">
-                        <MessageIcon />
+                        <MessageIcon onClick={() => handleSelect(data.idComentario,refSetter,data.mensaje)}/>
                     </IconButton>
                 </Grid>
                 { idLogin == data.usuario.idLogin &&
                     <Grid item pl={1}>
-                        <IconButton color="info">
+                        <IconButton color="info" onClick={handleDelete}>
                             <DeleteForeverIcon />
                         </IconButton>
                     </Grid>
                 }
 
                 {respondiendo &&                
-                    <Grid item pl={1}>
+                    <Grid item xs={12} pl={1}>
                         <Box sx={{ backgroundColor: grey[200], borderRadius: '10px' }}
-                            onClick={handleReplyClick}>
+                            onClick={handleReplyClick(respondiendo.idComentario)}>
                             <Card variant="outlined">
                                 <CardActionArea>
                                     <Box p={.5}>
                                         <SubdirectoryArrowRightIcon sx={{ fontSize: 12 }} />
                                         <Typography variant="caption">
-                                            {respondiendo}
+                                            {respondiendo.mensaje}
                                         </Typography>
                                     </Box>
                                 </CardActionArea>
@@ -64,7 +67,7 @@ const Comentario = (props) => {
                     </Grid>
                 }
 
-                <Grid item pt={1}>
+                <Grid item xs={12} pt={1}>
                     <Typography>
                         {data.mensaje}
                     </Typography>

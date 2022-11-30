@@ -39,6 +39,9 @@ public class PublicacionBO {
 	@Column(name = "FECHA_HORA_CREACION")
 	private Timestamp fechaHoraCreacion;
 	
+	@Column(name = "ULTIMA_ACTUALIZACION")
+	private Timestamp ultimaActualizacion;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_USUARIO")
 	private LoginBO usuario;
@@ -48,7 +51,7 @@ public class PublicacionBO {
 	}
 
 	public PublicacionBO(Long idPublicacion, String titulo, String imagen, String descripcion, Integer puntaje,
-			Timestamp fechaHoraCreacion, LoginBO usuario) {
+			Timestamp fechaHoraCreacion, Timestamp ultimaActualizacion, LoginBO usuario) {
 		super();
 		this.idPublicacion = idPublicacion;
 		this.titulo = titulo;
@@ -56,6 +59,7 @@ public class PublicacionBO {
 		this.descripcion = descripcion;
 		this.puntaje = puntaje;
 		this.fechaHoraCreacion = fechaHoraCreacion;
+		this.ultimaActualizacion = ultimaActualizacion;
 		this.usuario = usuario;
 	}
 
@@ -107,6 +111,14 @@ public class PublicacionBO {
 		this.fechaHoraCreacion = fechaHoraCreacion;
 	}
 
+	public Timestamp getUltimaActualizacion() {
+		return ultimaActualizacion;
+	}
+
+	public void setUltimaActualizacion(Timestamp ultimaActualizacion) {
+		this.ultimaActualizacion = ultimaActualizacion;
+	}
+
 	public LoginBO getUsuario() {
 		return usuario;
 	}
@@ -119,8 +131,10 @@ public class PublicacionBO {
 	public String toString() {
 		return "PublicacionBO [idPublicacion=" + idPublicacion + ", titulo=" + titulo + ", imagen=" + imagen
 				+ ", descripcion=" + descripcion + ", puntaje=" + puntaje + ", fechaHoraCreacion=" + fechaHoraCreacion
-				+ ", usuario=" + usuario + "]";
+				+ ", ultimaActualizacion=" + ultimaActualizacion + ", usuario=" + usuario + "]";
 	}
+
+	
 	
 	
 }

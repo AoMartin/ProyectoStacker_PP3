@@ -20,11 +20,11 @@ const App = () => {
         <CssBaseline />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<MainBanner vista={<Home />} />} />
-            <Route path="/home" element={<MainBanner vista={<Home />} />} />
+            <Route path="/" element={<MainBanner vista={<Home tipo={'Home'}/>} />} />
+            <Route path="/home" element={<MainBanner vista={<Home tipo={'Home'}/>} />} />
+            <Route path="/nuevos" element={<MainBanner vista={<Home tipo={'Nuevos'}/>} />} />
+            <Route path="/tendencia" element={<MainBanner vista={<Home tipo={'Tendencia'}/>} />} />
             <Route path="/publicacion" element={<MainBanner vista={<Publicacion />} />} />
-            <Route path="/nuevos" element={<MainBanner vista={<Publicacion />} />} />
-            <Route path="/tendencia" element={<MainBanner vista={<Publicacion />} />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

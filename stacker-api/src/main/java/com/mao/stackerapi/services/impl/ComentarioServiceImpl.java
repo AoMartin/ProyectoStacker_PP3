@@ -15,6 +15,7 @@ import com.mao.stackerapi.mapper.api.ComentarioMapper;
 import com.mao.stackerapi.models.api.ComentarioBO;
 import com.mao.stackerapi.repository.api.IComentarioRepository;
 import com.mao.stackerapi.services.generic.IComentarioService;
+import com.mao.stackerapi.services.generic.IPublicacionService;
 
 /**
  * <p>
@@ -34,6 +35,9 @@ public class ComentarioServiceImpl implements IComentarioService {
 
     @Autowired
     private IComentarioRepository comentarioRepository;
+    
+    @Autowired
+    private IPublicacionService publicacionService;
 
     @Override
     public ComentarioDTO obtenerComentario(Long id) throws ComentarioServiceException {
@@ -87,6 +91,8 @@ public class ComentarioServiceImpl implements IComentarioService {
 
             ComentarioBO guardado = comentarioRepository.save(bo);
             dto = comentarioMapper.toDTO(guardado);
+            
+            publicacionService.notificarModificacion(dto.getIdPublicacion());
         } catch (Exception e) {
             logger.error(e);
             throw new ComentarioServiceException(ComentarioServiceException.DEFAULT_MESSAGE + e.getMessage());
@@ -106,6 +112,8 @@ public class ComentarioServiceImpl implements IComentarioService {
 
             ComentarioBO guardado = comentarioRepository.save(bo);
             dto = comentarioMapper.toDTO(guardado);
+            
+            publicacionService.notificarModificacion(dto.getIdPublicacion());
         } catch (Exception e) {
             logger.error(e);
             throw new ComentarioServiceException(ComentarioServiceException.DEFAULT_MESSAGE + e.getMessage());
@@ -136,7 +144,7 @@ public class ComentarioServiceImpl implements IComentarioService {
         List<ComentarioDTO> listaDto = new ArrayList<>();
 
         try {
-            List<ComentarioBO> boLista = comentarioRepository.findByPublicacionIdPublicacionOrderByFechaHoraCreacion(idPublicacion);
+            List<ComentarioBO> boLista = comentarioRepository.findByPublicacionIdPublicacionOrderByPuntaje(idPublicacion);
 
             for (ComentarioBO bo : boLista) {
                 ComentarioDTO dto = comentarioMapper.toDTO(bo);

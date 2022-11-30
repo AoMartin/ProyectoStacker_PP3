@@ -13,8 +13,6 @@ const Usuario = (props) => {
   const img = useSelector((state) => state.usuario.login.img);
   const lastLoginDate = useSelector((state) => state.usuario.login.lastLoginDate);
 
-  //TODO formatear fechas
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl && userName != '');
 
@@ -42,6 +40,17 @@ const Usuario = (props) => {
     setAnchorEl(null);
   }
 
+  const formatearFecha = (fecha) => {
+    const currentDate = new Date(fecha);
+    const dia = currentDate.getDate();
+    const mes = currentDate.getMonth(); // Be careful! January is 0, not 1
+    const anio = currentDate.getFullYear();
+    const horas = currentDate.getHours();
+    const minutos = currentDate.getMinutes();
+    const dateString = `${horas}:${minutos} - ${dia}/${mes+1}/${anio}`;
+    return dateString;
+}
+
   return (
     <Box sx={{ width: 350, height: 80, backgroundColor: grey[200], borderRadius: '10px' }}>
       <Grid container>
@@ -58,7 +67,7 @@ const Usuario = (props) => {
             <Button onClick={handleLoginModalOpen} variant="outlined" color="info">No se ha iniciado sesión</Button>
             :
             <Typography id="login-date" sx={{ fontSize: 12, color: (theme) => theme.palette.info.light }}>
-              <strong>Inicio sesion: {lastLoginDate}</strong>
+              <strong>Inicio sesion: {formatearFecha(lastLoginDate)}</strong>
             </Typography>
           }
         </Grid>
