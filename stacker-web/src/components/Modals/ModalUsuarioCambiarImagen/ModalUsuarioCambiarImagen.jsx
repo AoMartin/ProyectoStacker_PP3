@@ -92,7 +92,7 @@ const ModalUsuarioCambiarImagen = (props) => {
                                 label="Url"
                                 value={values.imagenUrl}
                                 onChange={handleChange('imagenUrl')}
-                                error={values.sendDisabled}
+                                error={values.sendDisabled ? true : undefined}
                                 fullWidth
                             />
                         </Box>

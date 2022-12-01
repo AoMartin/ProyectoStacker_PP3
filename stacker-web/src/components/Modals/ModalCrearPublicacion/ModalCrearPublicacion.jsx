@@ -126,7 +126,7 @@ const ModalCrearPublicacion = (props) => {
                                                 height: 'auto'
                                             }}
                                             src={values.imagenUrl}
-                                            error={values.imagenUrl.length > 2048}
+                                            error={values.imagenUrl.length > 2048 ? true : undefined}
                                         />
                                     </Box>
 

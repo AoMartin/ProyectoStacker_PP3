@@ -28,7 +28,7 @@ const comentarioSlice = createSlice({
       state.idRespuesta = null;
       state.refRespuesta = null;
       state.msgRespuesta = '';
-      state.listaComents = state.listaComents.push(action.payload);
+      state.listaComents.push(action.payload);
     },
 
     responderA: (state, action) => {

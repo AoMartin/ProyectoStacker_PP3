@@ -10,8 +10,9 @@ import { useSelector } from 'react-redux';
 import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
 
 const Comentario = (props) => {
-    const { data, respondiendo, handleSelect, handleReplyClick,refSetter } = props;
+    const { data, respondiendo, handleSelect, handleReplyClick, refSetter } = props;
     const idLogin = useSelector((state) => state.usuario.login.id);
+    const userName = useSelector((state) => state.usuario.login.userName);
 
     const handleDelete = () => {
         //TODO
@@ -31,17 +32,22 @@ const Comentario = (props) => {
                 <Grid item p={1}>
                     <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                 </Grid>
-                <Grid item pl={1}>
-                    <IconButton color="info">
-                        <PlusOneIcon />
-                    </IconButton>
-                </Grid>
-                <Grid item pl={1}>
-                    <IconButton color="info">
-                        <MessageIcon onClick={() => handleSelect(data.idComentario,refSetter,data.mensaje)}/>
-                    </IconButton>
-                </Grid>
-                { idLogin == data.usuario.idLogin &&
+                {
+                    userName != '' &&
+                    <>
+                        <Grid item pl={1}>
+                            <IconButton color="info">
+                                <PlusOneIcon />
+                            </IconButton>
+                        </Grid>
+                        <Grid item pl={1}>
+                            <IconButton color="info" onClick={(event) => handleSelect(event,data.idComentario, null, data.mensaje)}>
+                                <MessageIcon />
+                            </IconButton>
+                        </Grid>
+                    </>
+                }
+                {idLogin == data.usuario.idLogin &&
                     <Grid item pl={1}>
                         <IconButton color="info" onClick={handleDelete}>
                             <DeleteForeverIcon />
@@ -49,7 +55,7 @@ const Comentario = (props) => {
                     </Grid>
                 }
 
-                {respondiendo &&                
+                {respondiendo &&
                     <Grid item xs={12} pl={1}>
                         <Box sx={{ backgroundColor: grey[200], borderRadius: '10px' }}
                             onClick={handleReplyClick(respondiendo.idComentario)}>

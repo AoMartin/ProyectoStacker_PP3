@@ -30,18 +30,19 @@ export default function Publicacion(props) {
 
   const idRespuesta = useSelector((state) => state.coments.idRespuesta);
   const idLogin = useSelector((state) => state.usuario.login.id);
+  const userName = useSelector((state) => state.usuario.login.userName);
+  const userImg = useSelector((state) => state.usuario.login.img);
 
   let refsDicc = {};
-  let cajaComentRef = React.createRef();
 
   useEffect(() => {
-    myRef.current.scrollIntoView();
+    window.scrollTo(0, 0);
     cargarListaComentarios();
 
     return () => {
       dispatch(limpiarListaComents());
     };
-  },[]);
+  }, []);
 
   const cargarListaComentarios = async () => {
     try {
@@ -75,10 +76,10 @@ export default function Publicacion(props) {
     respuestaRef.current.scrollIntoView();
   }
 
-  const handleSelectToRespond = (idComentario, comRef, msgRespuesta) => {
+  const handleSelectToRespond = (event, idComentario, comRef, msgRespuesta) => {
     dispatch(responderA({ id: idComentario, comRef: comRef, msgRespuesta: msgRespuesta }));
-    //cajaComentRef.current.scrollIntoView();
-    //cajaComentRef.current?.scrollIntoView({behavior: 'smooth'});
+
+    myRef.current.scrollIntoView({top: 0, behavior:'smooth' });
   }
 
   const handleCurrentReplyClick = () => {
@@ -89,6 +90,8 @@ export default function Publicacion(props) {
     try {
       let data = comData;
       data.usuario.idLogin = idLogin;
+      data.usuario.user = userName;
+      data.usuario.imagenUrl = userImg;
       data.idPublicacion = pubData.idPublicacion;
       data.idRespuesta = idRespuesta;
       data.mensaje = msg;
@@ -109,7 +112,7 @@ export default function Publicacion(props) {
       </Grid>
 
       <Grid item xs={12}  >
-        <CajaComentario ref={cajaComentRef}
+        <CajaComentario id='caja-comentario'
           handleSubmit={handleEnviarComent}
           handleCurrentReplyClick={handleCurrentReplyClick}
         />
