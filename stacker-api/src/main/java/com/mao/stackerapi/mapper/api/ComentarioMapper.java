@@ -67,7 +67,7 @@ public class ComentarioMapper implements IGenericMapper<ComentarioDTO,Comentario
 		bo.setPublicacion(publicacion);
 		
 		ComentarioBO respuesta = null;
-		if(null != dto.getIdComentario()) {
+		if(null != dto.getIdRespuesta()) {
 			respuesta = new ComentarioBO();
 			respuesta.setIdComentario(dto.getIdRespuesta());			
 		}

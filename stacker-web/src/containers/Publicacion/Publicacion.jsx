@@ -57,34 +57,31 @@ export default function Publicacion(props) {
     refsDicc[com.idComentario] = React.createRef();
 
     let respondiendo = null;
-    if (com.idRespuesta) {
+    if (com.idRespuesta != null) {
       respondiendo = listaComents.find(c => com.idRespuesta == c.idComentario);
     }
 
     return <Comentario
       key={index}
+      index={index}
       data={com}
       respondiendo={respondiendo}
       handleSelect={handleSelectToRespond}
       handleReplyClick={handleReplyClick}
-      refSetter={refsDicc[com.idComentario]}
+      ref={refsDicc[com.idComentario]}
     />;
   }
 
   
   const handleReplyClick = (replyId) => {
     let respuestaRef = refsDicc[replyId];
-    respuestaRef.current.scrollIntoView();
+    respuestaRef.current.scrollIntoView({ behavior:'smooth' });
   }
 
-  const handleSelectToRespond = (event, idComentario, comRef, msgRespuesta) => {
-    dispatch(responderA({ id: idComentario, comRef: comRef, msgRespuesta: msgRespuesta }));
+  const handleSelectToRespond = (idComentario, msgRespuesta) => {
+    dispatch(responderA({ id: idComentario, msgRespuesta: msgRespuesta }));
 
-    myRef.current.scrollIntoView({top: 0, behavior:'smooth' });
-  }
-
-  const handleCurrentReplyClick = () => {
-    myRef.current.scrollIntoView();
+    myRef.current.scrollIntoView({ behavior:'smooth' });
   }
 
   const handleEnviarComent = async (msg) => {
@@ -115,7 +112,7 @@ export default function Publicacion(props) {
       <Grid item xs={12}  >
         <CajaComentario id='caja-comentario'
           handleSubmit={handleEnviarComent}
-          handleCurrentReplyClick={handleCurrentReplyClick}
+          handleReplyClick={handleReplyClick}
         />
       </Grid>
 

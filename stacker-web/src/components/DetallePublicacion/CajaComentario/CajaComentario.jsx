@@ -7,13 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { escribirMensaje, limpiarResponder } from '../../../redux/slices/comentarioSlice';
 
 const CajaComentario = (props) => {
-    const { handleCurrentReplyClick, handleSubmit } = props;
+    const { handleReplyClick, handleSubmit } = props;
     const dispatch = useDispatch();
 
     const userName = useSelector((state) => state.usuario.login.userName);
 
     const mensaje = useSelector((state) => state.coments.mensaje);
     const mensajeRespuesta = useSelector((state) => state.coments.msgRespuesta);
+    const idRespuesta = useSelector((state) => state.coments.idRespuesta);
 
     const handleChange = (event) => {
         dispatch(escribirMensaje(event.target.value));
@@ -63,7 +64,7 @@ const CajaComentario = (props) => {
                                         </InputAdornment>
                                     ),
                                 }}
-                                onClick={handleCurrentReplyClick}
+                                onClick={()=> handleReplyClick(idRespuesta)}
                             />
                             <Box sx={{ display: 'flex', alignItems: 'center', m: 1 }}>
                                 <IconButton color="info" onClick={handleCancelReply}>
