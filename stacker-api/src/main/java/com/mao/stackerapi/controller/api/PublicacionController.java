@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mao.stackerapi.dto.api.ComentarioDTO;
 import com.mao.stackerapi.dto.api.PublicacionDTO;
 import com.mao.stackerapi.services.generic.IPublicacionService;
 
@@ -136,5 +137,16 @@ public class PublicacionController  {
 		return ResponseEntity.ok().body(idBorrado);
 	}
 
+	@PutMapping(value = "/puntuar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Metodo puntuarPublicacion", notes = "Suma 1 punto a una publicacion dada", httpMethod = "PUT")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ComentarioDTO.class),
+			@ApiResponse(code = 400, message = ""), @ApiResponse(code = 500, message = "") })
+	public ResponseEntity<Integer> puntuarPublicacion(@PathVariable Long id) throws Exception {
+		logger.debug("ComentarioController: Ingresando a puntuarPublicacion...");
 
+		Integer puntajeActual = publicacionService.puntuarPublicacion(id);
+
+		logger.debug("ComentarioController: Saliendo de puntuarPublicacion...");
+		return ResponseEntity.ok().body(puntajeActual);
+	}
 }

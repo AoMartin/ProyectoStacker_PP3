@@ -124,4 +124,18 @@ public class ComentarioController  {
 		logger.debug("ComentarioController: Saliendo de obtenerTodosComentarioPorIdPublicacion...");
 		return ResponseEntity.ok().body(lista);
 	}
+	
+	@PutMapping(value = "/puntuar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Metodo puntuarComentario", notes = "Suma 1 punto a un comentario dado", httpMethod = "PUT")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ComentarioDTO.class),
+			@ApiResponse(code = 400, message = ""), @ApiResponse(code = 500, message = "") })
+	public ResponseEntity<Integer> puntuarComentario(@PathVariable Long id) throws Exception {
+		logger.debug("ComentarioController: Ingresando a puntuarComentario...");
+
+		Integer puntajeActual = comentarioService.puntuarComentario(id);
+
+		logger.debug("ComentarioController: Saliendo de puntuarComentario...");
+		return ResponseEntity.ok().body(puntajeActual);
+	}
+
 }

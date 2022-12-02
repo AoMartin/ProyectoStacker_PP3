@@ -11,7 +11,7 @@ const Spinner = (props) => {
     promiseInProgress &&
     <>
       <Backdrop
-        sx={{ color: '#fff', justifyContent: 'center' }}
+        sx={{ color: 'info', opacity: 0.0, justifyContent: 'center' }}
         open={true}
       >
         <Box >

@@ -18,7 +18,7 @@ import com.mao.stackerapi.models.api.PublicacionBO;
 @Repository
 public interface IPublicacionRepository extends JpaRepository<PublicacionBO, Long> {
 
-	public List<PublicacionBO> findAllByOrderByPuntaje();
+	public List<PublicacionBO> findAllByOrderByPuntajeDesc();
 	
 	public List<PublicacionBO> findAllByOrderByFechaHoraCreacionDesc();
 	

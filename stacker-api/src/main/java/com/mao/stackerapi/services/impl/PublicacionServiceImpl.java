@@ -118,7 +118,7 @@ public class PublicacionServiceImpl implements IPublicacionService {
         List<PublicacionDTO> listaDto = new ArrayList<>();
 
         try {
-            List<PublicacionBO> boLista = publicacionRepository.findAllByOrderByPuntaje();
+            List<PublicacionBO> boLista = publicacionRepository.findAllByOrderByPuntajeDesc();
 
             for (PublicacionBO bo : boLista) {
                 PublicacionDTO dto = publicacionMapper.toDTO(bo);
@@ -197,6 +197,32 @@ public class PublicacionServiceImpl implements IPublicacionService {
 
         logger.debug("PublicacionServiceImpl: Saliendo de obtenerTodoPublicacionUltimaActualizacion...");
         return res;
+	}
+
+	@Override
+	public Integer puntuarPublicacion(Long idPublicacion) throws PublicacionServiceException {
+        logger.debug("PublicacionServiceImpl: Ingresando a puntuarPublicacion...");
+        Integer puntajeActual = 0;
+
+        try {
+            Optional<PublicacionBO> publicacionOpt = publicacionRepository.findById(idPublicacion);
+
+            if(publicacionOpt.isPresent()) {
+            	PublicacionBO publicacion = publicacionOpt.get();
+            	puntajeActual = publicacion.getPuntaje() +1;
+            	publicacion.setPuntaje(puntajeActual);
+            	publicacion.setUltimaActualizacion(new Timestamp(System.currentTimeMillis()));
+            	publicacionRepository.save(publicacion);
+            }else {
+            	throw new PublicacionServiceException("Entidad no encontrada.");
+            }
+        } catch (Exception e) {
+        	logger.error(e);
+            throw new PublicacionServiceException(PublicacionServiceException.DEFAULT_MESSAGE + e.getMessage());
+        }
+
+        logger.debug("PublicacionServiceImpl: Saliendo de puntuarPublicacion...");
+        return puntajeActual;
 	}
 
 

@@ -5,14 +5,30 @@ import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRig
 import { Avatar, Card, CardActionArea, Grid, IconButton, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { Box } from "@mui/system";
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { actualizarPuntajeComent } from '../../../redux/slices/comentarioSlice';
+import ComentarioService from '../../../services/ComentarioService';
 import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
+import '../detalle.css';
 
 const Comentario = (props) => {
+    const dispatch = useDispatch();
     const { data, respondiendo, handleSelect, handleReplyClick, refSetter } = props;
+    
     const idLogin = useSelector((state) => state.usuario.login.id);
     const userName = useSelector((state) => state.usuario.login.userName);
+    const [plusOneTrigger, setPlusOneTrigger] = useState(0);
+
+    const puntuarHandle = async () => {
+        try {
+            setPlusOneTrigger(1);
+            const response = await ComentarioService.puntuarComent(data.idComentario);
+            dispatch(actualizarPuntajeComent({id:data.idComentario, puntaje:response}));
+        } catch (err) {
+            //TODO manejar casos de error
+        }
+    }
 
     const handleDelete = () => {
         //TODO
@@ -36,12 +52,18 @@ const Comentario = (props) => {
                     userName != '' &&
                     <>
                         <Grid item pl={1}>
-                            <IconButton color="info">
+                            <IconButton
+                                className="plusOneAnim"
+                                color="info"
+                                onClick={puntuarHandle}
+                                onAnimationEnd={() => setPlusOneTrigger(0)}
+                                plusOneTrigger={plusOneTrigger}
+                            >
                                 <PlusOneIcon />
                             </IconButton>
                         </Grid>
                         <Grid item pl={1}>
-                            <IconButton color="info" onClick={(event) => handleSelect(event,data.idComentario, null, data.mensaje)}>
+                            <IconButton color="info" onClick={(event) => handleSelect(event, data.idComentario, null, data.mensaje)}>
                                 <MessageIcon />
                             </IconButton>
                         </Grid>

@@ -71,6 +71,7 @@ export default function Publicacion(props) {
     />;
   }
 
+  
   const handleReplyClick = (replyId) => {
     let respuestaRef = refsDicc[replyId];
     respuestaRef.current.scrollIntoView();

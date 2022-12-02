@@ -41,7 +41,16 @@ const comentarioSlice = createSlice({
       state.idRespuesta = null;
       state.refRespuesta = null;
       state.msgRespuesta = '';
-    }
+    },
+
+    actualizarPuntajeComent: (state, action) =>{
+      state.listaComents.map(c =>{
+        if(c.idComentario == action.payload.id){
+          c.puntaje = action.payload.puntaje
+        }
+      }).sort((a,b) => a.puntaje - b.puntaje)
+    },
+
   }
 })
 
@@ -51,6 +60,7 @@ export const {
   escribirMensaje, 
   limpiarMensajeAlEnviarNuevo, 
   responderA,
-  limpiarResponder  
+  limpiarResponder,
+  actualizarPuntajeComent  
 } = comentarioSlice.actions
 export default comentarioSlice.reducer

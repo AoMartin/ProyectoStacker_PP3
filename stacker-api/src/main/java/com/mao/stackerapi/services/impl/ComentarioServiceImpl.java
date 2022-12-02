@@ -144,7 +144,7 @@ public class ComentarioServiceImpl implements IComentarioService {
         List<ComentarioDTO> listaDto = new ArrayList<>();
 
         try {
-            List<ComentarioBO> boLista = comentarioRepository.findByPublicacionIdPublicacionOrderByPuntaje(idPublicacion);
+            List<ComentarioBO> boLista = comentarioRepository.findByPublicacionIdPublicacionOrderByPuntajeDesc(idPublicacion);
 
             for (ComentarioBO bo : boLista) {
                 ComentarioDTO dto = comentarioMapper.toDTO(bo);
@@ -157,6 +157,32 @@ public class ComentarioServiceImpl implements IComentarioService {
 
         logger.debug("ComentarioServiceImpl: Saliendo de obtenerTodoPorPublicacion...");
         return listaDto;
+	}
+
+	@Override
+	public Integer puntuarComentario(Long idComentario) throws ComentarioServiceException {
+        logger.debug("ComentarioServiceImpl: Ingresando a puntuarComentario...");
+        Integer puntajeActual = 0;
+
+        try {
+            Optional<ComentarioBO> opt = comentarioRepository.findById(idComentario);
+            if (opt.isPresent()) {
+            	ComentarioBO bo = opt.get();
+            	puntajeActual = bo.getPuntaje() +1;
+            	bo.setPuntaje(puntajeActual);
+            	comentarioRepository.save(bo);
+            	
+            	publicacionService.notificarModificacion(bo.getPublicacion().getIdPublicacion());
+            } else {
+                throw new ComentarioServiceException("Entidad no encontrada");
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            throw new ComentarioServiceException(ComentarioServiceException.DEFAULT_MESSAGE + e.getMessage());
+        }
+
+        logger.debug("ComentarioServiceImpl: Saliendo de puntuarComentario...");
+		return puntajeActual;
 	}
 
 

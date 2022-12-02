@@ -21,8 +21,17 @@ const publicacionSlice = createSlice({
     ocultarModalCrearPub: (state) => {
       state.showModalCrearPub = false;
     },
+
+    actualizarPuntajePubs: (state, action) =>{
+      state.listaPubs.map(p =>{
+        if(p.idPublicacion == action.payload.id){
+          p.puntaje = action.payload.puntaje
+        }
+      })
+    },
+
   }
 })
 
-export const { cargarPublicaciones, mostrarModalCrearPub, ocultarModalCrearPub } = publicacionSlice.actions
+export const { cargarPublicaciones, mostrarModalCrearPub, ocultarModalCrearPub, actualizarPuntajePubs } = publicacionSlice.actions
 export default publicacionSlice.reducer

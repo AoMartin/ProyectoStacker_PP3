@@ -3,6 +3,7 @@ package com.mao.stackerapi.services.generic;
 import java.util.List;
 
 import com.mao.stackerapi.dto.api.PublicacionDTO;
+import com.mao.stackerapi.exceptions.api.ComentarioServiceException;
 import com.mao.stackerapi.exceptions.api.PublicacionServiceException;
 
 /**
@@ -29,4 +30,5 @@ public interface IPublicacionService {
 
     public Boolean notificarModificacion(Long idPublicacion) throws PublicacionServiceException;
 
+    public Integer puntuarPublicacion(Long idPublicacion) throws PublicacionServiceException;
 }

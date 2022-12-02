@@ -27,6 +27,11 @@ const obtenerTodoPorIdPub = async (id) => {
   return await API.get(`${CONTROLLER}/obtener-todos-pub/${id}`);
 };
 
+const puntuarComent = async (id) => {
+  return await API.put(`${CONTROLLER}/puntuar/${id}`);
+};
+
+
 export default {
   obtener,
   obtenerTodo,
@@ -34,4 +39,5 @@ export default {
   actualizar,
   borrar,
   obtenerTodoPorIdPub,
+  puntuarComent,
 };

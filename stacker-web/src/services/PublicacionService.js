@@ -29,6 +29,10 @@ const obtenerTodoUltimaActualizacion = async () => {
   return await API.get(`${CONTROLLER}/obtener-todos-actualizacion`);
 };
 
+const puntuarPub = async (id) => {
+  return await API.put(`${CONTROLLER}/puntuar/${id}`);
+};
+
 export default {
   obtener,
   obtenerTodoPuntaje,
@@ -37,4 +41,5 @@ export default {
   guardar,
   actualizar,
   borrar,
+  puntuarPub,
 };
