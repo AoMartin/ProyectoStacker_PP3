@@ -64,7 +64,7 @@ const ModalCrearPublicacion = (props) => {
             data.usuario.idLogin = idLogin;
 
             const response = await PublicacionService.guardar(data);
-            navigate('/');
+            window.location.reload()
             handleClose();
         } catch (err) {
             //TODO manejar casos de error

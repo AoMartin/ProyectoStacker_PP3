@@ -1,4 +1,4 @@
-package com.mao.stackerapi.controller.security;
+package com.mao.stackerapi.dto.security;
 
 public class CambiarImagenReqDTO {
 	

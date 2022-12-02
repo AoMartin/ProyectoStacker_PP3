@@ -17,6 +17,8 @@ const ModalLogin = (props) => {
     const { loginModalOpen } = useSelector((state) => state.usuario);
     const dispatch = useDispatch();
 
+    const [loginError, setLoginError] = useState(false);
+
     const [values, setValues] = useState({
         user: '',
         password: '',
@@ -60,14 +62,15 @@ const ModalLogin = (props) => {
         event.preventDefault();
     };
 
-    const handleSubmit = async() => {
+    const handleSubmit = async () => {
         try {
             const response = await LoginService.autenticarUsuario({ username: values.user, password: values.password });
             sessionStorage.setItem('session', JSON.stringify(response));
             dispatch(userLogin(response));
+            setLoginError(false);
             handleClose();
         } catch (err) {
-            //TODO manejar casos de error
+            setLoginError(true);
         }
     }
 
@@ -127,11 +130,13 @@ const ModalLogin = (props) => {
                         </FormControl>
                     </Box>
 
-                    <Box sx={{ display: 'flex', justifyContent: 'center', m: 1 }}>
-                        <Typography id="descripcion" variant="body2" color="error">
-                            Usuario registrado. Contraseña incorrecta.
-                        </Typography>
-                    </Box>
+                    {loginError &&
+                        <Box sx={{ display: 'flex', justifyContent: 'center', m: 1 }}>
+                            <Typography id="descripcion" variant="body2" color="error">
+                                Usuario registrado. Contraseña incorrecta.
+                            </Typography>
+                        </Box>
+                    }
 
                     <Box sx={{ m: 1, display: 'flex', justifyContent: 'center' }}>
                         <Box>

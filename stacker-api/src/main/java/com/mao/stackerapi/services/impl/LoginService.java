@@ -7,6 +7,9 @@ import java.util.UUID;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mao.stackerapi.config.JwtTokenProvider;
@@ -27,6 +30,9 @@ public class LoginService implements ILoginService {
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public TokenResponseDTO autenticarUser(UserDTO userDto) {
 		logger.debug(String.format("Entrando en %s", new Throwable().getStackTrace()[0].getMethodName()));
@@ -39,11 +45,20 @@ public class LoginService implements ILoginService {
 
 		// TODO manejar caso relogin, guardar user con password, responder ante usuario ya creado
 
-		login = new LoginBO();
-		login.setUltimoLogin(new Timestamp(System.currentTimeMillis()));
-		login.setUser(userDto.getUsername());
-		loginRepository.save(login);
-
+		if(null != login) {
+			//Usuario ya creado
+			if(!passwordEncoder.matches(userDto.getPassword(), login.getPassword())) {
+				throw new RuntimeException("Usuario ya existente. Password incorrecto.");
+			}
+		}else {
+			//Nuevo user
+			login = new LoginBO();
+			login.setUltimoLogin(new Timestamp(System.currentTimeMillis()));
+			login.setUser(userDto.getUsername());
+			login.setPassword(passwordEncoder.encode(userDto.getPassword()));
+			loginRepository.save(login);
+		}
+		
 		token = jwtTokenProvider.generateToken(userDto.getUsername(), id);
 		ret = new TokenResponseDTO(login.getIdLogin(),token,userDto.getUsername(),login.getImagenUrl(),login.getUltimoLogin().toString());
 
@@ -72,3 +87,5 @@ public class LoginService implements ILoginService {
 	}
 
 }
+
+

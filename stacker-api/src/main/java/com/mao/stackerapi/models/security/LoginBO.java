@@ -30,6 +30,9 @@ public class LoginBO {
 	@Column(name = "USER")
 	private String user;
 
+	@Column(name = "PASSWORD")
+	private String password;
+	
 	@Column(name = "IMAGEN_URL", length = 2048)
 	private String imagenUrl;
 
@@ -43,10 +46,12 @@ public class LoginBO {
 
 	}
 
-	public LoginBO(Long idLogin, String user, String imagenUrl, Timestamp ultimoLogin, Integer puntaje) {
+	public LoginBO(Long idLogin, String user, String password, String imagenUrl, Timestamp ultimoLogin,
+			Integer puntaje) {
 		super();
 		this.idLogin = idLogin;
 		this.user = user;
+		this.password = password;
 		this.imagenUrl = imagenUrl;
 		this.ultimoLogin = ultimoLogin;
 		this.puntaje = puntaje;
@@ -66,6 +71,14 @@ public class LoginBO {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getImagenUrl() {
@@ -94,8 +107,10 @@ public class LoginBO {
 
 	@Override
 	public String toString() {
-		return "LoginBO [idLogin=" + idLogin + ", user=" + user + ", imagenUrl=" + imagenUrl + ", ultimoLogin="
-				+ ultimoLogin + ", puntaje=" + puntaje + "]";
+		return "LoginBO [idLogin=" + idLogin + ", user=" + user + ", password=" + password + ", imagenUrl=" + imagenUrl
+				+ ", ultimoLogin=" + ultimoLogin + ", puntaje=" + puntaje + "]";
 	}
+
+	
 
 }
