@@ -12,13 +12,14 @@ public class PublicacionDTO {
 	private Integer puntaje;
 	private String fechaHoraCreacion;
 	private LoginBO usuario;
+	private Long cantidadComentarios;
 	
 	public PublicacionDTO() {
 		
 	}
 
 	public PublicacionDTO(Long idPublicacion, String titulo, String imagen, String descripcion, Integer puntaje,
-			String fechaHoraCreacion, LoginBO usuario) {
+			String fechaHoraCreacion, LoginBO usuario, Long cantidadComentarios) {
 		super();
 		this.idPublicacion = idPublicacion;
 		this.titulo = titulo;
@@ -27,6 +28,7 @@ public class PublicacionDTO {
 		this.puntaje = puntaje;
 		this.fechaHoraCreacion = fechaHoraCreacion;
 		this.usuario = usuario;
+		this.cantidadComentarios = cantidadComentarios;
 	}
 
 	public Long getIdPublicacion() {
@@ -85,13 +87,18 @@ public class PublicacionDTO {
 		this.usuario = usuario;
 	}
 
+	public Long getCantidadComentarios() {
+		return cantidadComentarios;
+	}
+
+	public void setCantidadComentarios(Long cantidadComentarios) {
+		this.cantidadComentarios = cantidadComentarios;
+	}
+
 	@Override
 	public String toString() {
 		return "PublicacionDTO [idPublicacion=" + idPublicacion + ", titulo=" + titulo + ", imagen=" + imagen
 				+ ", descripcion=" + descripcion + ", puntaje=" + puntaje + ", fechaHoraCreacion=" + fechaHoraCreacion
-				+ ", usuario=" + usuario + "]";
+				+ ", usuario=" + usuario + ", cantidadComentarios=" + cantidadComentarios + "]";
 	}
-
-	
-	
 }

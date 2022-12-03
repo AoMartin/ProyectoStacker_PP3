@@ -149,4 +149,18 @@ public class PublicacionController  {
 		logger.debug("ComentarioController: Saliendo de puntuarPublicacion...");
 		return ResponseEntity.ok().body(puntajeActual);
 	}
+	
+	@GetMapping(value = "/obtener-todos-usuario/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Metodo obtenerTodosPublicacionPuntaje", notes = "Obtiene todas las publicacion de un usuario dado", httpMethod = "GET")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = PublicacionDTO.class),
+			@ApiResponse(code = 400, message = ""), @ApiResponse(code = 500, message = "") })
+	public ResponseEntity<List<PublicacionDTO>> obtenerTodoPorIdUsuario(@PathVariable Long id) throws Exception {
+		logger.debug("PublicacionController: Ingresando a obtenerTodoPorIdUsuario...");
+		List<PublicacionDTO> lista = null;
+		
+		lista = publicacionService.obtenerTodoPorIdUsuario(id);
+		
+		logger.debug("PublicacionController: Saliendo de obtenerTodoPorIdUsuario...");
+		return ResponseEntity.ok().body(lista);
+	}
 }

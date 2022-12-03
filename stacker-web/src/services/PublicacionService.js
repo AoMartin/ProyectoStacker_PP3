@@ -33,6 +33,10 @@ const puntuarPub = async (id) => {
   return await API.put(`${CONTROLLER}/puntuar/${id}`);
 };
 
+const obtenerTodoUsuario = async (id) => {
+  return await API.get(`${CONTROLLER}/obtener-todos-usuario/${id}`);
+};
+
 export default {
   obtener,
   obtenerTodoPuntaje,
@@ -42,4 +46,5 @@ export default {
   actualizar,
   borrar,
   puntuarPub,
+  obtenerTodoUsuario,
 };

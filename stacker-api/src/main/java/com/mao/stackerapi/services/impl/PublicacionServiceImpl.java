@@ -14,6 +14,7 @@ import com.mao.stackerapi.dto.api.PublicacionDTO;
 import com.mao.stackerapi.exceptions.api.PublicacionServiceException;
 import com.mao.stackerapi.mapper.api.PublicacionMapper;
 import com.mao.stackerapi.models.api.PublicacionBO;
+import com.mao.stackerapi.repository.api.IComentarioRepository;
 import com.mao.stackerapi.repository.api.IPublicacionRepository;
 import com.mao.stackerapi.services.generic.IPublicacionService;
 
@@ -36,6 +37,9 @@ public class PublicacionServiceImpl implements IPublicacionService {
     @Autowired
     private IPublicacionRepository publicacionRepository;
 
+    @Autowired
+    private IComentarioRepository comentarioRepository;
+    
     @Override
     public PublicacionDTO obtenerPublicacion(Long id) throws PublicacionServiceException {
         logger.debug("PublicacionServiceImpl: Ingresando a obtenerPublicacion...");
@@ -223,6 +227,30 @@ public class PublicacionServiceImpl implements IPublicacionService {
 
         logger.debug("PublicacionServiceImpl: Saliendo de puntuarPublicacion...");
         return puntajeActual;
+	}
+
+	@Override
+	public List<PublicacionDTO> obtenerTodoPorIdUsuario(Long idUsuario) throws PublicacionServiceException {
+        logger.debug("PublicacionServiceImpl: Ingresando a obtenerTodoPorIdUsuario...");
+        List<PublicacionDTO> listaDto = new ArrayList<>();
+
+        try {
+            List<PublicacionBO> boLista = publicacionRepository.findAllByUsuarioIdLoginOrderByFechaHoraCreacionDesc(idUsuario);
+
+            for (PublicacionBO bo : boLista) {
+                PublicacionDTO dto = publicacionMapper.toDTO(bo);
+                Long cantidadComentario = comentarioRepository.countByPublicacionIdPublicacion(dto.getIdPublicacion());
+                dto.setCantidadComentarios(cantidadComentario);
+                listaDto.add(dto);
+            }
+
+        } catch (Exception e) {
+            logger.error(e);
+            throw new PublicacionServiceException(PublicacionServiceException.DEFAULT_MESSAGE + e.getMessage());
+        }
+
+        logger.debug("PublicacionServiceImpl: Saliendo de obtenerTodoPorIdUsuario...");
+        return listaDto;
 	}
 
 

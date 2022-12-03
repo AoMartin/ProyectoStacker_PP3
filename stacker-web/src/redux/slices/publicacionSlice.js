@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const INITIAL_STATE ={
   listaPubs: [],
+  listaPubsGestionar: [],
   showModalCrearPub: false,
-  actualPubData: {},
 }
 
 const publicacionSlice = createSlice({

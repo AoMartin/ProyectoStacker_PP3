@@ -1,17 +1,16 @@
-import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import LayersIcon from '@mui/icons-material/Layers';
-import PostAddIcon from '@mui/icons-material/PostAdd';
 import {
-  Box, Button, Container, Grid, Slide, Typography
+  Box, Chip, Container, Divider, Grid, Slide, Typography
 } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { grey } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ModalCrearPublicacion from '../../components/Modals/ModalCrearPublicacion/ModalCrearPublicacion';
 import ModalAvisoUsuario from '../../components/Modals/ModalAvisoUsuario/ModalAvisoUsuario';
+import ModalCrearPublicacion from '../../components/Modals/ModalCrearPublicacion/ModalCrearPublicacion';
 import Usuario from '../../components/Sistema//Usuario/Usuario';
+import MenuOpciones from '../../components/Sistema/MenuOpciones/MenuOpciones';
 import MenuPrincipal from '../../components/Sistema/MenuPrincipal/MenuPrincipal';
 import Spinner from '../../components/Sistema/Spinner/Spinner';
 import { mostrarModalCrearPub } from '../../redux/slices/publicacionSlice';
@@ -84,31 +83,14 @@ export default function MainBanner(props) {
         </Box>
       </AppBar>
 
-      <Box sx={{ maxWidth: '15%', backgroundColor: (theme) => theme.palette.info.light }}>
+      <Box sx={{ minWidth:'12%', backgroundColor: (theme) => theme.palette.info.light }}>
         <Grid container spacing={0} >
-          <Grid
-            item
-            xs={12}
-            sx={{
-              minHeight: 100,
-            }}
-          />
-          {
-            userName != '' &&
-            <>
-              <Grid item mt={2} ml={2} xs={12}>
-                <Button color="info" variant="contained" startIcon={<PostAddIcon />} size="large" onClick={handleOpenModalCrearPublicacion}>
-                  Publicar
-                </Button>
-              </Grid>
-              <Grid item mt={1} ml={2} xs={12}>
-                <Button color="info" variant="contained" startIcon={<AutoAwesomeMotionIcon />} size="large" >
-                  Editar
-                </Button>
-              </Grid>
-            </>
-          }
+          <Grid item xs={12}  sx={{ minHeight: 100 }}/>
           <Grid item xs={12}>
+            {
+              userName != '' &&
+              <MenuOpciones handleOpenModalCrearPublicacion={handleOpenModalCrearPublicacion} />
+            }
             <MenuPrincipal />
           </Grid>
         </Grid>
@@ -132,6 +114,6 @@ export default function MainBanner(props) {
       <ModalAvisoUsuario />
       <Spinner />
 
-    </Box>
+    </Box >
   );
 }

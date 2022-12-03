@@ -23,4 +23,8 @@ public interface IComentarioRepository extends JpaRepository<ComentarioBO, Long>
 	public List<ComentarioBO> findByPublicacionIdPublicacionOrderByPuntajeDesc(Long idPub);
 	
 	public List<ComentarioBO> findByRespuestaIdComentario(Long idRespuesta);
+	
+	public List<ComentarioBO> findByPublicacionIdPublicacion(Long idPublicacion);
+	
+	public Long countByPublicacionIdPublicacion(Long idPublicacion); 
 }

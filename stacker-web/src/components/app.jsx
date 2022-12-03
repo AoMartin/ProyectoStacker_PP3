@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../containers/Home/Home';
 import MainBanner from '../containers/MainBanner/MainBanner';
 import Publicacion from '../containers/Publicacion/Publicacion';
+import Gestionar from '../containers/Gestionar/Gestionar';
 
 const mdTheme = createTheme({
   palette: {
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="/nuevos" element={<MainBanner tipo={'Nuevos'} vista={<Home tipo={'Nuevos'}/>} />} />
             <Route path="/tendencia" element={<MainBanner tipo={'Tendencia'} vista={<Home tipo={'Tendencia'}/>} />} />
             <Route path="/publicacion" element={<MainBanner vista={<Publicacion />} />} />
+            <Route path="/gestionar" element={<MainBanner tipo={'Mis Publicaciones'} vista={<Gestionar />} />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

@@ -31,4 +31,6 @@ public interface IPublicacionService {
     public Boolean notificarModificacion(Long idPublicacion) throws PublicacionServiceException;
 
     public Integer puntuarPublicacion(Long idPublicacion) throws PublicacionServiceException;
+    
+    public List<PublicacionDTO> obtenerTodoPorIdUsuario(Long idUsuario) throws PublicacionServiceException;
 }
