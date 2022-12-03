@@ -1,6 +1,6 @@
 import { Grid, Slide, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PublicacionCard from '../../components/PublicacionCard/PublicacionCard';
 import { cargarPublicaciones } from '../../redux/slices/publicacionSlice';
@@ -13,8 +13,10 @@ export default function Home(props) {
   const [checked, setChecked] = useState(true);
 
   const listaPublicaciones = useSelector((state) => state.pubs.listaPubs);
-
+  const topRef = useRef(null);
+  
   useEffect(() => {
+    //topRef.current.scrollIntoView();
     handleReload();
     cargarListaPubs();
   }, [tipo]);
@@ -49,16 +51,8 @@ export default function Home(props) {
   }
 
   return (
-    <Box>
-      <Grid>
-        <Slide direction="left" in={checked} mountOnEnter unmountOnExit>
-          <Typography variant="h3" >
-            {tipo}
-          </Typography>
-        </Slide>
-
-      </Grid>
-      <Grid container component="main">
+    <Box ref={topRef}>
+      <Grid container component="main" >
         {listaPublicaciones.map((pub, index) =>
           <PublicacionCard key={index} data={pub} />
         )}

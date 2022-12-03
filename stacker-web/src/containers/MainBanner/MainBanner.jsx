@@ -2,11 +2,11 @@ import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import LayersIcon from '@mui/icons-material/Layers';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import {
-  Box, Button, Container, Grid, Typography
+  Box, Button, Container, Grid, Slide, Typography
 } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { grey } from '@mui/material/colors';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ModalCrearPublicacion from '../../components/Modals/ModalCrearPublicacion/ModalCrearPublicacion';
@@ -16,22 +16,34 @@ import Spinner from '../../components/Sistema/Spinner/Spinner';
 import { mostrarModalCrearPub } from '../../redux/slices/publicacionSlice';
 
 export default function MainBanner(props) {
-  const { vista } = props;
+  const { vista, tipo } = props;
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.usuario.login.userName);
+  const [checked, setChecked] = useState(true);
 
   let navigate = useNavigate();
+
+  useEffect(() => {
+    handleReload();
+  }, [tipo]);
+
+  const handleReload = () => {
+    setChecked(false);
+    setTimeout(function () {
+      setChecked(true);
+    }, 100);
+  };
 
   const routeChange = () => {
     navigate('/home');
   }
 
-  const handleOpenModalCrearPublicacion = () =>{
+  const handleOpenModalCrearPublicacion = () => {
     dispatch(mostrarModalCrearPub());
   }
 
   return (
-    <Box sx={{ display: 'flex'  }}>
+    <Box sx={{ display: 'flex' }}>
 
       <AppBar position="absolute"
         elevation={0}
@@ -54,6 +66,15 @@ export default function MainBanner(props) {
               <Typography component="h2" variant="h2" style={{ color: '#000000' }} >
                 Stacker
               </Typography>
+            </Grid>
+            <Grid item ml={1}>
+              {tipo != 'Home' &&
+                <Slide direction="top" in={checked} mountOnEnter unmountOnExit>
+                  <Typography component="h2" variant="h2" style={{ color: '#000000' }} >
+                    {` > ${tipo}`}
+                  </Typography>
+                </Slide>
+              }
             </Grid>
           </Grid>
         </Box>
@@ -106,7 +127,7 @@ export default function MainBanner(props) {
         </Container>
       </Box>
 
-      <ModalCrearPublicacion/>
+      <ModalCrearPublicacion />
       <Spinner />
       {/* TODO: MODALES ETC */}
     </Box>

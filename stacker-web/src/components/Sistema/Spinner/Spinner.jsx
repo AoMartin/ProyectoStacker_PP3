@@ -11,11 +11,11 @@ const Spinner = (props) => {
     promiseInProgress &&
     <>
       <Backdrop
-        sx={{ color: 'info', opacity: 0.0, justifyContent: 'center' }}
+        sx={{ color: 'info', justifyContent: 'center',backgroundColor: 'transparent', boxShadow: 'none', }}
         open={true}
       >
         <Box >
-          <CircularProgress color="error" />
+          <CircularProgress color="info" />
         </Box>
       </Backdrop>
     </>

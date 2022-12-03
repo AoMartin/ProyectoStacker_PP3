@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { cargarPublicaciones, ocultarModalCrearPub } from '../../../redux/slices/publicacionSlice';
 import PublicacionService from '../../../services/PublicacionService';
+import PublicacionCard from '../../PublicacionCard/PublicacionCard';
 
 
 const pubData = {
@@ -14,13 +15,14 @@ const pubData = {
     descripcion: '',
     puntaje: 0,
     fechaHoraCreacion: null,
-    usuario: {idLogin:-1},
+    usuario: { idLogin: -1 },
 }
 
 const ModalCrearPublicacion = (props) => {
     let navigate = useNavigate();
     const showModalCrearPub = useSelector((state) => state.pubs.showModalCrearPub);
     const idLogin = useSelector((state) => state.usuario.login.id);
+    const img = useSelector((state) => state.usuario.login.img);
     const dispatch = useDispatch();
 
     const [values, setValues] = useState({
@@ -75,63 +77,40 @@ const ModalCrearPublicacion = (props) => {
         <>
             <Modal open={showModalCrearPub} onClose={handleClose}>
                 <Box sx={style}>
-                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mb:1 }}>
                         <Typography id="titulo" variant="h6">
                             Crear nueva publicación
                         </Typography>
                     </Box>
 
-                    <Box m={3}  sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <Grid container xs={12} spacing={2}>
-                            <Grid container xs={6} spacing={1}>
-                                <Grid item xs={11}>
+                    <Grid container>
+
+                        <Grid item xs={6}>
+                            <Grid container spacing={1}>
+                                <Grid item xs={12}>
                                     <TextField
                                         id="txt-tit"
                                         label="Titulo"
                                         fullWidth
                                         value={values.titulo}
                                         onChange={handleChange('titulo')}
+                                        inputProps={{ maxLength: 60 }}
+                                    />
+
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        id="filled-multiline-flexible"
+                                        label="Descripcion"
+                                        multiline
+                                        rows={4}
+                                        fullWidth
+                                        value={values.descripcion}
+                                        onChange={handleChange('descripcion')}
                                         inputProps={{ maxLength: 255 }}
                                     />
                                 </Grid>
-                                <Grid item xs={11}>
-                                    <Box
-                                        sx={{
-                                            width: 850,
-                                            maxWidth: '100%', display: 'flex', alignItems: 'right',
-                                        }}>
-
-                                        <TextField
-                                            id="filled-multiline-flexible"
-                                            label="Descripcion"
-                                            multiline
-                                            rows={4}
-                                            fullWidth
-                                            value={values.descripcion}
-                                            onChange={handleChange('descripcion')}
-                                            inputProps={{ maxLength: 255 }}
-                                        />
-                                    </Box>
-                                </Grid>
-                            </Grid>
-                            <Grid container xs={6} spacing={1}>
-                                <Grid item xs={11}>
-                                    <Box m={2}>
-                                        <img
-                                            style={{
-                                                display: 'block',
-                                                maxWidth: 750,
-                                                maxHeight: 750,
-                                                width: 'auto',
-                                                height: 'auto'
-                                            }}
-                                            src={values.imagenUrl}
-                                            error={values.imagenUrl.length > 2048 ? true : undefined}
-                                        />
-                                    </Box>
-
-                                </Grid>
-                                <Grid item xs={11}>
+                                <Grid item xs={12}>
                                     <TextField
                                         id="txt-url"
                                         label="Url imagen"
@@ -143,7 +122,17 @@ const ModalCrearPublicacion = (props) => {
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Box>
+
+                        <Grid item xs={6}>
+                            <Box sx={{ m: 1, display: 'flex', justifyContent: 'center' }}>
+                                <img
+                                    style={{ aspectRatio: 4 / 3 }}
+                                    src={values.imagenUrl}
+                                />
+                            </Box>
+                        </Grid>
+
+                    </Grid>
 
                     <Box sx={{ m: 1, display: 'flex', justifyContent: 'center' }}>
                         <Box>
