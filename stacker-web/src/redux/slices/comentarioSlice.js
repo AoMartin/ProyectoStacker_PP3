@@ -14,19 +14,15 @@ const comentarioSlice = createSlice({
   
     cargarComentarios: (state, action) => {
       state.listaComents = action.payload;
+      state.mensaje = '';
+      state.idRespuesta = null;
+      state.msgRespuesta = '';
     },
 
     limpiarListaComents: () => INITIAL_STATE,
 
     escribirMensaje: (state, action) => {
       state.mensaje = action.payload;
-    },
-
-    limpiarMensajeAlEnviarNuevo: (state, action) => {
-      state.mensaje = '';
-      state.idRespuesta = null;
-      state.msgRespuesta = '';
-      state.listaComents.push(action.payload);
     },
 
     responderA: (state, action) => {
@@ -54,7 +50,6 @@ export const {
   cargarComentarios, 
   limpiarListaComents, 
   escribirMensaje, 
-  limpiarMensajeAlEnviarNuevo, 
   responderA,
   limpiarResponder,
   actualizarPuntajeComent  

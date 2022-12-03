@@ -77,7 +77,7 @@ const ModalCrearPublicacion = (props) => {
         <>
             <Modal open={showModalCrearPub} onClose={handleClose}>
                 <Box sx={style}>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', mb:1 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
                         <Typography id="titulo" variant="h6">
                             Crear nueva publicación
                         </Typography>
@@ -124,11 +124,23 @@ const ModalCrearPublicacion = (props) => {
                         </Grid>
 
                         <Grid item xs={6}>
-                            <Box sx={{ m: 1, display: 'flex', justifyContent: 'center' }}>
-                                <img
-                                    style={{ aspectRatio: 4 / 3 }}
-                                    src={values.imagenUrl}
-                                />
+                            <Box sx={{ ml:1, display: 'flex', justifyContent: 'center', border: '5px dashed grey',  }}>
+                                {
+                                    values.imagenUrl != ''
+                                        ?
+                                        <img
+
+                                            style={{ aspectRatio: 4 / 3 }}
+                                            src={values.imagenUrl}
+                                            alt="No se pudo cargar la imagen."
+                                        />
+                                        :
+                                        <Box sx={{ display: 'flex', justifyContent: 'center', m: 1}}>
+                                            <Typography id="titulo" variant="body">
+                                                Imagen
+                                            </Typography>
+                                        </Box>
+                                }
                             </Box>
                         </Grid>
 

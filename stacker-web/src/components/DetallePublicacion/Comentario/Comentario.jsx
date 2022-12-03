@@ -2,25 +2,35 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import MessageIcon from '@mui/icons-material/Message';
 import PlusOneIcon from '@mui/icons-material/PlusOne';
 import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
-import { Avatar, Card, CardActionArea, Fade, Grid, Grow, IconButton, Typography } from '@mui/material';
+import { Avatar, Card, CardActionArea, Grid, Grow, IconButton, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { Box } from "@mui/system";
-import React, { useState } from 'react';
+import React, { useImperativeHandle, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actualizarPuntajeComent } from '../../../redux/slices/comentarioSlice';
 import ComentarioService from '../../../services/ComentarioService';
 import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
 import '../detalle.css';
 
+
 const Comentario = React.forwardRef((props, ref) => {
     const dispatch = useDispatch();
-    const { data, respondiendo, handleSelect, handleReplyClick, index } = props;
+    const { data, respondiendo, handleSelect, handleReplyClick, index, blockDelete } = props;
 
     const idLogin = useSelector((state) => state.usuario.login.id);
     const userName = useSelector((state) => state.usuario.login.userName);
     const [plusOneTrigger, setPlusOneTrigger] = useState(0);
 
     const [selectedTrigger, setSelectedTrigger] = useState(true);
+
+    useImperativeHandle(ref, () => ({
+        triggerComentSelected: ()=> {
+            setSelectedTrigger(false);
+            setTimeout(function () {
+                setSelectedTrigger(true);
+            }, 500);
+        }
+    }));
 
     const puntuarHandle = async () => {
         try {
@@ -37,8 +47,8 @@ const Comentario = React.forwardRef((props, ref) => {
     }
 
     return (
-        <Box m={.5} ref={ref}>
-            <Grow in={selectedTrigger} timeout={1000 + 100 * index} >
+        <Box m={.5} ref={ref} id={`com#${index}`}>
+            <Grow in={selectedTrigger} timeout={1000 + 10 * index} >
                 <Grid container component="main" p={.5}>
                     <Grid item>
                         <Avatar src={data.usuario.imagenUrl}></Avatar>
@@ -50,7 +60,7 @@ const Comentario = React.forwardRef((props, ref) => {
                         <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                     </Grid>
                     {
-                        userName != '' &&
+                        (userName != '') &&
                         <>
                             <Grid item pl={1}>
                                 <IconButton
@@ -58,7 +68,8 @@ const Comentario = React.forwardRef((props, ref) => {
                                     color="info"
                                     onClick={puntuarHandle}
                                     onAnimationEnd={() => setPlusOneTrigger(0)}
-                                    plusOneTrigger={plusOneTrigger}
+                                    plusonetrigger={plusOneTrigger}
+                                    disabled={idLogin == data.usuario.idLogin ? true : undefined}
                                 >
                                     <PlusOneIcon />
                                 </IconButton>
@@ -72,7 +83,7 @@ const Comentario = React.forwardRef((props, ref) => {
                     }
                     {idLogin == data.usuario.idLogin &&
                         <Grid item pl={1}>
-                            <IconButton color="info" onClick={handleDelete}>
+                            <IconButton disabled={blockDelete} color="info" onClick={handleDelete}>
                                 <DeleteForeverIcon />
                             </IconButton>
                         </Grid>

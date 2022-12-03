@@ -1,4 +1,4 @@
-.plusOneAnim[plusOneTrigger='1'] {
+.plusOneAnim[plusonetrigger='1'] {
 	-webkit-animation: fade-out-top 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	        animation: fade-out-top 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }

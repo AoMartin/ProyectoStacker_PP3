@@ -1,12 +1,12 @@
 import { Grid } from '@mui/material';
 import { Stack } from '@mui/system';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import CajaComentario from '../../components/DetallePublicacion/CajaComentario/CajaComentario';
 import Comentario from '../../components/DetallePublicacion/Comentario/Comentario';
 import DetallePublicacion from '../../components/DetallePublicacion/DetallePublicacion/DetallePublicacion';
-import { cargarComentarios, limpiarListaComents, limpiarMensajeAlEnviarNuevo, responderA } from '../../redux/slices/comentarioSlice';
+import { cargarComentarios, limpiarListaComents, responderA } from '../../redux/slices/comentarioSlice';
 import ComentarioService from '../../services/ComentarioService';
 
 const comData = {
@@ -54,11 +54,17 @@ export default function Publicacion(props) {
   }
 
   const procesarComentario = (com, index) => {
-    refsDicc[com.idComentario] = React.createRef();
+    refsDicc[com.idComentario] =  {ref:React.createRef(), index: index};
 
     let respondiendo = null;
     if (com.idRespuesta != null) {
       respondiendo = listaComents.find(c => com.idRespuesta == c.idComentario);
+    }
+
+    let blockDelete = false;
+    let cc = listaComents.find(c => com.idComentario == c.idRespuesta);
+    if (null != cc) {
+      blockDelete = true;
     }
 
     return <Comentario
@@ -68,20 +74,30 @@ export default function Publicacion(props) {
       respondiendo={respondiendo}
       handleSelect={handleSelectToRespond}
       handleReplyClick={handleReplyClick}
-      ref={refsDicc[com.idComentario]}
+      blockDelete={blockDelete}
+      ref={refsDicc[com.idComentario].ref}
     />;
   }
 
-  
   const handleReplyClick = (replyId) => {
-    let respuestaRef = refsDicc[replyId];
-    respuestaRef.current.scrollIntoView({ behavior:'smooth' });
+    let respuestaRef = refsDicc[replyId].ref;
+    let respuestaComIndex = refsDicc[replyId].index;
+
+    let idToFind = document.getElementById(`com#${respuestaComIndex - 1}`) != null ? respuestaComIndex - 1 : respuestaComIndex;
+
+    if(respuestaComIndex != 0){
+      document.getElementById(`com#${idToFind}`).scrollIntoView({ behavior: 'smooth' });
+    }else{
+      document.getElementById(`pub-detalle`).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    respuestaRef.current.triggerComentSelected();
   }
 
   const handleSelectToRespond = (idComentario, msgRespuesta) => {
     dispatch(responderA({ id: idComentario, msgRespuesta: msgRespuesta }));
 
-    myRef.current.scrollIntoView({ behavior:'smooth' });
+    myRef.current.scrollIntoView({ behavior: 'smooth' });
   }
 
   const handleEnviarComent = async (msg) => {
@@ -95,7 +111,7 @@ export default function Publicacion(props) {
       data.mensaje = msg;
 
       const response = await ComentarioService.guardar(data);
-      dispatch(limpiarMensajeAlEnviarNuevo(response));
+      dispatch(cargarComentarios());
     } catch (err) {
       //TODO manejar casos de error
     }

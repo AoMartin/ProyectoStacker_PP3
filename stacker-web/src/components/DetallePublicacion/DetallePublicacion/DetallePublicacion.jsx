@@ -11,6 +11,7 @@ const DetallePublicacion = (props) => {
     const dispatch = useDispatch();
     const { data } = props;
 
+    const idLogin = useSelector((state) => state.usuario.login.id);
     const userName = useSelector((state) => state.usuario.login.userName);
     const [plusOneTrigger, setPlusOneTrigger] = useState(0);
 
@@ -25,7 +26,7 @@ const DetallePublicacion = (props) => {
     }
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex' }} id='pub-detalle'>
             <Box m={2}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                     <Avatar src={data.usuario.imagenUrl}></Avatar>
@@ -35,13 +36,13 @@ const DetallePublicacion = (props) => {
                 <Typography variant="h4" component="div" color='#000000' >
                     {data.titulo}
                     {
-                        userName != '' &&
+                        (userName != '' && idLogin != data.usuario.idLogin) &&
                         <IconButton
                             className="plusOneAnim"
                             color="info"
                             onClick={puntuarHandle}
                             onAnimationEnd={() => setPlusOneTrigger(0)}
-                            plusOneTrigger={plusOneTrigger}
+                            plusonetrigger={plusOneTrigger}
                         >
                             <PlusOneIcon sx={{ fontSize: 40 }} />
                         </IconButton>

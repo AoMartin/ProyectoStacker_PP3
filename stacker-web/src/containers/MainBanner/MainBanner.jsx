@@ -68,8 +68,8 @@ export default function MainBanner(props) {
               </Typography>
             </Grid>
             <Grid item ml={1}>
-              {tipo != 'Home' &&
-                <Slide direction="top" in={checked} mountOnEnter unmountOnExit>
+              {(tipo != 'Home' && tipo != '' && tipo != undefined) &&
+                <Slide direction="down" in={checked} mountOnEnter unmountOnExit>
                   <Typography component="h2" variant="h2" style={{ color: '#000000' }} >
                     {` > ${tipo}`}
                   </Typography>
@@ -129,7 +129,6 @@ export default function MainBanner(props) {
 
       <ModalCrearPublicacion />
       <Spinner />
-      {/* TODO: MODALES ETC */}
     </Box>
   );
 }
