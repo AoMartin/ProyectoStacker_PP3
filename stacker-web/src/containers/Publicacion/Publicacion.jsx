@@ -21,12 +21,10 @@ const comData = {
 }
 
 export default function Publicacion(props) {
-  const location = useLocation();
-  const pubData = location.state;
-
   const myRef = useRef(null);
   const dispatch = useDispatch();
-
+  
+  const pubData = useSelector((state) => state.pubs.actualPubData);
   const listaComents = useSelector((state) => state.coments.listaComents);
 
   const idRespuesta = useSelector((state) => state.coments.idRespuesta);

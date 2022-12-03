@@ -5,15 +5,19 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { selectPub } from '../../redux/slices/publicacionSlice';
 import ValoracionFechaHora from '../ValoracionFechaHora/ValoracionFechaHora';
 
 const PublicacionCard = (props) => {
     const { data } = props;
+    const dispatch = useDispatch();
     let navigate = useNavigate();
 
     const handleCardClick = () => {
-        navigate('/publicacion', { state: data })
+        dispatch(selectPub(data));
+        navigate('/publicacion');
     }
 
     return (

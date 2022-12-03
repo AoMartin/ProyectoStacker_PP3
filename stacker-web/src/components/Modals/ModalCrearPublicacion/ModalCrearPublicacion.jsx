@@ -3,11 +3,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { abrirModalAvisoUsuario } from '../../../redux/slices/avisoSlice';
-import { cargarPublicaciones, ocultarModalCrearPub } from '../../../redux/slices/publicacionSlice';
+import { ocultarModalCrearPub } from '../../../redux/slices/publicacionSlice';
 import PublicacionService from '../../../services/PublicacionService';
-import PublicacionCard from '../../PublicacionCard/PublicacionCard';
 
 
 const pubData = {
@@ -20,10 +18,8 @@ const pubData = {
 }
 
 const ModalCrearPublicacion = (props) => {
-    let navigate = useNavigate();
     const showModalCrearPub = useSelector((state) => state.pubs.showModalCrearPub);
     const idLogin = useSelector((state) => state.usuario.login.id);
-    const img = useSelector((state) => state.usuario.login.img);
     const dispatch = useDispatch();
 
     const [values, setValues] = useState({
