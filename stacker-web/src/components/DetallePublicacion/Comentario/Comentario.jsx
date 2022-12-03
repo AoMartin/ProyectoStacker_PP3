@@ -7,7 +7,8 @@ import { grey } from '@mui/material/colors';
 import { Box } from "@mui/system";
 import React, { useImperativeHandle, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actualizarPuntajeComent } from '../../../redux/slices/comentarioSlice';
+import { abrirModalAvisoUsuario, cerrarModalAvisoUsuario } from '../../../redux/slices/avisoSlice';
+import { actualizarPuntajeComent, cargarComentarios } from '../../../redux/slices/comentarioSlice';
 import ComentarioService from '../../../services/ComentarioService';
 import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
 import '../detalle.css';
@@ -15,7 +16,14 @@ import '../detalle.css';
 
 const Comentario = React.forwardRef((props, ref) => {
     const dispatch = useDispatch();
-    const { data, respondiendo, handleSelect, handleReplyClick, index, blockDelete } = props;
+    const {
+        data,
+        respondiendo,
+        handleSelect,
+        handleReplyClick,
+        index,
+        handleDelete,
+        blockDelete } = props;
 
     const idLogin = useSelector((state) => state.usuario.login.id);
     const userName = useSelector((state) => state.usuario.login.userName);
@@ -24,7 +32,7 @@ const Comentario = React.forwardRef((props, ref) => {
     const [selectedTrigger, setSelectedTrigger] = useState(true);
 
     useImperativeHandle(ref, () => ({
-        triggerComentSelected: ()=> {
+        triggerComentSelected: () => {
             setSelectedTrigger(false);
             setTimeout(function () {
                 setSelectedTrigger(true);
@@ -38,13 +46,10 @@ const Comentario = React.forwardRef((props, ref) => {
             const response = await ComentarioService.puntuarComent(data.idComentario);
             dispatch(actualizarPuntajeComent({ id: data.idComentario, puntaje: response }));
         } catch (err) {
-            //TODO manejar casos de error
+            dispatch(abrirModalAvisoUsuario(err));
         }
     }
 
-    const handleDelete = () => {
-        //TODO
-    }
 
     return (
         <Box m={.5} ref={ref} id={`com#${index}`}>
@@ -83,7 +88,7 @@ const Comentario = React.forwardRef((props, ref) => {
                     }
                     {idLogin == data.usuario.idLogin &&
                         <Grid item pl={1}>
-                            <IconButton disabled={blockDelete} color="info" onClick={handleDelete}>
+                            <IconButton disabled={blockDelete} color="info" onClick={() => handleDelete(data.idComentario)}>
                                 <DeleteForeverIcon />
                             </IconButton>
                         </Grid>

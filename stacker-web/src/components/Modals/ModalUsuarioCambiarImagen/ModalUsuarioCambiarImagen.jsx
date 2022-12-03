@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { abrirModalAvisoUsuario } from '../../../redux/slices/avisoSlice';
 import { closeImagenModal, userImgUpdate } from '../../../redux/slices/usuarioSlice';
 import UsuarioService from '../../../services/UsuarioService';
 
@@ -52,7 +53,7 @@ const ModalUsuarioCambiarImagen = (props) => {
             dispatch(userImgUpdate(response));
             handleClose();
         } catch (err) {
-            //TODO manejar casos de error
+            dispatch(abrirModalAvisoUsuario(err));
         }
     }
 

@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ModalCrearPublicacion from '../../components/Modals/ModalCrearPublicacion/ModalCrearPublicacion';
+import ModalAvisoUsuario from '../../components/Modals/ModalAvisoUsuario/ModalAvisoUsuario';
 import Usuario from '../../components/Sistema//Usuario/Usuario';
 import MenuPrincipal from '../../components/Sistema/MenuPrincipal/MenuPrincipal';
 import Spinner from '../../components/Sistema/Spinner/Spinner';
@@ -128,7 +129,9 @@ export default function MainBanner(props) {
       </Box>
 
       <ModalCrearPublicacion />
+      <ModalAvisoUsuario />
       <Spinner />
+
     </Box>
   );
 }

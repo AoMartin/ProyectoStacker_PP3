@@ -128,7 +128,13 @@ public class ComentarioServiceImpl implements IComentarioService {
         logger.debug("ComentarioServiceImpl: Ingresando a borrarComentario...");
 
         try {
-            comentarioRepository.deleteById(id);
+        	List<ComentarioBO> listaAsociados = comentarioRepository.findByRespuestaIdComentario(id);
+        	
+        	if(listaAsociados.isEmpty()) {        		
+        		comentarioRepository.deleteById(id);
+        	}else {
+        		throw new RuntimeException("El comentario tiene respuestas asociadas y no se puede eliminar.");
+        	}
         } catch (Exception e) {
             logger.error(e);
             throw new ComentarioServiceException(ComentarioServiceException.DEFAULT_MESSAGE + e.getMessage());

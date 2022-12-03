@@ -2,6 +2,7 @@ import PlusOneIcon from '@mui/icons-material/PlusOne';
 import { Avatar, Box, IconButton, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { abrirModalAvisoUsuario } from '../../../redux/slices/avisoSlice';
 import { actualizarPuntajePubs } from '../../../redux/slices/publicacionSlice';
 import PublicacionService from '../../../services/PublicacionService';
 import ValoracionFechaHora from '../../ValoracionFechaHora/ValoracionFechaHora';
@@ -21,7 +22,7 @@ const DetallePublicacion = (props) => {
             const response = await PublicacionService.puntuarPub(data.idPublicacion);
             dispatch(actualizarPuntajePubs({id:data.idPublicacion, puntaje:response}));
         } catch (err) {
-            //TODO manejar casos de error
+            dispatch(abrirModalAvisoUsuario(err));
         }
     }
 

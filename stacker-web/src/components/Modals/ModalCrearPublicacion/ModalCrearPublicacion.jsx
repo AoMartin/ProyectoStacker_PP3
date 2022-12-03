@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { abrirModalAvisoUsuario } from '../../../redux/slices/avisoSlice';
 import { cargarPublicaciones, ocultarModalCrearPub } from '../../../redux/slices/publicacionSlice';
 import PublicacionService from '../../../services/PublicacionService';
 import PublicacionCard from '../../PublicacionCard/PublicacionCard';
@@ -69,7 +70,7 @@ const ModalCrearPublicacion = (props) => {
             window.location.reload()
             handleClose();
         } catch (err) {
-            //TODO manejar casos de error
+            dispatch(abrirModalAvisoUsuario(err));
         }
     }
 

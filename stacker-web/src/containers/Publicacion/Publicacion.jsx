@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import CajaComentario from '../../components/DetallePublicacion/CajaComentario/CajaComentario';
 import Comentario from '../../components/DetallePublicacion/Comentario/Comentario';
 import DetallePublicacion from '../../components/DetallePublicacion/DetallePublicacion/DetallePublicacion';
+import { abrirModalAvisoUsuario } from '../../redux/slices/avisoSlice';
 import { cargarComentarios, limpiarListaComents, responderA } from '../../redux/slices/comentarioSlice';
 import ComentarioService from '../../services/ComentarioService';
 
@@ -49,12 +50,12 @@ export default function Publicacion(props) {
       const response = await ComentarioService.obtenerTodoPorIdPub(pubData.idPublicacion);
       dispatch(cargarComentarios(response));
     } catch (err) {
-      //TODO manejar casos de error
+      dispatch(abrirModalAvisoUsuario(err));
     }
   }
 
   const procesarComentario = (com, index) => {
-    refsDicc[com.idComentario] =  {ref:React.createRef(), index: index};
+    refsDicc[com.idComentario] = { ref: React.createRef(), index: index };
 
     let respondiendo = null;
     if (com.idRespuesta != null) {
@@ -74,6 +75,7 @@ export default function Publicacion(props) {
       respondiendo={respondiendo}
       handleSelect={handleSelectToRespond}
       handleReplyClick={handleReplyClick}
+      handleDelete={handleDelete}
       blockDelete={blockDelete}
       ref={refsDicc[com.idComentario].ref}
     />;
@@ -85,9 +87,9 @@ export default function Publicacion(props) {
 
     let idToFind = document.getElementById(`com#${respuestaComIndex - 1}`) != null ? respuestaComIndex - 1 : respuestaComIndex;
 
-    if(respuestaComIndex != 0){
+    if (respuestaComIndex != 0) {
       document.getElementById(`com#${idToFind}`).scrollIntoView({ behavior: 'smooth' });
-    }else{
+    } else {
       document.getElementById(`pub-detalle`).scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -111,9 +113,18 @@ export default function Publicacion(props) {
       data.mensaje = msg;
 
       const response = await ComentarioService.guardar(data);
-      dispatch(cargarComentarios());
+      cargarListaComentarios();
     } catch (err) {
-      //TODO manejar casos de error
+      dispatch(abrirModalAvisoUsuario(err));
+    }
+  }
+
+  const handleDelete = async (idToDelete) => {
+    try {
+      const response = await ComentarioService.borrar(idToDelete);
+      cargarListaComentarios();
+    } catch (err) {
+      dispatch(abrirModalAvisoUsuario(err));
     }
   }
 
@@ -134,7 +145,7 @@ export default function Publicacion(props) {
 
       <Grid item xs={12}>
         <Stack spacing={2}>
-          {listaComents.map((com, index) =>
+          {listaComents?.map((com, index) =>
             procesarComentario(com, index)
           )}
         </Stack>

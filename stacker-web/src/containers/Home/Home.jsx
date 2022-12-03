@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PublicacionCard from '../../components/PublicacionCard/PublicacionCard';
+import { abrirModalAvisoUsuario } from '../../redux/slices/avisoSlice';
 import { cargarPublicaciones } from '../../redux/slices/publicacionSlice';
 import PublicacionService from '../../services/PublicacionService';
 
@@ -46,7 +47,7 @@ export default function Home(props) {
 
       dispatch(cargarPublicaciones(response));
     } catch (err) {
-      //TODO manejar casos de error
+      dispatch(abrirModalAvisoUsuario(err));
     }
   }
 
