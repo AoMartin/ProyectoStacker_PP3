@@ -15,10 +15,16 @@ En la carpeta [`mockups`](/mockups/) se encuentran los mockups de la app.
 
 En la carpeta [`stacker-api`](/stacker-api/) se encuentra el codigo fuente del backend de la aplicación.
 
+El backend se encuentra servido utilizando el servico Railway, se implementa Swagger UI sobre SpringBoot
+para documentar la API y tambien disponer de un medio para probar los endpoints en la siguiente url:
+https://proyectostackerpp3-production.up.railway.app/stacker-api/swagger-ui/index.html
 
 # Frontend
 
 En la carpeta [`stacker-front`](/stacker-front/) se encuentra el codigo fuente del frontend de la aplicación.
+
+El frontend se encuentra servido utilizando el servicio de Github Pages en la siguiente url:
+https://aomartin.github.io/ProyectoStacker_PP3/
 
 # Historias de Usuario
 
