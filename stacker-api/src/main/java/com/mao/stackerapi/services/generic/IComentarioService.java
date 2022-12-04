@@ -19,5 +19,8 @@ public interface IComentarioService {
 
     public List<ComentarioDTO> obtenerTodoPorPublicacion(Long idPublicacion) throws ComentarioServiceException;
     
-    public Integer puntuarComentario(Long idComentario) throws ComentarioServiceException;
+    public ComentarioDTO puntuarComentario(Long idComentario) throws ComentarioServiceException;
+    
+    public Long contarComentariosEnPublicacion(Long idComentario) throws ComentarioServiceException;
+
 }

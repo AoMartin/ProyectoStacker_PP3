@@ -15,7 +15,6 @@ import com.mao.stackerapi.mapper.api.ComentarioMapper;
 import com.mao.stackerapi.models.api.ComentarioBO;
 import com.mao.stackerapi.repository.api.IComentarioRepository;
 import com.mao.stackerapi.services.generic.IComentarioService;
-import com.mao.stackerapi.services.generic.IPublicacionService;
 
 /**
  * <p>
@@ -35,9 +34,6 @@ public class ComentarioServiceImpl implements IComentarioService {
 
     @Autowired
     private IComentarioRepository comentarioRepository;
-    
-    @Autowired
-    private IPublicacionService publicacionService;
 
     @Override
     public ComentarioDTO obtenerComentario(Long id) throws ComentarioServiceException {
@@ -91,8 +87,7 @@ public class ComentarioServiceImpl implements IComentarioService {
 
             ComentarioBO guardado = comentarioRepository.save(bo);
             dto = comentarioMapper.toDTO(guardado);
-            
-            publicacionService.notificarModificacion(dto.getIdPublicacion());
+           
         } catch (Exception e) {
             logger.error(e);
             throw new ComentarioServiceException(ComentarioServiceException.DEFAULT_MESSAGE + e.getMessage());
@@ -113,7 +108,6 @@ public class ComentarioServiceImpl implements IComentarioService {
             ComentarioBO guardado = comentarioRepository.save(bo);
             dto = comentarioMapper.toDTO(guardado);
             
-            publicacionService.notificarModificacion(dto.getIdPublicacion());
         } catch (Exception e) {
             logger.error(e);
             throw new ComentarioServiceException(ComentarioServiceException.DEFAULT_MESSAGE + e.getMessage());
@@ -166,10 +160,11 @@ public class ComentarioServiceImpl implements IComentarioService {
 	}
 
 	@Override
-	public Integer puntuarComentario(Long idComentario) throws ComentarioServiceException {
+	public ComentarioDTO puntuarComentario(Long idComentario) throws ComentarioServiceException {
         logger.debug("ComentarioServiceImpl: Ingresando a puntuarComentario...");
         Integer puntajeActual = 0;
-
+        ComentarioDTO dto = null;
+        
         try {
             Optional<ComentarioBO> opt = comentarioRepository.findById(idComentario);
             if (opt.isPresent()) {
@@ -177,8 +172,7 @@ public class ComentarioServiceImpl implements IComentarioService {
             	puntajeActual = bo.getPuntaje() +1;
             	bo.setPuntaje(puntajeActual);
             	comentarioRepository.save(bo);
-            	
-            	publicacionService.notificarModificacion(bo.getPublicacion().getIdPublicacion());
+            	dto = comentarioMapper.toDTO(bo);
             } else {
                 throw new ComentarioServiceException("Entidad no encontrada");
             }
@@ -188,6 +182,23 @@ public class ComentarioServiceImpl implements IComentarioService {
         }
 
         logger.debug("ComentarioServiceImpl: Saliendo de puntuarComentario...");
+		return dto;
+	}
+
+	@Override
+	public Long contarComentariosEnPublicacion(Long idPublicacion) throws ComentarioServiceException {
+        logger.debug("ComentarioServiceImpl: Ingresando a contarComentariosEnPublicacion...");
+        Long puntajeActual = 0L;
+
+        try {
+        	puntajeActual = comentarioRepository.countByPublicacionIdPublicacion(idPublicacion);
+            
+        } catch (Exception e) {
+            logger.error(e);
+            throw new ComentarioServiceException(ComentarioServiceException.DEFAULT_MESSAGE + e.getMessage());
+        }
+
+        logger.debug("ComentarioServiceImpl: Saliendo de contarComentariosEnPublicacion...");
 		return puntajeActual;
 	}
 

@@ -36,8 +36,17 @@ const publicacionSlice = createSlice({
       }).sort((a,b) => a.puntaje - b.puntaje)
     },
 
+    eliminarPub:(state,action)=>{
+      state.listaPubs = state.listaPubs.filter( p => p.idPublicacion != action.payload); 
+    }
   }
 })
 
-export const { cargarPublicaciones, mostrarModalCrearPub, ocultarModalCrearPub, actualizarPuntajePubs, selectPub } = publicacionSlice.actions
+export const { 
+  cargarPublicaciones, 
+  mostrarModalCrearPub, 
+  ocultarModalCrearPub, 
+  actualizarPuntajePubs, 
+  selectPub, 
+  eliminarPub } = publicacionSlice.actions
 export default publicacionSlice.reducer

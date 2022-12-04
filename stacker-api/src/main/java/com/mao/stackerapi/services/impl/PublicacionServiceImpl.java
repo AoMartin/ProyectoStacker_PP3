@@ -10,12 +10,13 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mao.stackerapi.dto.api.ComentarioDTO;
 import com.mao.stackerapi.dto.api.PublicacionDTO;
 import com.mao.stackerapi.exceptions.api.PublicacionServiceException;
 import com.mao.stackerapi.mapper.api.PublicacionMapper;
 import com.mao.stackerapi.models.api.PublicacionBO;
-import com.mao.stackerapi.repository.api.IComentarioRepository;
 import com.mao.stackerapi.repository.api.IPublicacionRepository;
+import com.mao.stackerapi.services.generic.IComentarioService;
 import com.mao.stackerapi.services.generic.IPublicacionService;
 
 /**
@@ -38,7 +39,7 @@ public class PublicacionServiceImpl implements IPublicacionService {
     private IPublicacionRepository publicacionRepository;
 
     @Autowired
-    private IComentarioRepository comentarioRepository;
+    private IComentarioService comentarioService;
     
     @Override
     public PublicacionDTO obtenerPublicacion(Long id) throws PublicacionServiceException {
@@ -106,6 +107,15 @@ public class PublicacionServiceImpl implements IPublicacionService {
         logger.debug("PublicacionServiceImpl: Ingresando a borrarPublicacion...");
 
         try {
+        	List<ComentarioDTO> comentariosAsociados = comentarioService.obtenerTodoPorPublicacion(id);
+        	for(ComentarioDTO dto : comentariosAsociados) {
+        		dto.setIdPublicacion(null);
+        		dto.setIdRespuesta(null);
+        		comentarioService.actualizarComentario(dto);
+        	}
+        	for(ComentarioDTO dto : comentariosAsociados) {
+        		comentarioService.borrarComentario(dto.getIdComentario());
+        	}
             publicacionRepository.deleteById(id);
         } catch (Exception e) {
             logger.error(e);
@@ -239,7 +249,7 @@ public class PublicacionServiceImpl implements IPublicacionService {
 
             for (PublicacionBO bo : boLista) {
                 PublicacionDTO dto = publicacionMapper.toDTO(bo);
-                Long cantidadComentario = comentarioRepository.countByPublicacionIdPublicacion(dto.getIdPublicacion());
+                Long cantidadComentario = comentarioService.contarComentariosEnPublicacion(dto.getIdPublicacion());
                 dto.setCantidadComentarios(cantidadComentario);
                 listaDto.add(dto);
             }

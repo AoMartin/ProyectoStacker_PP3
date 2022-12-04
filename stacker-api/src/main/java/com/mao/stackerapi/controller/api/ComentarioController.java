@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mao.stackerapi.dto.api.ComentarioDTO;
 import com.mao.stackerapi.services.generic.IComentarioService;
+import com.mao.stackerapi.services.generic.IPublicacionService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -34,7 +35,9 @@ public class ComentarioController  {
 	@Autowired
 	private IComentarioService comentarioService;
 
-
+	@Autowired
+	private IPublicacionService publicacionService;
+	
 	@GetMapping(value = "/obtener/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Metodo obtenerComentario", notes = "Solicita todos los datos de una comentario para el ID indicado", httpMethod = "GET")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ComentarioDTO.class),
@@ -74,7 +77,8 @@ public class ComentarioController  {
 		ComentarioDTO dto = null;
 
 		dto = comentarioService.guardarComentario(comentario);
-
+		publicacionService.notificarModificacion(dto.getIdPublicacion());
+		
 		logger.debug("ComentarioController: Saliendo de guardarComentario...");
 		return ResponseEntity.ok().body(dto);
 	}
@@ -89,7 +93,8 @@ public class ComentarioController  {
 		ComentarioDTO dto = null;
 
 		dto = comentarioService.actualizarComentario(comentario);
-
+        publicacionService.notificarModificacion(dto.getIdPublicacion());
+        
 		logger.debug("ComentarioController: Saliendo de actualizarComentario...");
 		return ResponseEntity.ok().body(dto);
 	}
@@ -132,7 +137,9 @@ public class ComentarioController  {
 	public ResponseEntity<Integer> puntuarComentario(@PathVariable Long id) throws Exception {
 		logger.debug("ComentarioController: Ingresando a puntuarComentario...");
 
-		Integer puntajeActual = comentarioService.puntuarComentario(id);
+		ComentarioDTO dto = comentarioService.puntuarComentario(id);
+		publicacionService.notificarModificacion(dto.getIdPublicacion());
+		Integer puntajeActual = dto.getPuntaje();
 
 		logger.debug("ComentarioController: Saliendo de puntuarComentario...");
 		return ResponseEntity.ok().body(puntajeActual);
