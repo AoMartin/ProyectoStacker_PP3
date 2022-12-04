@@ -12,15 +12,13 @@ const mdTheme = createTheme({
   }
 });
 
-//basename={process.env.PUBLIC_URL}
-
 const App = () => {
 
   return (
     <>
       <ThemeProvider theme={mdTheme}>
         <CssBaseline />
-        <BrowserRouter >
+        <HashRouter >
           <Routes>
             <Route path="/" element={<MainBanner tipo={'Home'} vista={<Home tipo={'Home'}/>} />} />
             <Route path="/home" element={<MainBanner tipo={'Home'} vista={<Home tipo={'Home'}/>} />} />
@@ -29,7 +27,7 @@ const App = () => {
             <Route path="/publicacion" element={<MainBanner vista={<Publicacion />} />} />
             <Route path="/gestionar" element={<MainBanner tipo={'Mis Publicaciones'} vista={<Gestionar />} />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </ThemeProvider>
     </>
   );
