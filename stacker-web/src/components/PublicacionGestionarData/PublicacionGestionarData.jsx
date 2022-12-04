@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { abrirModalAvisoUsuario } from '../../redux/slices/avisoSlice';
@@ -17,6 +18,10 @@ const PublicacionGestionarData = (props) => {
     const dispatch = useDispatch();
     const [checked, setChecked] = useState(false);
     let navigate = useNavigate();
+
+    useEffect(() => {
+        setChecked(false);
+    }, [data]);
 
     const handleCardClick = () => {
         dispatch(selectPub(data));
@@ -40,7 +45,7 @@ const PublicacionGestionarData = (props) => {
     return (
         <Box m={.5} width={'100%'}>
             <Card sx={{ display: 'flex' }}>
-            <Box pl={1}>
+                <Box pl={1}>
                     <Switch
                         checked={checked}
                         onChange={handleChange}
