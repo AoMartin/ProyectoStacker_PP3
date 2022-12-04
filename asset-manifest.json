@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ProyectoStacker_PP3/static/css/main.9d8f349a.css",
+    "main.js": "/ProyectoStacker_PP3/static/js/main.c8671bc7.js",
+    "index.html": "/ProyectoStacker_PP3/index.html",
+    "main.9d8f349a.css.map": "/ProyectoStacker_PP3/static/css/main.9d8f349a.css.map",
+    "main.c8671bc7.js.map": "/ProyectoStacker_PP3/static/js/main.c8671bc7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9d8f349a.css",
+    "static/js/main.c8671bc7.js"
+  ]
+}

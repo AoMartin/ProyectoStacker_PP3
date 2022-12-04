@@ -1,0 +1,2 @@
+.plusOneAnim[plusonetrigger="1"]{-webkit-animation:fade-out-top .7s cubic-bezier(.25,.46,.45,.94) both;animation:fade-out-top .7s cubic-bezier(.25,.46,.45,.94) both}@-webkit-keyframes fade-out-top{0%{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}to{opacity:0;-webkit-transform:translateY(-50px);transform:translateY(-50px)}}@keyframes fade-out-top{0%{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}to{opacity:0;-webkit-transform:translateY(-50px);transform:translateY(-50px)}}
+/*# sourceMappingURL=main.9d8f349a.css.map*/
