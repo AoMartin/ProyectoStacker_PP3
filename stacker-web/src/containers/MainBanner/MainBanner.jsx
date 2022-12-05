@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ModalAvisoUsuario from '../../components/Modals/ModalAvisoUsuario/ModalAvisoUsuario';
 import ModalCrearPublicacion from '../../components/Modals/ModalCrearPublicacion/ModalCrearPublicacion';
+import ModalFiltrar from '../../components/Modals/ModalFiltrar/ModalFiltrar';
 import Usuario from '../../components/Sistema//Usuario/Usuario';
 import MenuOpciones from '../../components/Sistema/MenuOpciones/MenuOpciones';
 import MenuPrincipal from '../../components/Sistema/MenuPrincipal/MenuPrincipal';
@@ -91,7 +92,7 @@ export default function MainBanner(props) {
               userName != '' &&
               <MenuOpciones handleOpenModalCrearPublicacion={handleOpenModalCrearPublicacion} />
             }
-            <MenuPrincipal />
+            <MenuPrincipal tipo={tipo}/>
           </Grid>
         </Grid>
       </Box>
@@ -112,6 +113,7 @@ export default function MainBanner(props) {
 
       <ModalCrearPublicacion />
       <ModalAvisoUsuario />
+      <ModalFiltrar />
       <Spinner />
 
     </Box >

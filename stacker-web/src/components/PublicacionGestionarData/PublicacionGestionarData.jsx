@@ -59,18 +59,7 @@ const PublicacionGestionarData = (props) => {
                 </Box>
                 <CardActionArea onClick={handleCardClick}>
                     <Box sx={{ display: 'flex', alignItems: 'center', m: 1 }}>
-                        <Box>
-                            <Typography ml={1} component="div" variant="h5" color='#000000' >
-                                {data.titulo}
-                            </Typography>
-                        </Box>
-                        <Box pl={1} sx={{ display: 'flex', alignItems: 'center' }}>
-                            <MessageIcon pl={1} />
-                            <Typography pl={1} variant="subtitle1" color="text.secondary">
-                                {data.cantidadComentarios == null | undefined ? 0 : data.cantidadComentarios}
-                            </Typography>
-                        </Box>
-                        <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
+                        <ValoracionFechaHora cc={data.cantidadComentarios} puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                     </Box>
 
                 </CardActionArea>

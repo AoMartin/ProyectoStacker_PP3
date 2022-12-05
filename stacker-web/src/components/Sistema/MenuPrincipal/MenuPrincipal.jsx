@@ -9,10 +9,19 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { mostrarModalFiltrar } from '../../../redux/slices/publicacionSlice';
 
-const MenuPrincipal = () => {
-  
+const MenuPrincipal = (props) => {
+  const { tipo } = props;
+  const dispatch = useDispatch();
+
+  const abrirModalFiltrar= () =>{
+    if(tipo != 'Home' && tipo != 'Nuevos' && tipo != 'Tendencia') return;
+    dispatch(mostrarModalFiltrar());
+  }
+
   return (
     <List
       sx={{ bgcolor: (theme) => theme.palette.info.light }}
@@ -67,7 +76,7 @@ const MenuPrincipal = () => {
         />
       </ListItemButton>
 
-      <ListItemButton component={Link} to="/">
+      <ListItemButton onClick={abrirModalFiltrar}>
         <ListItemIcon>
           <FilterListIcon sx={{ fontSize: 35 }} style={{ color: '#FFFFFF' }} />
         </ListItemIcon>

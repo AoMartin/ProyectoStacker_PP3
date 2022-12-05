@@ -138,6 +138,8 @@ public class PublicacionServiceImpl implements IPublicacionService {
 
             for (PublicacionBO bo : boLista) {
                 PublicacionDTO dto = publicacionMapper.toDTO(bo);
+                Long cantidadComentario = comentarioService.contarComentariosEnPublicacion(dto.getIdPublicacion());
+                dto.setCantidadComentarios(cantidadComentario);
                 listaDto.add(dto);
             }
         } catch (Exception e) {
@@ -159,6 +161,8 @@ public class PublicacionServiceImpl implements IPublicacionService {
 
             for (PublicacionBO bo : boLista) {
                 PublicacionDTO dto = publicacionMapper.toDTO(bo);
+                Long cantidadComentario = comentarioService.contarComentariosEnPublicacion(dto.getIdPublicacion());
+                dto.setCantidadComentarios(cantidadComentario);
                 listaDto.add(dto);
             }
         } catch (Exception e) {
@@ -180,6 +184,8 @@ public class PublicacionServiceImpl implements IPublicacionService {
 
             for (PublicacionBO bo : boLista) {
                 PublicacionDTO dto = publicacionMapper.toDTO(bo);
+                Long cantidadComentario = comentarioService.contarComentariosEnPublicacion(dto.getIdPublicacion());
+                dto.setCantidadComentarios(cantidadComentario);
                 listaDto.add(dto);
             }
         } catch (Exception e) {

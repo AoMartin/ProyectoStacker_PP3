@@ -22,7 +22,7 @@ const PublicacionCard = (props) => {
 
     return (
         <Box m={.5} width={'49%'}>
-            <Card sx={{ display: 'flex' }}>
+            <Card sx={{ display: 'flex', }}>
                 <CardActionArea onClick={handleCardClick}>
                     <Box sx={{ display: 'flex', alignItems: 'center', m: 1 }}>
                         <Avatar src={data.usuario.imagenUrl}></Avatar>
@@ -40,7 +40,7 @@ const PublicacionCard = (props) => {
                                 </Box>
                             </CardContent>
                             <Box sx={{ display: 'flex', alignItems: 'bottom', p: 1 }}>
-                                <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
+                                <ValoracionFechaHora cc={data.cantidadComentarios} puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                             </Box>
                         </Grid>
                         <Grid item xs={6}>

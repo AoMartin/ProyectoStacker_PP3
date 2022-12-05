@@ -32,7 +32,7 @@ const DetallePublicacion = (props) => {
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                     <Avatar src={data.usuario.imagenUrl}></Avatar>
                     <Typography ml={2}>{data.usuario.user}</Typography>
-                    <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
+                    <ValoracionFechaHora cc={data.cantidadComentarios} puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                 </Box>
                 <Typography variant="h4" component="div" color='#000000' >
                     {data.titulo}
