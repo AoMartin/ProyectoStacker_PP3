@@ -37,6 +37,10 @@ const obtenerTodoUsuario = async (id) => {
   return await API.get(`${CONTROLLER}/obtener-todos-usuario/${id}`);
 };
 
+const buscarTitulo = async (buscar) => {
+  return await API.get(`${CONTROLLER}/buscar-por-titulo/${buscar}`);
+};
+
 export default {
   obtener,
   obtenerTodoPuntaje,
@@ -47,4 +51,5 @@ export default {
   borrar,
   puntuarPub,
   obtenerTodoUsuario,
+  buscarTitulo,
 };

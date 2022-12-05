@@ -57,7 +57,7 @@ const MenuPrincipal = () => {
         <Chip label="Opciones" color="info"></Chip>
       </Divider>
 
-      <ListItemButton component={Link} to="/">
+      <ListItemButton component={Link} to="/buscar">
         <ListItemIcon>
           <SearchIcon sx={{ fontSize: 35 }} style={{ color: '#FFFFFF' }} />
         </ListItemIcon>

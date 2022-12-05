@@ -163,4 +163,18 @@ public class PublicacionController  {
 		logger.debug("PublicacionController: Saliendo de obtenerTodoPorIdUsuario...");
 		return ResponseEntity.ok().body(lista);
 	}
+	
+	@GetMapping(value = "/buscar-por-titulo/{buscar}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Metodo buscarPorTitulo", notes = "Busca las publicaciones que coincidad por medio del titulo", httpMethod = "GET")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = PublicacionDTO.class),
+			@ApiResponse(code = 400, message = ""), @ApiResponse(code = 500, message = "") })
+	public ResponseEntity<List<PublicacionDTO>> buscarPorTitulo(@PathVariable String buscar) throws Exception {
+		logger.debug("PublicacionController: Ingresando a buscarPorTitulo...");
+		List<PublicacionDTO> lista = null;
+		
+		lista = publicacionService.buscarPorTitulo(buscar.toString());
+		
+		logger.debug("PublicacionController: Saliendo de buscarPorTitulo...");
+		return ResponseEntity.ok().body(lista);
+	}
 }

@@ -25,6 +25,7 @@ public class SecurityConfig {
 			"/publicacion/obtener-todos-puntaje",
 			"/publicacion/obtener-todos-hora-creacion",
 			"/publicacion/obtener-todos-actualizacion",
+			"/publicacion/buscar-por-titulo/**",
 			"/comentario/obtener-todos-pub/**",
 			"/v3/api-docs/",
 			"/v3/api-docs",

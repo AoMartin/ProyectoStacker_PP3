@@ -33,4 +33,6 @@ public interface IPublicacionService {
     public Integer puntuarPublicacion(Long idPublicacion) throws PublicacionServiceException;
     
     public List<PublicacionDTO> obtenerTodoPorIdUsuario(Long idUsuario) throws PublicacionServiceException;
+    
+    public List<PublicacionDTO> buscarPorTitulo(String buscar) throws PublicacionServiceException;
 }

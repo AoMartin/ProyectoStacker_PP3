@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.mao.stackerapi.dto.api.ComentarioDTO;
@@ -261,6 +263,28 @@ public class PublicacionServiceImpl implements IPublicacionService {
 
         logger.debug("PublicacionServiceImpl: Saliendo de obtenerTodoPorIdUsuario...");
         return listaDto;
+	}
+
+	@Override
+	public List<PublicacionDTO> buscarPorTitulo(String buscar) throws PublicacionServiceException {
+	      logger.debug("PublicacionServiceImpl: Ingresando a buscarPorTitulo...");
+	        List<PublicacionDTO> listaDto = new ArrayList<>();
+
+	        try {
+	            List<PublicacionBO> boLista = publicacionRepository.findByTituloIgnoreCaseContaining(buscar);
+	            
+	            for (PublicacionBO bo : boLista) {
+	                PublicacionDTO dto = publicacionMapper.toDTO(bo);
+	                listaDto.add(dto);
+	            }
+
+	        } catch (Exception e) {
+	            logger.error(e);
+	            throw new PublicacionServiceException(PublicacionServiceException.DEFAULT_MESSAGE + e.getMessage());
+	        }
+
+	        logger.debug("PublicacionServiceImpl: Saliendo de buscarPorTitulo...");
+	        return listaDto;
 	}
 
 

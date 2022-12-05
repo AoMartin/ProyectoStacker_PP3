@@ -25,4 +25,6 @@ public interface IPublicacionRepository extends JpaRepository<PublicacionBO, Lon
 	public List<PublicacionBO> findAllByOrderByUltimaActualizacionDesc();
 	
 	public List<PublicacionBO> findAllByUsuarioIdLoginOrderByFechaHoraCreacionDesc(Long idLogin);
+	
+	public List<PublicacionBO> findByTituloIgnoreCaseContaining(String titulo);
 }

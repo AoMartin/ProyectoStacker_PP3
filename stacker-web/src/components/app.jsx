@@ -5,6 +5,7 @@ import Home from '../containers/Home/Home';
 import MainBanner from '../containers/MainBanner/MainBanner';
 import Publicacion from '../containers/Publicacion/Publicacion';
 import Gestionar from '../containers/Gestionar/Gestionar';
+import Buscador from '../containers/Buscador/Buscador';
 
 const mdTheme = createTheme({
   palette: {
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="/tendencia" element={<MainBanner tipo={'Tendencia'} vista={<Home tipo={'Tendencia'}/>} />} />
             <Route path="/publicacion" element={<MainBanner vista={<Publicacion />} />} />
             <Route path="/gestionar" element={<MainBanner tipo={'Mis Publicaciones'} vista={<Gestionar />} />} />
+            <Route path="/buscar" element={<MainBanner tipo={'Buscar'} vista={<Buscador />} />} />
           </Routes>
         </HashRouter>
       </ThemeProvider>

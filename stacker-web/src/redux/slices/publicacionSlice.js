@@ -38,7 +38,11 @@ const publicacionSlice = createSlice({
 
     eliminarPub:(state,action)=>{
       state.listaPubs = state.listaPubs.filter( p => p.idPublicacion != action.payload); 
-    }
+    },
+
+    limpiarListaPubs:(state)=>{
+      state.listaPubs = [];
+    },
   }
 })
 
@@ -48,5 +52,6 @@ export const {
   ocultarModalCrearPub, 
   actualizarPuntajePubs, 
   selectPub, 
+  limpiarListaPubs,
   eliminarPub } = publicacionSlice.actions
 export default publicacionSlice.reducer
