@@ -28,7 +28,7 @@ const ValoracionFechaHora = (props) => {
                 </Typography>
             </Box>
             {
-                cc != undefined | null &&
+                cc != undefined &&
                 <Box pl={1} sx={{ display: 'flex', alignItems: 'center' }}>
                     <MessageIcon color='#000000'/>
                     <Typography pl={1} variant="subtitle1" color="text.secondary">
