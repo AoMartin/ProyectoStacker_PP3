@@ -84,7 +84,7 @@ export default function MainBanner(props) {
         </Box>
       </AppBar>
 
-      <Box sx={{ minWidth:'12%', backgroundColor: (theme) => theme.palette.info.light }}>
+      <Box sx={{ minWidth:'15%', backgroundColor: (theme) => theme.palette.info.light }}>
         <Grid container spacing={0} >
           <Grid item xs={12}  sx={{ minHeight: 100 }}/>
           <Grid item xs={12}>
