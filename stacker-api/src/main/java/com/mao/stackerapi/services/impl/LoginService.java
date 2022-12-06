@@ -43,20 +43,24 @@ public class LoginService implements ILoginService {
 
 		LoginBO login = loginRepository.findByUser(userDto.getUsername());
 
-		// TODO manejar caso relogin, guardar user con password, responder ante usuario ya creado
-
 		if(null != login) {
 			//Usuario ya creado
 			if(!passwordEncoder.matches(userDto.getPassword(), login.getPassword())) {
 				throw new RuntimeException("Usuario ya existente. Password incorrecto.");
 			}
+
+			login.setUltimoLogin(new Timestamp(System.currentTimeMillis()));
+			loginRepository.save(login);
 		}else {
 			//Nuevo user
 			login = new LoginBO();
+			login.setFechaHoraCreacion(new Timestamp(System.currentTimeMillis()));
 			login.setUltimoLogin(new Timestamp(System.currentTimeMillis()));
 			login.setUser(userDto.getUsername());
 			login.setPassword(passwordEncoder.encode(userDto.getPassword()));
 			loginRepository.save(login);
+			
+			//TODO: Crear perfil
 		}
 		
 		token = jwtTokenProvider.generateToken(userDto.getUsername(), id);

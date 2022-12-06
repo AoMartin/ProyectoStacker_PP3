@@ -36,25 +36,26 @@ public class LoginBO {
 	@Column(name = "IMAGEN_URL", length = 2048)
 	private String imagenUrl;
 
+	@Column(name = "FECHA_HORA_CREACION")
+	private Timestamp fechaHoraCreacion;
+	
 	@Column(name = "ULTIMO_LOGIN")
 	private Timestamp ultimoLogin;
 
-	@Column(name = "PUNTAJE")
-	private Integer puntaje;
 
 	public LoginBO() {
 
 	}
 
-	public LoginBO(Long idLogin, String user, String password, String imagenUrl, Timestamp ultimoLogin,
-			Integer puntaje) {
+	public LoginBO(Long idLogin, String user, String password, String imagenUrl, Timestamp fechaHoraCreacion,
+			Timestamp ultimoLogin ) {
 		super();
 		this.idLogin = idLogin;
 		this.user = user;
 		this.password = password;
 		this.imagenUrl = imagenUrl;
+		this.fechaHoraCreacion = fechaHoraCreacion;
 		this.ultimoLogin = ultimoLogin;
-		this.puntaje = puntaje;
 	}
 
 	public Long getIdLogin() {
@@ -89,6 +90,14 @@ public class LoginBO {
 		this.imagenUrl = imagenUrl;
 	}
 
+	public Timestamp getFechaHoraCreacion() {
+		return fechaHoraCreacion;
+	}
+
+	public void setFechaHoraCreacion(Timestamp fechaHoraCreacion) {
+		this.fechaHoraCreacion = fechaHoraCreacion;
+	}
+
 	public Timestamp getUltimoLogin() {
 		return ultimoLogin;
 	}
@@ -97,20 +106,12 @@ public class LoginBO {
 		this.ultimoLogin = ultimoLogin;
 	}
 
-	public Integer getPuntaje() {
-		return puntaje;
-	}
-
-	public void setPuntaje(Integer puntaje) {
-		this.puntaje = puntaje;
-	}
-
 	@Override
 	public String toString() {
 		return "LoginBO [idLogin=" + idLogin + ", user=" + user + ", password=" + password + ", imagenUrl=" + imagenUrl
-				+ ", ultimoLogin=" + ultimoLogin + ", puntaje=" + puntaje + "]";
+				+ ", fechaHoraCreacion=" + fechaHoraCreacion + ", ultimoLogin=" + ultimoLogin 
+				+ "]";
 	}
 
-	
 
 }
