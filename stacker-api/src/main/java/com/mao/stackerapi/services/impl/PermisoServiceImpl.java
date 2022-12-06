@@ -30,7 +30,7 @@ public class PermisoServiceImpl implements IPermisoService {
         
         try {
         	Optional<PermisoBO> opt = permisoRepository.findById(objetivo);
-            if(!opt.isEmpty()) {
+            if(opt.isPresent()) {
             	res = opt.get();
             }
         } catch (Exception e) {
