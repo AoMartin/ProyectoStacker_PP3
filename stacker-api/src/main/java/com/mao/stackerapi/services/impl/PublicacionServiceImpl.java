@@ -14,11 +14,14 @@ import org.springframework.stereotype.Service;
 
 import com.mao.stackerapi.dto.api.ComentarioDTO;
 import com.mao.stackerapi.dto.api.PublicacionDTO;
+import com.mao.stackerapi.dto.security.PermisoRequestDTO;
 import com.mao.stackerapi.exceptions.api.PublicacionServiceException;
 import com.mao.stackerapi.mapper.api.PublicacionMapper;
 import com.mao.stackerapi.models.api.PublicacionBO;
+import com.mao.stackerapi.models.security.PermisoBO;
 import com.mao.stackerapi.repository.api.IPublicacionRepository;
 import com.mao.stackerapi.services.generic.IComentarioService;
+import com.mao.stackerapi.services.generic.IPermisoService;
 import com.mao.stackerapi.services.generic.IPublicacionService;
 
 /**
@@ -43,6 +46,9 @@ public class PublicacionServiceImpl implements IPublicacionService {
     @Autowired
     private IComentarioService comentarioService;
     
+    @Autowired
+    private IPermisoService permisoService;
+    
     @Override
     public PublicacionDTO obtenerPublicacion(Long id) throws PublicacionServiceException {
         logger.debug("PublicacionServiceImpl: Ingresando a obtenerPublicacion...");
@@ -54,6 +60,12 @@ public class PublicacionServiceImpl implements IPublicacionService {
                 throw new PublicacionServiceException(PublicacionServiceException.NO_ENCONTRADO);
             } else {
                 dto = publicacionMapper.toDTO(bo.get());
+                
+                PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,dto.getUsuario().getIdLogin(),null);
+                PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+                if(null != permiso) {                	
+                	dto.getUsuario().setTipoPermiso(permiso.getTipoPermiso());
+                }
             }
         } catch (Exception e) {
             logger.error(e);
@@ -140,6 +152,13 @@ public class PublicacionServiceImpl implements IPublicacionService {
                 PublicacionDTO dto = publicacionMapper.toDTO(bo);
                 Long cantidadComentario = comentarioService.contarComentariosEnPublicacion(dto.getIdPublicacion());
                 dto.setCantidadComentarios(cantidadComentario);
+                
+                PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,dto.getUsuario().getIdLogin(),null);
+                PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+                if(null != permiso) {                	
+                	dto.getUsuario().setTipoPermiso(permiso.getTipoPermiso());
+                }
+                
                 listaDto.add(dto);
             }
         } catch (Exception e) {
@@ -163,6 +182,13 @@ public class PublicacionServiceImpl implements IPublicacionService {
                 PublicacionDTO dto = publicacionMapper.toDTO(bo);
                 Long cantidadComentario = comentarioService.contarComentariosEnPublicacion(dto.getIdPublicacion());
                 dto.setCantidadComentarios(cantidadComentario);
+                
+                PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,dto.getUsuario().getIdLogin(),null);
+                PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+                if(null != permiso) {                	
+                	dto.getUsuario().setTipoPermiso(permiso.getTipoPermiso());
+                }
+                
                 listaDto.add(dto);
             }
         } catch (Exception e) {
@@ -186,6 +212,13 @@ public class PublicacionServiceImpl implements IPublicacionService {
                 PublicacionDTO dto = publicacionMapper.toDTO(bo);
                 Long cantidadComentario = comentarioService.contarComentariosEnPublicacion(dto.getIdPublicacion());
                 dto.setCantidadComentarios(cantidadComentario);
+                
+                PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,dto.getUsuario().getIdLogin(),null);
+                PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+                if(null != permiso) {                	
+                	dto.getUsuario().setTipoPermiso(permiso.getTipoPermiso());
+                }
+                
                 listaDto.add(dto);
             }
         } catch (Exception e) {
@@ -259,6 +292,13 @@ public class PublicacionServiceImpl implements IPublicacionService {
                 PublicacionDTO dto = publicacionMapper.toDTO(bo);
                 Long cantidadComentario = comentarioService.contarComentariosEnPublicacion(dto.getIdPublicacion());
                 dto.setCantidadComentarios(cantidadComentario);
+                
+                PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,dto.getUsuario().getIdLogin(),null);
+                PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+                if(null != permiso) {                	
+                	dto.getUsuario().setTipoPermiso(permiso.getTipoPermiso());
+                }
+                
                 listaDto.add(dto);
             }
 
@@ -281,6 +321,13 @@ public class PublicacionServiceImpl implements IPublicacionService {
 	            
 	            for (PublicacionBO bo : boLista) {
 	                PublicacionDTO dto = publicacionMapper.toDTO(bo);
+	                
+	                PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,dto.getUsuario().getIdLogin(),null);
+	                PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+	                if(null != permiso) {                	
+	                	dto.getUsuario().setTipoPermiso(permiso.getTipoPermiso());
+	                }
+	                
 	                listaDto.add(dto);
 	            }
 

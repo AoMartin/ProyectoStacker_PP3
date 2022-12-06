@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mao.stackerapi.dto.api.ComentarioDTO;
+import com.mao.stackerapi.dto.security.PermisoRequestDTO;
 import com.mao.stackerapi.exceptions.api.ComentarioServiceException;
 import com.mao.stackerapi.mapper.api.ComentarioMapper;
 import com.mao.stackerapi.models.api.ComentarioBO;
+import com.mao.stackerapi.models.security.PermisoBO;
 import com.mao.stackerapi.repository.api.IComentarioRepository;
 import com.mao.stackerapi.services.generic.IComentarioService;
+import com.mao.stackerapi.services.generic.IPermisoService;
 
 /**
  * <p>
@@ -35,6 +38,9 @@ public class ComentarioServiceImpl implements IComentarioService {
     @Autowired
     private IComentarioRepository comentarioRepository;
 
+    @Autowired
+    private IPermisoService permisoService;
+    
     @Override
     public ComentarioDTO obtenerComentario(Long id) throws ComentarioServiceException {
         logger.debug("ComentarioServiceImpl: Ingresando a obtenerComentario...");
@@ -46,6 +52,12 @@ public class ComentarioServiceImpl implements IComentarioService {
                 throw new ComentarioServiceException(ComentarioServiceException.NO_ENCONTRADO);
             } else {
                 dto = comentarioMapper.toDTO(bo.get());
+                
+                PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,dto.getUsuario().getIdLogin(),null);
+                PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+                if(null != permiso) {                	
+                	dto.getUsuario().setTipoPermiso(permiso.getTipoPermiso());
+                }
             }
         } catch (Exception e) {
             logger.error(e);
@@ -66,6 +78,13 @@ public class ComentarioServiceImpl implements IComentarioService {
 
             for (ComentarioBO bo : boLista) {
                 ComentarioDTO dto = comentarioMapper.toDTO(bo);
+                
+                PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,dto.getUsuario().getIdLogin(),null);
+                PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+                if(null != permiso) {                	
+                	dto.getUsuario().setTipoPermiso(permiso.getTipoPermiso());
+                }
+                
                 listaDto.add(dto);
             }
         } catch (Exception e) {
@@ -148,6 +167,13 @@ public class ComentarioServiceImpl implements IComentarioService {
 
             for (ComentarioBO bo : boLista) {
                 ComentarioDTO dto = comentarioMapper.toDTO(bo);
+                
+                PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,dto.getUsuario().getIdLogin(),null);
+                PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+                if(null != permiso) {                	
+                	dto.getUsuario().setTipoPermiso(permiso.getTipoPermiso());
+                }
+                
                 listaDto.add(dto);
             }
         } catch (Exception e) {
@@ -173,6 +199,12 @@ public class ComentarioServiceImpl implements IComentarioService {
             	bo.setPuntaje(puntajeActual);
             	comentarioRepository.save(bo);
             	dto = comentarioMapper.toDTO(bo);
+            	
+                PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,dto.getUsuario().getIdLogin(),null);
+                PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+                if(null != permiso) {                	
+                	dto.getUsuario().setTipoPermiso(permiso.getTipoPermiso());
+                }
             } else {
                 throw new ComentarioServiceException("Entidad no encontrada");
             }

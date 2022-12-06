@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.mao.stackerapi.utils.Constantes.TipoPermisoUsuario;
 
 /**
  * <p>
@@ -42,7 +45,9 @@ public class LoginBO {
 	@Column(name = "ULTIMO_LOGIN")
 	private Timestamp ultimoLogin;
 
-
+	@Transient
+	private TipoPermisoUsuario tipoPermiso;
+	
 	public LoginBO() {
 
 	}
@@ -106,12 +111,22 @@ public class LoginBO {
 		this.ultimoLogin = ultimoLogin;
 	}
 
+	
+	public TipoPermisoUsuario getTipoPermiso() {
+		return tipoPermiso;
+	}
+
+	public void setTipoPermiso(TipoPermisoUsuario tipoPermiso) {
+		this.tipoPermiso = tipoPermiso;
+	}
+
 	@Override
 	public String toString() {
 		return "LoginBO [idLogin=" + idLogin + ", user=" + user + ", password=" + password + ", imagenUrl=" + imagenUrl
-				+ ", fechaHoraCreacion=" + fechaHoraCreacion + ", ultimoLogin=" + ultimoLogin 
-				+ "]";
+				+ ", fechaHoraCreacion=" + fechaHoraCreacion + ", ultimoLogin=" + ultimoLogin + ", tipoPermiso="
+				+ tipoPermiso + "]";
 	}
 
+	
 
 }

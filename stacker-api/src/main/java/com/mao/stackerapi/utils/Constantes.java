@@ -9,4 +9,8 @@ public class Constantes {
     //public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
     public static final long JWT_EXPIRATION_TIME = 300_000;
+    
+    public static enum TipoPermisoUsuario { 
+    	ADMIN, MOD, BAN
+    }
 }

@@ -7,17 +7,18 @@ import java.util.UUID;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mao.stackerapi.config.JwtTokenProvider;
+import com.mao.stackerapi.dto.security.PermisoRequestDTO;
 import com.mao.stackerapi.dto.security.TokenResponseDTO;
 import com.mao.stackerapi.dto.security.UserDTO;
 import com.mao.stackerapi.models.security.LoginBO;
+import com.mao.stackerapi.models.security.PermisoBO;
 import com.mao.stackerapi.repository.security.ILoginRepository;
 import com.mao.stackerapi.services.generic.ILoginService;
+import com.mao.stackerapi.utils.Constantes.TipoPermisoUsuario;
 
 @Service
 public class LoginService implements ILoginService {
@@ -33,6 +34,9 @@ public class LoginService implements ILoginService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private PermisoServiceImpl permisoService;
+	
 	@Override
 	public TokenResponseDTO autenticarUser(UserDTO userDto) {
 		logger.debug(String.format("Entrando en %s", new Throwable().getStackTrace()[0].getMethodName()));
@@ -43,6 +47,19 @@ public class LoginService implements ILoginService {
 
 		LoginBO login = loginRepository.findByUser(userDto.getUsername());
 
+		try {			
+			PermisoRequestDTO permisoReq = new PermisoRequestDTO(null,login.getIdLogin(),null);
+			PermisoBO permiso = permisoService.obtenerPermiso(permisoReq);
+		
+			if(null != permiso) {
+				if(permiso.getTipoPermiso().equals(TipoPermisoUsuario.BAN)) {
+					throw new RuntimeException("El usuario ingresado se encuentra baneado.");
+				}
+			}
+		}catch(Exception e) {
+			logger.error(e);
+		}
+		
 		if(null != login) {
 			//Usuario ya creado
 			if(!passwordEncoder.matches(userDto.getPassword(), login.getPassword())) {
