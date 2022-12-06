@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mao.stackerapi.config.JWTAuthorizationFilter;
 import com.mao.stackerapi.dto.api.ComentarioDTO;
 import com.mao.stackerapi.dto.security.PermisoRequestDTO;
 import com.mao.stackerapi.exceptions.api.ComentarioServiceException;
@@ -40,6 +41,9 @@ public class ComentarioServiceImpl implements IComentarioService {
 
     @Autowired
     private IPermisoService permisoService;
+    
+    @Autowired
+    private JWTAuthorizationFilter jwtFilter;
     
     @Override
     public ComentarioDTO obtenerComentario(Long id) throws ComentarioServiceException {

@@ -27,6 +27,7 @@ const Comentario = React.forwardRef((props, ref) => {
 
     const idLogin = useSelector((state) => state.usuario.login.id);
     const userName = useSelector((state) => state.usuario.login.userName);
+    const tipoPermiso = useSelector((state) => state.usuario.login.tipoPermiso);
     const [plusOneTrigger, setPlusOneTrigger] = useState(0);
 
     const [selectedTrigger, setSelectedTrigger] = useState(true);
@@ -94,7 +95,7 @@ const Comentario = React.forwardRef((props, ref) => {
                             </Grid>
                         </>
                     }
-                    {idLogin == data.usuario.idLogin &&
+                    {(idLogin == data.usuario.idLogin || tipoPermiso == 'ADMIN' || tipoPermiso == 'MOD') &&
                         <Grid item pl={1}>
                             <IconButton disabled={blockDelete} color="info" onClick={() => handleDelete(data.idComentario)}>
                                 <DeleteForeverIcon />

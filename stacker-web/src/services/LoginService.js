@@ -8,7 +8,11 @@ const autenticarUsuario = async (bodyData) => {
   return await API.post(`${CONTROLLER}/autenticar-usuario`, { data: bodyData });
 };
 
+const buscarUsuario = async (buscar) => {
+  return await API.get(`${CONTROLLER}/buscar/${buscar}`);
+};
 
 export default {
-  autenticarUsuario
+  autenticarUsuario,
+  buscarUsuario
 };

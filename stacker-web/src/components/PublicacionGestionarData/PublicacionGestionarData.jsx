@@ -59,9 +59,9 @@ const PublicacionGestionarData = (props) => {
                 </Box>
                 <CardActionArea onClick={handleCardClick}>
                     <Box sx={{ display: 'flex', alignItems: 'center', m: 1 }}>
+                        <Typography>{data.titulo}</Typography>
                         <ValoracionFechaHora cc={data.cantidadComentarios} puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                     </Box>
-
                 </CardActionArea>
             </Card>
         </Box>

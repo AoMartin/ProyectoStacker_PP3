@@ -5,12 +5,16 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 const MenuOpciones = (props) => {
     const { handleOpenModalCrearPublicacion } = props;
     let navigate = useNavigate();
+
+    const tipoPermiso = useSelector((state) => state.usuario.login.tipoPermiso);
 
     const routeChange = () => {
         navigate('/gestionar');
@@ -25,6 +29,18 @@ const MenuOpciones = (props) => {
                 <Divider sx={{ borderBottomWidth: 5 }}>
                     <Chip label="Acciones" color="info"></Chip>
                 </Divider>
+
+                {(tipoPermiso == 'ADMIN' || tipoPermiso == 'MOD') &&
+                    <ListItemButton component={Link} to="/moderar">
+                        <ListItemIcon>
+                            <SupervisorAccountIcon sx={{ fontSize: 35 }} style={{ color: '#FFFFFF' }} />
+                        </ListItemIcon>
+                        <ListItemText
+                            disableTypography
+                            primary={<Typography component="h4" variant="h5" type="body2" style={{ color: '#FFFFFF' }}>Moderar</Typography>}
+                        />
+                    </ListItemButton>
+                }
 
                 <ListItemButton onClick={handleOpenModalCrearPublicacion}>
                     <ListItemIcon>

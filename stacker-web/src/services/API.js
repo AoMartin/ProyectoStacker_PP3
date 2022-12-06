@@ -45,6 +45,11 @@ const call = async(url, options = {}) => {
                     console.log(error.response.status);
                     console.log(error.response.headers);
 
+                    
+                    if (undefined != error.response.data) {
+                        errorMessage = error.response.data;
+                    }
+
                     if (undefined != error.response.data.message) {
                         errorMessage = error.response.data.message;
                     }

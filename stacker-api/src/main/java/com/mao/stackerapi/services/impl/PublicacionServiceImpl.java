@@ -8,10 +8,9 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import com.mao.stackerapi.config.JWTAuthorizationFilter;
 import com.mao.stackerapi.dto.api.ComentarioDTO;
 import com.mao.stackerapi.dto.api.PublicacionDTO;
 import com.mao.stackerapi.dto.security.PermisoRequestDTO;
@@ -21,6 +20,7 @@ import com.mao.stackerapi.models.api.PublicacionBO;
 import com.mao.stackerapi.models.security.PermisoBO;
 import com.mao.stackerapi.repository.api.IPublicacionRepository;
 import com.mao.stackerapi.services.generic.IComentarioService;
+import com.mao.stackerapi.services.generic.ILoginService;
 import com.mao.stackerapi.services.generic.IPermisoService;
 import com.mao.stackerapi.services.generic.IPublicacionService;
 
@@ -48,6 +48,11 @@ public class PublicacionServiceImpl implements IPublicacionService {
     
     @Autowired
     private IPermisoService permisoService;
+    
+    @Autowired
+    private JWTAuthorizationFilter jwtFilter;
+    
+
     
     @Override
     public PublicacionDTO obtenerPublicacion(Long id) throws PublicacionServiceException {
@@ -121,6 +126,8 @@ public class PublicacionServiceImpl implements IPublicacionService {
         logger.debug("PublicacionServiceImpl: Ingresando a borrarPublicacion...");
 
         try {
+        	String usuario = jwtFilter.obtenerUsuario();
+        	
         	List<ComentarioDTO> comentariosAsociados = comentarioService.obtenerTodoPorPublicacion(id);
         	for(ComentarioDTO dto : comentariosAsociados) {
         		dto.setIdPublicacion(null);

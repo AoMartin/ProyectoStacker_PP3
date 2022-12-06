@@ -1,5 +1,7 @@
 package com.mao.stackerapi.dto.security;
 
+import com.mao.stackerapi.utils.Constantes.TipoPermisoUsuario;
+
 /**
  * <p>
  * 	Dto con la respuesta al servicio de login, devuelve el token jwt generado
@@ -16,7 +18,8 @@ public class TokenResponseDTO {
 	private String userName;
 	private String img;
 	private String lastLoginDate;
-
+	private TipoPermisoUsuario tipoPermiso;
+	
 	public TokenResponseDTO() {
 	}
 
@@ -69,12 +72,21 @@ public class TokenResponseDTO {
 		this.lastLoginDate = lastLoginDate;
 	}
 
+	public TipoPermisoUsuario getTipoPermiso() {
+		return tipoPermiso;
+	}
+
+	public void setTipoPermiso(TipoPermisoUsuario tipoPermiso) {
+		this.tipoPermiso = tipoPermiso;
+	}
+
 	@Override
 	public String toString() {
 		return "TokenResponseDTO [id=" + id + ", token=" + token + ", userName=" + userName + ", img=" + img
-				+ ", lastLoginDate=" + lastLoginDate + "]";
+				+ ", lastLoginDate=" + lastLoginDate + ", tipoPermiso=" + tipoPermiso + "]";
 	}
 
+	
 	
 	
 	

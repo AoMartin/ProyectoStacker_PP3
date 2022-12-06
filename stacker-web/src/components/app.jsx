@@ -6,6 +6,7 @@ import MainBanner from '../containers/MainBanner/MainBanner';
 import Publicacion from '../containers/Publicacion/Publicacion';
 import Gestionar from '../containers/Gestionar/Gestionar';
 import Buscador from '../containers/Buscador/Buscador';
+import Moderar from '../containers/Moderar/Moderar';
 
 const mdTheme = createTheme({
   palette: {
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/publicacion" element={<MainBanner vista={<Publicacion />} />} />
             <Route path="/gestionar" element={<MainBanner tipo={'Mis Publicaciones'} vista={<Gestionar />} />} />
             <Route path="/buscar" element={<MainBanner tipo={'Buscar'} vista={<Buscador />} />} />
+            <Route path="/moderar" element={<MainBanner tipo={'Moderar'} vista={<Moderar />} />} />
           </Routes>
         </HashRouter>
       </ThemeProvider>

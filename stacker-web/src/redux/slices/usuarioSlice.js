@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   },
   loginModalOpen: false,
   imagenModalOpen: false,
+  listaUsuarios: [],
 }
 
 const usuarioSlice = createSlice({
@@ -44,11 +45,18 @@ const usuarioSlice = createSlice({
       sessionStorage.setItem('session', JSON.stringify(state.login));
     },
 
+    cargarListaUsuarios: (state, action) =>{
+      state.listaUsuarios = action.payload
+    },
+
+    limpiarListaUsuarios: (state) =>{
+      state.listaUsuarios = []
+    },
   }
 })
 
 
-export const { openLoginModal, closeLoginModal, openImagenModal, closeImagenModal, userLogin, userLogout, userImgUpdate } = usuarioSlice.actions
+export const { openLoginModal, closeLoginModal, openImagenModal, closeImagenModal, userLogin, userLogout, userImgUpdate, cargarListaUsuarios, limpiarListaUsuarios } = usuarioSlice.actions
 export default usuarioSlice.reducer
 
 

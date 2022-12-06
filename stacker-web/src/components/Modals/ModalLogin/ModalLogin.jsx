@@ -10,14 +10,15 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeLoginModal, userLogin } from '../../../redux/slices/usuarioSlice';
+import { abrirModalAvisoUsuario } from '../../../redux/slices/avisoSlice';
+import { closeLoginModal, userLogin, userLogout } from '../../../redux/slices/usuarioSlice';
 import LoginService from '../../../services/LoginService';
 
 const ModalLogin = (props) => {
     const { loginModalOpen } = useSelector((state) => state.usuario);
     const dispatch = useDispatch();
 
-    const [loginError, setLoginError] = useState(false);
+    const [loginError, setLoginError] = useState('');
 
     const [values, setValues] = useState({
         user: '',
@@ -67,10 +68,18 @@ const ModalLogin = (props) => {
             const response = await LoginService.autenticarUsuario({ username: values.user, password: values.password });
             sessionStorage.setItem('session', JSON.stringify(response));
             dispatch(userLogin(response));
-            setLoginError(false);
+            setLoginError('');
             handleClose();
+
+            setTimeout(function () {
+                sessionStorage.removeItem('session');
+                dispatch(abrirModalAvisoUsuario("La sesión ha expirado, por favor vuelva a loguearse."))
+                dispatch(userLogout());
+            }, 899000);
+
         } catch (err) {
-            setLoginError(true);
+            console.log(JSON.stringify(err))
+            setLoginError(err);
         }
     }
 
@@ -130,10 +139,10 @@ const ModalLogin = (props) => {
                         </FormControl>
                     </Box>
 
-                    {loginError &&
+                    {loginError != '' &&
                         <Box sx={{ display: 'flex', justifyContent: 'center', m: 1 }}>
                             <Typography id="descripcion" variant="body2" color="error">
-                                Usuario registrado. Contraseña incorrecta.
+                                {loginError}
                             </Typography>
                         </Box>
                     }
@@ -141,7 +150,7 @@ const ModalLogin = (props) => {
                     <Box sx={{ m: 1, display: 'flex', justifyContent: 'center' }}>
                         <Box>
                             <Button onClick={handleSubmit} variant="contained" color="info"
-                                disabled={values.user == '' || values.password == ''}>
+                                disabled={values.user.length < 3 || values.password == ''}>
                                 Aceptar
                             </Button>
                         </Box>
