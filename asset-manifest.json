@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "https://aomartin.github.io/ProyectoStacker_PP3/static/css/main.9d8f349a.css",
-    "main.js": "https://aomartin.github.io/ProyectoStacker_PP3/static/js/main.18cbe89d.js",
+    "main.js": "https://aomartin.github.io/ProyectoStacker_PP3/static/js/main.ac0b53ba.js",
     "index.html": "https://aomartin.github.io/ProyectoStacker_PP3/index.html",
     "main.9d8f349a.css.map": "https://aomartin.github.io/ProyectoStacker_PP3/static/css/main.9d8f349a.css.map",
-    "main.18cbe89d.js.map": "https://aomartin.github.io/ProyectoStacker_PP3/static/js/main.18cbe89d.js.map"
+    "main.ac0b53ba.js.map": "https://aomartin.github.io/ProyectoStacker_PP3/static/js/main.ac0b53ba.js.map"
   },
   "entrypoints": [
     "static/css/main.9d8f349a.css",
-    "static/js/main.18cbe89d.js"
+    "static/js/main.ac0b53ba.js"
   ]
 }
