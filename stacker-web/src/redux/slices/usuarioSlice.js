@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     img: '',
     token: '',
     lastLoginDate: '',
+    tipoPermiso: null,
   },
   loginModalOpen: false,
   imagenModalOpen: false,

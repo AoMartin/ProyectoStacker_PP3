@@ -1,5 +1,5 @@
 import PlusOneIcon from '@mui/icons-material/PlusOne';
-import { Avatar, Box, IconButton, Typography } from '@mui/material';
+import { Avatar, Box, Chip, IconButton, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { abrirModalAvisoUsuario } from '../../../redux/slices/avisoSlice';
@@ -31,7 +31,13 @@ const DetallePublicacion = (props) => {
             <Box m={2}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                     <Avatar src={data.usuario.imagenUrl}></Avatar>
-                    <Typography ml={2}>{data.usuario.user}</Typography>
+                    <Typography ml={2} mr={2}>{data.usuario.user}</Typography>
+                    {
+                        data.usuario.tipoPermiso != null &&
+                        <Chip label={data.usuario.tipoPermiso} size="small" 
+                            color={data.usuario.tipoPermiso == 'BAN' ? 'error' : data.usuario.tipoPermiso == 'ADMIN' ? 'info' : undefined}>
+                        </Chip>
+                    }
                     <ValoracionFechaHora cc={data.cantidadComentarios} puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                 </Box>
                 <Typography variant="h4" component="div" color='#000000' >

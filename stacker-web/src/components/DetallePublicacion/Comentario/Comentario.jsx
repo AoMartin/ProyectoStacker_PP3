@@ -2,8 +2,8 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import MessageIcon from '@mui/icons-material/Message';
 import PlusOneIcon from '@mui/icons-material/PlusOne';
 import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
-import { Avatar, Card, CardActionArea, Grid, Grow, IconButton, Typography } from '@mui/material';
-import { grey } from '@mui/material/colors';
+import { Avatar, Card, CardActionArea, Chip, Grid, Grow, IconButton, Typography } from '@mui/material';
+import { grey, red } from '@mui/material/colors';
 import { Box } from "@mui/system";
 import React, { useImperativeHandle, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,6 +61,14 @@ const Comentario = React.forwardRef((props, ref) => {
                     <Grid item p={1}>
                         <Typography>{data.usuario.user}</Typography>
                     </Grid>
+                    {
+                        data.usuario.tipoPermiso != null &&
+                        <Grid item p={1}>
+                            <Chip label={data.usuario.tipoPermiso} size="small"
+                                color={data.usuario.tipoPermiso == 'BAN' ? 'error' : data.usuario.tipoPermiso == 'ADMIN' ? 'info' : undefined}>
+                            </Chip>
+                        </Grid>
+                    }
                     <Grid item p={1}>
                         <ValoracionFechaHora puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
                     </Grid>
