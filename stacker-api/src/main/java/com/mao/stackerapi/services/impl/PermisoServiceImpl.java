@@ -56,7 +56,8 @@ public class PermisoServiceImpl implements IPermisoService {
         	PermisoBO permisoUsuario = obtenerPermiso(permisoReq1);
     		
 			if(null != permisoUsuario) {
-				if(permisoUsuario.getTipoPermiso().equals(TipoPermisoUsuario.ADMIN)) {
+				if(permisoUsuario.getTipoPermiso().equals(TipoPermisoUsuario.ADMIN)||
+						permisoUsuario.getTipoPermiso().equals(TipoPermisoUsuario.MOD)) {
 					PermisoBO permisoNuevo = new PermisoBO(objetivo, tipoPermiso);
 					res = permisoRepository.save(permisoNuevo);
 				}else {					

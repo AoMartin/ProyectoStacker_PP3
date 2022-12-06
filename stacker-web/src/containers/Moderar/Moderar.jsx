@@ -113,15 +113,25 @@ export default function Moderar(props) {
                         </Grid>
                         <Box sx={{ ml: 1, display: 'flex', justifyContent: 'center', border: '5px dashed grey', }}>
                             {
-                                tipoPermiso == 'ADMIN' &&
-                                <>                                
-                                    <Button onClick={()=>darPermiso(PERMISO_ADMIN)} variant="outlined" p={1} color='info'>Dar ADMIN</Button>
-                                    <Button onClick={()=>darPermiso(PERMISO_MOD)} variant="outlined" p={1} color='secondary'>Dar MOD</Button>
-                                </>
+                                selected.tipoPermiso != 'ADMIN' || tipoPermiso == 'ADMIN'
+                                    ?
+                                    <>
+                                        {
+                                            tipoPermiso == 'ADMIN' &&
+                                            <>
+                                                <Button onClick={() => darPermiso(PERMISO_ADMIN)} variant="outlined" p={1} color='info'>Dar ADMIN</Button>
+                                                <Button onClick={() => darPermiso(PERMISO_MOD)} variant="outlined" p={1} color='secondary'>Dar MOD</Button>
+                                            </>
+                                        }
+                                        <Button onClick={() => darPermiso(PERMISO_BAN)} variant="outlined" p={1} color='error'>Dar BAN</Button>
+                                        <Typography p={1} variant="h4">-</Typography>
+                                        <Button onClick={quitarPermisos} variant="outlined" p={1} color='error'>Quitar ban / permiso</Button>
+                                    </>
+                                    :
+                                    <Typography id="titulo" variant="body" m={2}>
+                                        Solo un admin puede ejecutar acciones sobre otros admin.
+                                    </Typography>
                             }
-                            <Button onClick={() => darPermiso(PERMISO_BAN)} variant="outlined" p={1} color='error'>Dar BAN</Button>
-                            <Typography p={1} variant="h4">-</Typography>
-                            <Button onClick={quitarPermisos} variant="outlined" p={1} color='error'>Quitar ban / permiso</Button>
                         </Box>
                     </>
                 }

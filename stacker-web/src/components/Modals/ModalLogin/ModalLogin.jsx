@@ -72,7 +72,7 @@ const ModalLogin = (props) => {
             handleClose();
 
             setTimeout(function () {
-                sessionStorage.removeItem('session');
+                sessionStorage.clear();
                 dispatch(abrirModalAvisoUsuario("La sesión ha expirado, por favor vuelva a loguearse."))
                 dispatch(userLogout());
             }, 899000);

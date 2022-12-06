@@ -38,7 +38,19 @@ const usuarioSlice = createSlice({
       state.login = action.payload;
     },
 
-    userLogout: () => INITIAL_STATE,
+    userLogout: (state) => {
+      state.login = {
+        id: -1,
+        userName: '',
+        img: '',
+        token: '',
+        lastLoginDate: '',
+        tipoPermiso: null,
+      };
+      state.loginModalOpen = false;
+      state.imagenModalOpen = false;
+      state.listaUsuarios = [];
+    },
 
     userImgUpdate: (state, action) => {
       state.login.img = action.payload

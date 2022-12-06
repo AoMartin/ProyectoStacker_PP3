@@ -31,7 +31,7 @@ const Usuario = (props) => {
   }
 
   const logout = () => {
-    sessionStorage.removeItem('session');
+    sessionStorage.clear();
     dispatch(userLogout());
   }
 

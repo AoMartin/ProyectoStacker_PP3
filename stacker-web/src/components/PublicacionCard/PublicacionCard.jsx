@@ -41,18 +41,20 @@ const PublicacionCard = (props) => {
                             </CardContent>
                         </Grid>
                         <Grid item xs={6}>
-                            <CardMedia
-                                onClick={handleCardClick}
-                                style={{ aspectRatio: 16 / 9 }}
-                                component="img"
-                                image={data.imagen}
-                                alt="No se pudo cargar la imagen!"
-                            />
+                            {
+                                data.imagen &&
+                                <CardMedia
+                                    onClick={handleCardClick}
+                                    style={{ aspectRatio: 16 / 9 }}
+                                    component="img"
+                                    image={data.imagen}
+                                />
+                            }
                         </Grid>
                     </Grid>
-                            <Box sx={{ display: 'flex', alignItems: 'bottom', p: 1 }}>
-                                <ValoracionFechaHora cc={data.cantidadComentarios} puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
-                            </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'bottom', p: 1 }}>
+                        <ValoracionFechaHora cc={data.cantidadComentarios} puntaje={data.puntaje} fechaHora={data.fechaHoraCreacion} />
+                    </Box>
                 </CardActionArea>
             </Card>
         </Box>

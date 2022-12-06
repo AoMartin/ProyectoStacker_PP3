@@ -146,7 +146,7 @@ const ModalCrearPublicacion = (props) => {
                     <Box sx={{ m: 1, display: 'flex', justifyContent: 'center' }}>
                         <Box>
                             <Button onClick={handleSubmit} variant="contained" color="info"
-                                disabled={values.titulo == '' || values.descripcion == '' || values.imagenUrl == '' || values.imagenUrl.length > 2048}>
+                                disabled={values.titulo == '' || values.descripcion == '' || values.imagenUrl.length > 2048}>
                                 Publicar
                             </Button>
                         </Box>
